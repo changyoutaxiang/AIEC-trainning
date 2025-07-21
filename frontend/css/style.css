@@ -133,6 +133,51 @@ body {
     transform: none !important;
 }
 
+/* 统一学习模块样式 */
+.content-section {
+    display: block;
+    max-width: 800px; /* 统一最大宽度 */
+    margin: 0 auto;   /* 居中显示 */
+}
+
+.content-section.hidden {
+    display: none;
+}
+
+.content-section h2 {
+    color: #333;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-align: center; /* 标题居中 */
+}
+
+/* 统一内容区域样式 */
+.content-text,
+.practice-arena {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    /* 移除practice-arena的特殊样式，使用统一样式 */
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+}
+
+/* 统一按钮区域样式 */
+.content-actions {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.content-actions .btn {
+    margin: 0 8px;
+}
+
 /* 表单样式 */
 .form-group {
     margin-bottom: 24px;
@@ -731,27 +776,7 @@ body {
     min-height: 600px;
 }
 
-.content-section {
-    display: block;
-}
-
-.content-section.hidden {
-    display: none;
-}
-
-.content-section h2 {
-    color: #333;
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 24px;
-}
-
-.content-text {
-    color: #333;
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 40px;
-}
+/* 旧的重复定义已移除，使用统一的模块样式 */
 
 .content-text h3 {
     color: #333;
@@ -807,18 +832,14 @@ body {
 }
 
 /* 实战模拟样式 */
-.practice-arena {
-    background: #fff;
-    border-radius: 12px;
-    padding: 24px;
-    margin: 20px 0;
-}
+/* practice-arena样式已统一到.content-text中 */
 
 .practice-selector h3 {
-    color: #1C1C1E;
+    color: #333;
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
+    text-align: center; /* 与其他模块标题一致 */
 }
 
 .practice-list {
