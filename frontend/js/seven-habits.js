@@ -609,14 +609,14 @@ function showHabitDetail(habitNumber) {
 // 检查用户是否已登录
 function checkAuth() {
     try {
-        const user = localStorage.getItem('user');
+        const user = localStorage.getItem('aiec_current_user');
         if (user) {
             return JSON.parse(user);
         }
         return null;
     } catch (e) {
         console.error('检查用户登录状态时出错:', e);
-        localStorage.removeItem('user');
+        localStorage.removeItem('aiec_current_user');
         return null;
     }
 }

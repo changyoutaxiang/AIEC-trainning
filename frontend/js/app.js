@@ -209,7 +209,7 @@ function initializeButtons() {
 
 // 检查用户是否已登录
 function checkAuth() {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('aiec_current_user');
     if (user) {
         try {
             return JSON.parse(user);
@@ -225,7 +225,7 @@ function checkAuth() {
 // 登出功能
 function logout() {
     console.log('用户登出');
-    localStorage.removeItem('user');
+    localStorage.removeItem('aiec_current_user');
     window.location.href = 'login.html';
 }
 

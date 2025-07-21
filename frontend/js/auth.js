@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 目前使用模拟登录
             if (username && password) {
                 // 模拟登录成功
-                localStorage.setItem('user', JSON.stringify({
+                localStorage.setItem('aiec_current_user', JSON.stringify({
                     username: username,
                     loginTime: new Date().toISOString()
                 }));
@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 目前使用模拟注册
             if (fullName && email && username && password) {
                 // 模拟注册成功
-                localStorage.setItem('user', JSON.stringify({
+                localStorage.setItem('aiec_current_user', JSON.stringify({
                     fullName: fullName,
                     email: email,
                     username: username,
@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 检查用户是否已登录
 function checkAuth() {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('aiec_current_user');
     if (user) {
         return JSON.parse(user);
     }
@@ -350,7 +350,7 @@ function checkAuth() {
 
 // 登出功能
 function logout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('aiec_current_user');
     window.location.href = 'login.html';
 }
 

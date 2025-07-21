@@ -325,12 +325,12 @@ function saveProgress() {
 }
 
 function checkAuth() {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('aiec_current_user');
     if (user) {
         try {
             return JSON.parse(user);
         } catch (e) {
-            localStorage.removeItem('user');
+            localStorage.removeItem('aiec_current_user');
             return null;
         }
     }
