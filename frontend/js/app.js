@@ -174,8 +174,8 @@ function initializeButtons() {
                     const habitNumber = habitCard.querySelector('.habit-number').textContent;
                     console.log('从主页开始学习习惯', habitNumber);
                     
-                    // 跳转到七个习惯页面
-                    window.location.href = `seven-habits.html#habit-${habitNumber}`;
+                    // 跳转到具体习惯学习页面
+                    window.location.href = `habit-learning.html?habit=${habitNumber}`;
                 } else {
                     console.log('用户未登录，跳转到登录页面');
                     window.location.href = 'login.html';
