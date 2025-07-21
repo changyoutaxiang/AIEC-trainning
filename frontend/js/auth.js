@@ -158,9 +158,9 @@ class AuthManager {
         
         showMessage(`欢迎回来，${user.name}！`, 'success');
         
-        // 跳转到技能列表页
+        // 跳转到七个习惯学习页面
         setTimeout(() => {
-            window.location.href = 'skills.html';
+            window.location.href = 'seven-habits.html';
         }, 1500);
     }
     
@@ -257,8 +257,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     loginTime: new Date().toISOString()
                 }));
                 
-                // 跳转到主页
-                window.location.href = 'index.html';
+                // 跳转到七个习惯学习页面
+                window.location.href = 'seven-habits.html';
             } else {
                 alert('请输入用户名和密码');
             }
@@ -294,8 +294,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }));
                 
                 alert('注册成功！欢迎加入AIEC职场软技能！');
-                // 跳转到主页
-                window.location.href = 'index.html';
+                // 跳转到七个习惯学习页面
+                window.location.href = 'seven-habits.html';
             } else {
                 alert('请填写所有必填字段');
             }
