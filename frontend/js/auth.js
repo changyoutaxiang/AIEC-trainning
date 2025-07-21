@@ -339,14 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// 检查用户是否已登录
-function checkAuth() {
-    const user = localStorage.getItem('aiec_current_user');
-    if (user) {
-        return JSON.parse(user);
-    }
-    return null;
-}
+// checkAuth 函数现在使用 app.js 中的全局版本
 
 // 登出功能
 function logout() {

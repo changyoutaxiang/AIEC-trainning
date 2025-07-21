@@ -324,18 +324,7 @@ function saveProgress() {
     }
 }
 
-function checkAuth() {
-    const user = localStorage.getItem('aiec_current_user');
-    if (user) {
-        try {
-            return JSON.parse(user);
-        } catch (e) {
-            localStorage.removeItem('aiec_current_user');
-            return null;
-        }
-    }
-    return null;
-}
+// checkAuth 函数现在使用 app.js 中的全局版本
 
 // ==================== 实战模拟功能 ====================
 
