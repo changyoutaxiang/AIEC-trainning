@@ -1,0 +1,1076 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f2f2f7; /* 苹果系统的浅灰色背景 */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 登录容器 - PC端优化 */
+.login-container {
+    width: 100%;
+    max-width: 800px; /* 增加最大宽度适合PC */
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 60px 80px; /* 增加内边距 */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 左右分栏布局 */
+    gap: 60px;
+    align-items: center;
+}
+
+/* 左侧：品牌信息区域 */
+.login-brand {
+    text-align: left;
+}
+
+.login-brand h1 {
+    color: #333;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.login-brand p {
+    color: #666;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-start; /* 左对齐 */
+}
+
+/* 右侧：登录表单区域 */
+.login-form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 320px;
+}
+
+.login-form h2 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+/* 按钮样式 */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    min-width: 100px;
+}
+
+.btn-primary {
+    background: #007AFF;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0056CC;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: rgba(0, 0, 0, 0.05);
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.btn-full {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    margin-top: 24px;
+}
+
+/* 表单样式 */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007AFF;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 24px;
+    color: #666;
+    font-size: 14px;
+}
+
+.register-link a {
+    color: #007AFF;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* 响应式设计 - 小屏幕回退到移动端布局 */
+@media (max-width: 768px) {
+    .login-container {
+        max-width: 400px;
+        padding: 40px;
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .login-brand {
+        text-align: center;
+    }
+    
+    .login-brand h1 {
+        font-size: 24px;
+    }
+    
+    .login-brand p {
+        font-size: 16px;
+    }
+    
+    .auth-buttons {
+        justify-content: center;
+    }
+}
+
+/* 主页面样式 - PC端优化 */
+.container {
+    max-width: 1400px; /* 增加最大宽度 */
+    margin: 0 auto;
+    padding: 40px 60px; /* 增加内边距 */
+}
+
+.header {
+    background: white;
+    padding: 30px 0; /* 增加垂直内边距 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px; /* 增加底部间距 */
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 60px;
+}
+
+.logo {
+    font-size: 28px; /* 增加字体大小 */
+    font-weight: bold;
+    color: #333;
+}
+
+.nav-links {
+    display: flex;
+    gap: 40px; /* 增加间距 */
+}
+
+.nav-links a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px; /* 增加字体大小 */
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #007AFF;
+}
+
+
+
+
+
+/* 功能卡片区域 - 横向布局优化 */
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 固定3列布局 */
+    gap: 40px; /* 增加间距 */
+    margin-bottom: 80px;
+}
+
+.feature-card {
+    background: white;
+    padding: 40px; /* 增加内边距 */
+    border-radius: 20px; /* 更圆润的圆角 */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+    min-height: 280px; /* 设置最小高度保持一致 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+}
+
+.feature-icon {
+    font-size: 64px; /* 增加图标大小 */
+    margin-bottom: 24px;
+}
+
+.feature-card h3 {
+    color: #333;
+    margin-bottom: 16px;
+    font-size: 24px; /* 增加标题字体大小 */
+    font-weight: 600;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* 七个习惯页面样式 - PC端优化 */
+.habits-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 60px;
+}
+
+.habits-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.habits-header h1 {
+    color: #333;
+    font-size: 48px; /* 增加标题大小 */
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.habits-header p {
+    color: #666;
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* 七个习惯学习体系 - 分组布局 */
+.habits-section {
+    margin-bottom: 80px;
+}
+
+.habits-section h2 {
+    color: #333;
+    font-size: 32px;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.habits-section p {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* 个人成功习惯 (1-3) */
+.personal-habits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+/* 公众成功习惯 (4-6) */
+.public-habits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+/* 自我更新习惯 (7) */
+.renewal-habit {
+    display: flex;
+    justify-content: center;
+}
+
+.renewal-habit .habit-card {
+    max-width: 400px;
+}
+
+.habit-card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+}
+
+.habit-card:hover {
+    transform: translateY(-8px);
+}
+
+.habit-number {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background: #007AFF;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 48px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.habit-card h3 {
+    color: #333;
+    margin-bottom: 16px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.habit-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    flex-grow: 1;
+    font-size: 15px;
+}
+
+.habit-progress {
+    background: #f0f0f0;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.habit-progress-bar {
+    height: 100%;
+    background: #007AFF;
+    transition: width 0.3s ease;
+}
+
+.habit-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-small {
+    padding: 10px 18px;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .personal-habits,
+    .public-habits {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .nav {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 20px;
+    }
+    
+
+    
+    .features {
+        grid-template-columns: 1fr;
+    }
+    
+    .personal-habits,
+    .public-habits {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 技能训练页面样式 */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.skill-category {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.skill-category h2 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.skill-cards {
+    display: grid;
+    gap: 20px;
+}
+
+.skill-card {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-2px);
+}
+
+.skill-card h3 {
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.skill-card p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.skill-progress {
+    background: #e9ecef;
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.skill-progress-bar {
+    height: 100%;
+    background: #007AFF;
+    transition: width 0.3s ease;
+}
+
+/* AI 测试页面样式 */
+.test-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.test-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.test-card h2 {
+    color: #333;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.test-input {
+    margin-bottom: 32px;
+}
+
+.test-input textarea {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: inherit;
+    resize: vertical;
+    margin-bottom: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.test-input textarea:focus {
+    outline: none;
+    border-color: #007AFF;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.test-output h3 {
+    color: #333;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.output-content {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 100px;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+/* 学习页面样式 */
+.learning-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.learning-header {
+    text-align: center;
+    margin-bottom: 40px;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.habit-badge {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.habit-badge .habit-number {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #007AFF 0%, #5856d6 100%);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 60px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.learning-header h1 {
+    color: #333;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.learning-header p {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.progress-section {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #007AFF 0%, #5856d6 100%);
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    color: #666;
+    font-size: 14px;
+}
+
+.learning-content {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.learning-modules {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.module-card {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.module-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.module-card.active {
+    border-color: #007AFF;
+    background: linear-gradient(135deg, #f8fbff 0%, #f0f7ff 100%);
+}
+
+.module-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.module-card h3 {
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.module-card p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.content-area {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    min-height: 600px;
+}
+
+.content-section {
+    display: block;
+}
+
+.content-section.hidden {
+    display: none;
+}
+
+.content-section h2 {
+    color: #333;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.content-text {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.content-text h3 {
+    color: #333;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 24px 0 16px 0;
+}
+
+.content-text h4 {
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 20px 0 12px 0;
+}
+
+.content-text ul, .content-text ol {
+    margin: 16px 0;
+    padding-left: 24px;
+}
+
+.content-text li {
+    margin-bottom: 8px;
+}
+
+.case-study {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border-left: 4px solid #007AFF;
+}
+
+.practice-exercise {
+    background: #fff8e1;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border-left: 4px solid #ffa726;
+}
+
+.reflection {
+    background: #f3e5f5;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border-left: 4px solid #9c27b0;
+}
+
+.content-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+}
+
+/* 实战模拟样式 */
+.practice-arena {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+}
+
+.practice-selector h3 {
+    color: #1C1C1E;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.practice-list {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.practice-item {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.practice-item:hover {
+    background: #e9ecef;
+    border-color: #007AFF;
+    transform: translateY(-2px);
+}
+
+.practice-item h4 {
+    color: #1C1C1E;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.practice-item p {
+    color: #8E8E93;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.practice-workspace {
+    animation: fadeIn 0.3s ease;
+}
+
+.practice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.practice-header h3 {
+    color: #1C1C1E;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.practice-scenario,
+.practice-task {
+    margin-bottom: 24px;
+}
+
+.practice-scenario h4,
+.practice-task h4 {
+    color: #1C1C1E;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.scenario-content,
+.task-content {
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid #007AFF;
+    line-height: 1.6;
+}
+
+.practice-input {
+    margin-bottom: 24px;
+}
+
+.practice-input h4 {
+    color: #1C1C1E;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.practice-input textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+
+.practice-input textarea:focus {
+    outline: none;
+    border-color: #007AFF;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.input-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.practice-evaluation {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 24px;
+    animation: slideIn 0.5s ease;
+}
+
+.practice-evaluation h4 {
+    color: #1C1C1E;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.overall-score {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.score-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1C1C1E;
+}
+
+.score-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #007AFF;
+}
+
+.dimension-scores {
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.dimension-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dimension-item:last-child {
+    border-bottom: none;
+}
+
+.dimension-name {
+    font-size: 14px;
+    color: #1C1C1E;
+}
+
+.dimension-score {
+    font-size: 16px;
+    font-weight: 600;
+    color: #007AFF;
+}
+
+.evaluation-feedback,
+.evaluation-highlights,
+.evaluation-improvements {
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.evaluation-feedback h5,
+.evaluation-highlights h5,
+.evaluation-improvements h5 {
+    color: #1C1C1E;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.feedback-content {
+    color: #333;
+    line-height: 1.6;
+}
+
+.highlights-list,
+.improvements-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.highlights-list li {
+    color: #34C759;
+    margin-bottom: 4px;
+}
+
+.improvements-list li {
+    color: #FF9500;
+    margin-bottom: 4px;
+}
+
+.evaluation-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .learning-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .learning-modules {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+    
+    .module-card {
+        min-width: 200px;
+    }
+    
+    .practice-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .input-actions,
+    .evaluation-actions {
+        flex-direction: column;
+    }
+}

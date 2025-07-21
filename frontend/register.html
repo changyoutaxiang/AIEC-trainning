@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 - AIEC 职场软技能</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <!-- 左侧：品牌信息区域 -->
+        <div class="login-brand">
+            <h1>AIEC 职场软技能</h1>
+            <p>加入我们，开启你的职场成长之旅，掌握七个高效能习惯，成为更好的自己。</p>
+            <div class="auth-buttons">
+                <button id="loginBtn" class="btn btn-secondary">登录</button>
+                <button id="registerBtn" class="btn btn-primary">注册</button>
+            </div>
+        </div>
+        
+        <!-- 右侧：注册表单区域 -->
+        <div class="login-form-container">
+            <div class="login-form">
+                <h2>创建账户</h2>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="fullName">姓名</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">用户名</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">确认密码</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">创建账户</button>
+                </form>
+                <p class="register-link">已有账户？<a href="login.html" id="showLogin">立即登录</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html> 

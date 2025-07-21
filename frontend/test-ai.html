@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 测试 - AIEC 职场软技能</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="nav">
+                <div class="logo">AIEC 职场软技能</div>
+                <div class="nav-links">
+                    <a href="index.html">首页</a>
+                    <a href="seven-habits.html">七个习惯</a>
+                    <a href="skills.html">技能训练</a>
+                    <a href="#" onclick="logout()">退出</a>
+                </div>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>AI 功能测试</h1>
+            <p>测试AI服务的连接和响应能力</p>
+        </section>
+
+        <section class="test-section">
+            <div class="test-card">
+                <h2>AI 对话测试</h2>
+                <div class="test-input">
+                    <textarea id="testInput" placeholder="请输入测试消息..." rows="4"></textarea>
+                    <button id="testBtn" class="btn btn-primary">发送测试</button>
+                </div>
+                <div class="test-output">
+                    <h3>AI 响应：</h3>
+                    <div id="testOutput" class="output-content">
+                        等待测试...
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/aiService.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.getElementById('testBtn').addEventListener('click', async function() {
+            const input = document.getElementById('testInput').value;
+            const output = document.getElementById('testOutput');
+            
+            if (!input.trim()) {
+                output.textContent = '请输入测试消息';
+                return;
+            }
+            
+            output.textContent = '正在处理...';
+            
+            try {
+                const response = await fetch('/api/ai/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: input,
+                        context: 'test'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    output.textContent = data.response;
+                } else {
+                    output.textContent = '错误: ' + data.error;
+                }
+            } catch (error) {
+                output.textContent = '网络错误: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html> 
