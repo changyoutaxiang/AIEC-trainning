@@ -1,0 +1,131 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2025-01-15",
+    "description": "AIEC七个习惯培训体系内容库",
+    "totalHabits": 7,
+    "totalUnits": 21
+  },
+  "habits": {
+    "habit_1": {
+      "habitId": "habit_1",
+      "habitName": "积极主动",
+      "habitNameEn": "Be Proactive",
+      "description": "从被动响应者到主动价值创造者的关键身份转变",
+      "corePhilosophy": "在外部刺激和我们的回应之间，存在一个空间，这个空间里有我们选择回应方式的权利与自由",
+      "status": "available",
+      "prerequisite": null,
+      "estimatedTime": "4-6周",
+      "units": {
+        "unit_1_1": {
+          "unitId": "unit_1_1",
+          "unitName": "责任感 (Ownership)",
+          "subtitle": "问题到我为止",
+          "description": "深刻理解责任感的内核，将问题解决从推诿转向承担",
+          "sections": {
+            "why_it_matters": {
+              "professional": "责任感是积极主动这一习惯的内核。它要求我们对自己的行为、选择及其产生的结果，承担起100%的责任。",
+              "simple": "简单来说，责任感就是一种'这事儿我兜了'的心态。"
+            },
+            "leon_perspective": {
+              "videoTitle": "Leon 谈责任感：我职业生涯中最重要的一堂课",
+              "videoDescription": "在这段视频中，我将与大家分享我个人关于责任感的几点真实体会..."
+            },
+            "practice_arena": [
+              {
+                "practiceId": "practice_1_1_1",
+                "title": "我的项目交付不达预期",
+                "scenario": "你负责的一个项目刚刚结束，但在最终的复盘会上，你的领导在团队群里公开指出...",
+                "task": "在模拟的聊天窗口中，草拟你的第一条公开回复。",
+                "evaluationDimensions": [
+                  "直面差距 (Acknowledge the Gap)",
+                  "承担责任 (Take Responsibility)",
+                  "主动担责 (Propose Action)"
+                ]
+              },
+              {
+                "practiceId": "practice_1_1_2",
+                "title": "跨部门项目卡住了",
+                "scenario": "你负责的一个项目中，需要依赖法务部门审核一份合作协议...",
+                "task": "草拟你准备采取的下一步行动计划。",
+                "evaluationDimensions": [
+                  "打破被动 (Break Passivity)",
+                  "主动担责 (Take Ownership)",
+                  "建设性行动 (Constructive Action)"
+                ]
+              }
+            ],
+            "dilemma_zone": [
+              {
+                "dilemmaId": "dilemma_1_1_1",
+                "title": "能力边界",
+                "question": "当一个问题的难度明显超出了你当前的能力范围时，你还应该坚持'问题到我为止'吗？",
+                "coachingLogic": "AI会引导学员思考：'问题到我为止'，是否意味着'所有问题都必须由我独立解决'？"
+              }
+            ]
+          }
+        },
+        "unit_1_2": {
+          "unitId": "unit_1_2",
+          "unitName": "积极主动 (Proactiveness)",
+          "subtitle": "在无人区寻找价值",
+          "description": "从任务的被动接收器升级为价值的主动探索者",
+          "sections": {
+            "why_it_matters": {
+              "professional": "积极主动是责任感的自然延伸，它要求成员不仅要对已被分配的任务负责，更要对未被发现的机会负责。",
+              "simple": "如果说责任感是守好自己的一亩三分地，那积极主动就是主动去开垦旁边的荒地。"
+            }
+          }
+        }
+      }
+    },
+    "habit_2": {
+      "habitId": "habit_2",
+      "habitName": "以终为始",
+      "habitNameEn": "Begin with the End in Mind",
+      "description": "培养先看靶再拉弓的战略性工作习惯",
+      "prerequisite": "habit_1",
+      "status": "locked"
+    },
+    "habit_3": {
+      "habitId": "habit_3",
+      "habitName": "要事第一",
+      "habitNameEn": "Put First Things First",
+      "description": "掌握高效能人士的核心组织方法",
+      "prerequisite": "habit_2",
+      "status": "locked"
+    },
+    "habit_4": {
+      "habitId": "habit_4",
+      "habitName": "双赢思维",
+      "habitNameEn": "Think Win-Win",
+      "description": "建立合作共赢的思维模式",
+      "prerequisite": "habit_3",
+      "status": "locked"
+    },
+    "habit_5": {
+      "habitId": "habit_5",
+      "habitName": "知彼解己",
+      "habitNameEn": "Seek First to Understand",
+      "description": "掌握深度沟通的核心技能",
+      "prerequisite": "habit_4",
+      "status": "locked"
+    },
+    "habit_6": {
+      "habitId": "habit_6",
+      "habitName": "统合综效",
+      "habitNameEn": "Synergize",
+      "description": "创造性地解决问题和产生第三选择",
+      "prerequisite": "habit_5",
+      "status": "locked"
+    },
+    "habit_7": {
+      "habitId": "habit_7",
+      "habitName": "不断更新",
+      "habitNameEn": "Sharpen the Saw",
+      "description": "建立可持续的个人成长系统",
+      "prerequisite": "habit_6",
+      "status": "locked"
+    }
+  }
+} 

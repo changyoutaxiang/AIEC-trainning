@@ -53,13 +53,20 @@ async function initializeLearningPage() {
         updateProgress();
     } catch (error) {
         console.error('初始化学习页面失败:', error);
-        alert('加载学习内容失败，请刷新页面重试');
+        
+        // 尝试使用默认数据
+        habitData = getHabitData(currentHabit);
+        document.getElementById('habitNumber').textContent = currentHabit;
+        document.getElementById('habitTitle').textContent = habitData.habitName;
+        document.getElementById('habitSubtitle').textContent = habitData.description;
+        
+        console.log('使用默认习惯数据继续加载');
     }
 }
 
 async function loadHabitData(habitNumber) {
     try {
-        const response = await fetch('../content/seven_habits.json');
+        const response = await fetch('content/seven_habits.json');
         if (!response.ok) {
             throw new Error('无法加载习惯数据');
         }
