@@ -133,11 +133,12 @@ body {
     transform: none !important;
 }
 
-/* 统一学习模块样式 */
+/* 统一学习模块样式 - 温和修复方案 */
 .content-section {
     display: block;
     max-width: 800px; /* 统一最大宽度 */
     margin: 0 auto;   /* 居中显示 */
+    padding: 0 20px;  /* 添加适量内边距 */
 }
 
 .content-section.hidden {
