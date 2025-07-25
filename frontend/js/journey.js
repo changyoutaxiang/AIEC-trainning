@@ -198,11 +198,9 @@ class JourneyManager {
         try {
             // 尝试从后端获取真实的习惯进度数据
             const habitsProgress = await this.calculateHabitsProgress();
-            const overallProgress = await this.calculateOverallProgress(habitsProgress);
             
             this.habitData = {
-                habitsProgress,
-                overallProgress
+                habitsProgress
             };
             
         } catch (error) {
@@ -272,50 +270,6 @@ class JourneyManager {
         }
     }
     
-    // 计算整体进度
-    async calculateOverallProgress(habitsProgress) {
-        try {
-            // 计算平均进度
-            const totalProgress = habitsProgress.reduce((sum, habit) => sum + habit.progress, 0);
-            const averageProgress = Math.round(totalProgress / habitsProgress.length);
-            
-            // 计算完成的单元数（基于进度）
-            const completedUnits = Math.round((averageProgress / 100) * 21); // 总共21个单元
-            const totalUnits = 21;
-            
-            // 计算下个里程碑
-            let nextMilestone = "100%";
-            if (averageProgress < 80) nextMilestone = "80%";
-            else if (averageProgress < 90) nextMilestone = "90%";
-            
-            // 估算完成时间
-            let estimatedCompletion = "已完成";
-            if (averageProgress < 100) {
-                const remainingProgress = 100 - averageProgress;
-                const daysToComplete = Math.ceil(remainingProgress / 5); // 假设每天提升5%
-                estimatedCompletion = `${daysToComplete}天后`;
-            }
-            
-            return {
-                percentage: averageProgress,
-                completedUnits,
-                totalUnits,
-                nextMilestone,
-                estimatedCompletion
-            };
-            
-        } catch (error) {
-            console.error('计算整体进度失败:', error);
-            
-            return {
-                percentage: 0,
-                completedUnits: 0,
-                totalUnits: 21,
-                nextMilestone: "20%",
-                estimatedCompletion: "开始学习"
-            };
-        }
-    }
     
     
     // 渲染用户档案
@@ -335,7 +289,6 @@ class JourneyManager {
     // 渲染仪表盘
     renderDashboard() {
         this.renderRadarChart();
-        this.renderProgressCircle();
     }
     
     // 渲染雷达图
@@ -465,32 +418,6 @@ class JourneyManager {
         });
     }
     
-    // 渲染进度环图
-    renderProgressCircle() {
-        const { overallProgress } = this.habitData;
-        const progressBar = document.getElementById('progressBar');
-        const progressPercentage = document.getElementById('progressPercentage');
-        const completedUnits = document.getElementById('completedUnits');
-        const totalUnits = document.getElementById('totalUnits');
-        const nextMilestone = document.getElementById('nextMilestone');
-        const estimatedCompletion = document.getElementById('estimatedCompletion');
-        
-        // 计算进度环的stroke-dashoffset
-        const circumference = 2 * Math.PI * 80; // r = 80
-        const offset = circumference - (overallProgress.percentage / 100) * circumference;
-        
-        // 动画更新进度环
-        setTimeout(() => {
-            progressBar.style.strokeDashoffset = offset;
-            progressPercentage.textContent = overallProgress.percentage + '%';
-        }, 500);
-        
-        // 更新详细信息
-        completedUnits.textContent = overallProgress.completedUnits;
-        totalUnits.textContent = overallProgress.totalUnits;
-        nextMilestone.textContent = overallProgress.nextMilestone;
-        estimatedCompletion.textContent = overallProgress.estimatedCompletion;
-    }
     
     
     

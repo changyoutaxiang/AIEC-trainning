@@ -42,35 +42,32 @@
 .profile-card {
     background: linear-gradient(135deg, var(--surface) 0%, #ffffff 100%);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xl);
-    border: 1px solid var(--border);
-}
-
-.profile-card {
-    background: linear-gradient(135deg, var(--surface) 0%, #ffffff 100%);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
+    padding: var(--spacing-lg) var(--spacing-xl);
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border);
 }
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .stat-card {
     text-align: center;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-sm);
     background: white;
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    min-width: 0;
+    aspect-ratio: 1.2/1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .stat-card:hover {
@@ -78,18 +75,38 @@
     box-shadow: var(--shadow-md);
 }
 
+/* 为不同的统计卡片添加主题色彩 */
+.stat-card:nth-child(1) .stat-number {
+    color: var(--habit-1);
+}
+
+.stat-card:nth-child(2) .stat-number {
+    color: var(--habit-3);
+}
+
+.stat-card:nth-child(3) .stat-number {
+    color: var(--habit-5);
+}
+
+.stat-card:nth-child(4) .stat-number {
+    color: var(--habit-6);
+}
+
 .stat-number {
     font-size: 28px;
     font-weight: 700;
     color: var(--primary-blue);
     margin-bottom: var(--spacing-xs);
+    line-height: 1.1;
 }
 
 .stat-label {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* ===========================================
@@ -102,8 +119,10 @@
 
 .dashboard-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: var(--spacing-lg);
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .dashboard-card {
@@ -160,64 +179,6 @@
     border-radius: 50%;
 }
 
-/* 进度环图样式 */
-.progress-container {
-    text-align: center;
-}
-
-.progress-circle {
-    position: relative;
-    display: inline-block;
-    margin-bottom: var(--spacing-md);
-}
-
-.progress-svg {
-    width: 150px;
-    height: 150px;
-    transform: rotate(-90deg);
-}
-
-.progress-bg {
-    fill: none;
-    stroke: var(--border);
-    stroke-width: 8;
-}
-
-.progress-fill {
-    fill: none;
-    stroke: var(--primary-blue);
-    stroke-width: 8;
-    stroke-linecap: round;
-    stroke-dasharray: 502;
-    stroke-dashoffset: 502;
-    transition: stroke-dashoffset 1s ease-in-out;
-}
-
-.progress-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.progress-percentage {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--primary-blue);
-}
-
-.progress-label {
-    font-size: 10px;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.progress-details {
-    font-size: 12px;
-    color: var(--text-secondary);
-    line-height: 1.5;
-}
 
 
 
@@ -300,7 +261,9 @@
     }
     
     .stats-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+        max-width: 600px;
     }
 }
 
@@ -333,6 +296,21 @@
     
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+        max-width: 500px;
+    }
+    
+    .stat-card {
+        aspect-ratio: 1/1;
+        padding: var(--spacing-sm);
+    }
+    
+    .stat-number {
+        font-size: 24px;
+    }
+    
+    .stat-label {
+        font-size: 12px;
     }
     
     .dashboard-grid {
