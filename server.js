@@ -10,6 +10,8 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const sqlite3 = require('sqlite3').verbose();
+const fs = require('fs');
 require('dotenv').config();
 
 // 引入后端路由
@@ -19,6 +21,117 @@ const leaderboardRoutes = require('./backend/routes/leaderboard');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// 数据库初始化
+async function initializeDatabase() {
+    const dbPath = path.join(__dirname, 'backend/database/aiec_users.db');
+    const dbDir = path.dirname(dbPath);
+    
+    // 确保数据库目录存在
+    if (!fs.existsSync(dbDir)) {
+        fs.mkdirSync(dbDir, { recursive: true });
+        console.log('📁 数据库目录已创建');
+    }
+    
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(dbPath, (err) => {
+            if (err) {
+                console.error('❌ 数据库连接失败:', err);
+                reject(err);
+                return;
+            }
+            
+            console.log('✅ 数据库连接成功');
+            
+            // 创建用户表（包含password字段）
+            const createUsersTable = `
+                CREATE TABLE IF NOT EXISTS users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    email TEXT UNIQUE NOT NULL,
+                    name TEXT NOT NULL,
+                    department TEXT,
+                    position TEXT,
+                    password TEXT NOT NULL,
+                    avatar TEXT DEFAULT 'default.png',
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    last_login DATETIME,
+                    status TEXT DEFAULT 'active'
+                )
+            `;
+            
+            // 创建学习记录表
+            const createLearningRecordsTable = `
+                CREATE TABLE IF NOT EXISTS learning_records (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    habit_id INTEGER NOT NULL,
+                    unit_id TEXT,
+                    exercise_type TEXT NOT NULL,
+                    exercise_id TEXT NOT NULL,
+                    user_response TEXT,
+                    ai_evaluation TEXT,
+                    score INTEGER,
+                    completed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (user_id) REFERENCES users (id)
+                )
+            `;
+            
+            // 创建习惯进度表
+            const createHabitProgressTable = `
+                CREATE TABLE IF NOT EXISTS habit_progress (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    habit_id INTEGER NOT NULL,
+                    unit_id TEXT,
+                    progress_data TEXT,
+                    completion_percentage INTEGER DEFAULT 0,
+                    last_accessed DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    completed_at DATETIME,
+                    FOREIGN KEY (user_id) REFERENCES users (id),
+                    UNIQUE(user_id, habit_id, unit_id)
+                )
+            `;
+            
+            // 依次创建表
+            db.serialize(() => {
+                db.run(createUsersTable, (err) => {
+                    if (err) {
+                        console.error('❌ 创建用户表失败:', err);
+                        reject(err);
+                        return;
+                    }
+                    console.log('✅ 用户表创建成功');
+                });
+                
+                db.run(createLearningRecordsTable, (err) => {
+                    if (err) {
+                        console.error('❌ 创建学习记录表失败:', err);
+                    } else {
+                        console.log('✅ 学习记录表创建成功');
+                    }
+                });
+                
+                db.run(createHabitProgressTable, (err) => {
+                    if (err) {
+                        console.error('❌ 创建习惯进度表失败:', err);
+                    } else {
+                        console.log('✅ 习惯进度表创建成功');
+                    }
+                });
+            });
+            
+            db.close((err) => {
+                if (err) {
+                    console.error('❌ 关闭数据库失败:', err);
+                    reject(err);
+                } else {
+                    console.log('🎉 数据库初始化完成');
+                    resolve();
+                }
+            });
+        });
+    });
+}
 
 // 中间件配置
 app.use(cors({
@@ -75,11 +188,25 @@ app.use((err, req, res, next) => {
 });
 
 // 启动服务器
-app.listen(PORT, () => {
-    console.log(`🚀 AIEC学习系统启动成功`);
-    console.log(`📍 服务地址: http://localhost:${PORT}`);
-    console.log(`🌍 环境: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`📊 API文档: http://localhost:${PORT}/api/health`);
-});
+async function startServer() {
+    try {
+        // 初始化数据库
+        await initializeDatabase();
+        
+        // 启动Express服务器
+        app.listen(PORT, () => {
+            console.log(`🚀 AIEC学习系统启动成功`);
+            console.log(`📍 服务地址: http://localhost:${PORT}`);
+            console.log(`🌍 环境: ${process.env.NODE_ENV || 'development'}`);
+            console.log(`📊 API文档: http://localhost:${PORT}/api/health`);
+        });
+    } catch (error) {
+        console.error('❌ 服务器启动失败:', error);
+        process.exit(1);
+    }
+}
+
+// 启动服务器
+startServer();
 
 module.exports = app;

@@ -13,7 +13,9 @@
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  },
   "devDependencies": {},
   "keywords": ["aiec", "learning", "ai", "skills"],
   "author": "AIEC Development Team",
