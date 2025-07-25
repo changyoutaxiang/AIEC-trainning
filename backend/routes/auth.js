@@ -19,6 +19,13 @@ const router = express.Router();
 // 数据库路径
 const DB_PATH = path.join(__dirname, '../database/aiec_users.db');
 
+// 确保数据库目录存在
+const dbDir = path.dirname(DB_PATH);
+if (!fs.existsSync(dbDir)) {
+    fs.mkdirSync(dbDir, { recursive: true });
+    console.log('📁 数据库目录已创建:', dbDir);
+}
+
 // 白名单配置文件路径
 const WHITELIST_PATH = path.join(__dirname, '../config/authorized-users.json');
 
@@ -39,13 +46,39 @@ function isEmailAuthorized(email) {
     return whitelist.authorizedEmails.includes(email);
 }
 
-// 创建数据库连接
+// 创建数据库连接并确保表存在
 function getDbConnection() {
-    return new sqlite3.Database(DB_PATH, (err) => {
+    const db = new sqlite3.Database(DB_PATH, (err) => {
         if (err) {
             console.error('数据库连接失败:', err.message);
         }
     });
+    
+    // 每次连接时确保表存在
+    const createUsersTable = `
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT UNIQUE NOT NULL,
+            name TEXT NOT NULL,
+            department TEXT,
+            position TEXT,
+            password TEXT NOT NULL,
+            avatar TEXT DEFAULT 'default.png',
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            last_login DATETIME,
+            status TEXT DEFAULT 'active'
+        )
+    `;
+    
+    db.run(createUsersTable, (err) => {
+        if (err) {
+            console.error('❌ 创建用户表失败:', err);
+        } else {
+            console.log('✅ 用户表确认存在');
+        }
+    });
+    
+    return db;
 }
 
 // 6位数字密码验证
