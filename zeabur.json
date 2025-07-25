@@ -8,28 +8,22 @@
       "startCommand": "npm start",
       "port": 3000,
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "DATABASE_PATH": "/data/database/aiec_users.db",
+        "UPLOADS_PATH": "/data/uploads"
       },
       "volumes": [
         {
-          "name": "database",
-          "mountPath": "/app/backend/database"
-        },
-        {
-          "name": "uploads",
-          "mountPath": "/app/frontend/assets/avatars/uploads"
+          "name": "persistent-data",
+          "mountPath": "/data"
         }
       ]
     }
   ],
   "volumes": [
     {
-      "name": "database",
-      "size": "1GB"
-    },
-    {
-      "name": "uploads", 
-      "size": "500MB"
+      "name": "persistent-data",
+      "size": "2GB"
     }
   ]
 }

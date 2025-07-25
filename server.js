@@ -24,13 +24,16 @@ const PORT = process.env.PORT || 3000;
 
 // 数据库初始化
 async function initializeDatabase() {
-    const dbPath = path.join(__dirname, 'backend/database/aiec_users.db');
+    // 使用环境变量或默认路径
+    const dbPath = process.env.DATABASE_PATH || path.join(__dirname, 'backend/database/aiec_users.db');
     const dbDir = path.dirname(dbPath);
+    
+    console.log(`📍 数据库路径: ${dbPath}`);
     
     // 确保数据库目录存在
     if (!fs.existsSync(dbDir)) {
         fs.mkdirSync(dbDir, { recursive: true });
-        console.log('📁 数据库目录已创建');
+        console.log(`📁 数据库目录已创建: ${dbDir}`);
     }
     
     return new Promise((resolve, reject) => {

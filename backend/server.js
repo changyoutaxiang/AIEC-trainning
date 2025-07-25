@@ -87,7 +87,7 @@ app.get('/api/auth/user/:id', (req, res) => {
     
     // 从数据库获取用户信息
     const sqlite3 = require('sqlite3').verbose();
-    const dbPath = path.join(__dirname, 'database/aiec_users.db');
+    const dbPath = process.env.DATABASE_PATH || path.join(__dirname, 'database/aiec_users.db');
     const db = new sqlite3.Database(dbPath);
     
     db.get(

@@ -16,8 +16,8 @@ const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
-// 数据库路径
-const DB_PATH = path.join(__dirname, '../database/aiec_users.db');
+// 数据库路径 - 支持环境变量配置
+const DB_PATH = process.env.DATABASE_PATH || path.join(__dirname, '../database/aiec_users.db');
 
 // 确保数据库目录存在
 const dbDir = path.dirname(DB_PATH);
