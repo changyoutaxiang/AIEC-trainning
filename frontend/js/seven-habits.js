@@ -38,20 +38,15 @@ class SevenHabitsSystem {
     // 检查用户认证状态
     checkUserAuth() {
         // 先尝试从localStorage恢复用户状态
-        const savedUser = localStorage.getItem('aiec_current_user');
-        if (savedUser) {
-            try {
-                this.currentUser = JSON.parse(savedUser);
-                // 更新全局状态
-                if (window.app) {
-                    window.app.setUser(this.currentUser);
-                }
-                console.log('用户状态恢复成功:', this.currentUser.name);
-                return;
-            } catch (error) {
-                console.error('用户数据解析失败:', error);
-                localStorage.removeItem('aiec_current_user');
+        const currentUserData = localStorage.getItem('aiec_current_user');
+        this.currentUser = currentUserData ? JSON.parse(currentUserData) : null;
+        if (this.currentUser) {
+            // 更新全局状态
+            if (window.app) {
+                window.app.setUser(this.currentUser);
             }
+            console.log('用户状态恢复成功:', this.currentUser.name);
+            return;
         }
         
         // 备选方案：检查全局状态
@@ -76,14 +71,10 @@ class SevenHabitsSystem {
     loadUserData() {
         if (!this.currentUser) return;
         
-        const userData = localStorage.getItem(`aiec_user_${this.currentUser.id}`);
+        const userDataStr = localStorage.getItem(`aiec_user_${this.currentUser.id}`);
+        const userData = userDataStr ? JSON.parse(userDataStr) : null;
         if (userData) {
-            try {
-                const parsedData = JSON.parse(userData);
-                this.currentUser = { ...this.currentUser, ...parsedData };
-            } catch (error) {
-                console.error('用户数据解析失败:', error);
-            }
+            this.currentUser = { ...this.currentUser, ...userData };
         }
         
         // 确保用户数据包含必要字段
@@ -125,6 +116,8 @@ class SevenHabitsSystem {
     updateHabitsStatus() {
         if (!this.currentUser || !this.currentUser.habitsProgress) return;
         
+        console.log('更新习惯状态，用户进度:', this.currentUser.habitsProgress);
+        
         Object.keys(this.habits).forEach(habitId => {
             const habit = this.habits[habitId];
             const userProgress = this.currentUser.habitsProgress[habitId];
@@ -144,6 +137,8 @@ class SevenHabitsSystem {
                 habit.status = this.isHabitUnlocked(habitId) ? 'available' : 'locked';
                 habit.progress = 0;
             }
+            
+            console.log(`习惯 ${habitId} 状态: ${habit.status}, 解锁条件: ${habit.prerequisite}, 是否解锁: ${this.isHabitUnlocked(habitId)}`);
         });
     }
 
@@ -542,7 +537,6 @@ function initializeHabitsPage() {
         
         const habitNumber = card.querySelector('.habit-number');
         const startButton = card.querySelector('.habit-actions .btn-primary');
-        const detailButton = card.querySelector('.habit-actions .btn-secondary');
         
         if (habitNumber) {
             console.log('习惯编号:', habitNumber.textContent);
@@ -550,6 +544,12 @@ function initializeHabitsPage() {
         
         if (startButton && startButton.textContent.includes('开始学习')) {
             console.log('绑定第', index + 1, '个习惯的开始学习按钮');
+            // 添加数据属性用于调试
+            if (habitNumber) {
+                const number = habitNumber.textContent.trim();
+                startButton.setAttribute('data-habit-number', number);
+            }
+            
             startButton.addEventListener('click', function(e) {
                 e.preventDefault();
                 console.log('开始学习按钮被点击');
@@ -562,21 +562,33 @@ function initializeHabitsPage() {
                     console.error('未找到习惯编号元素');
                 }
             });
+        } else {
+            console.log('未找到开始学习的按钮或按钮文本不匹配，卡片索引:', index);
+            if (startButton) {
+                console.log('找到的按钮文本:', startButton.textContent);
+            }
         }
         
-        if (detailButton && detailButton.textContent.includes('查看详情')) {
-            console.log('绑定第', index + 1, '个习惯的查看详情按钮');
-            detailButton.addEventListener('click', function(e) {
+    });
+    
+    // 为所有开始学习的按钮添加事件监听，确保包括第7个习惯
+    const allStartButtons = document.querySelectorAll('button[onclick*="startHabitLearning"]');
+    console.log('找到所有开始学习按钮:', allStartButtons.length);
+    
+    allStartButtons.forEach(button => {
+        const onclickAttr = button.getAttribute('onclick');
+        const match = onclickAttr.match(/startHabitLearning\((\d+)\)/);
+        if (match) {
+            const habitNumber = match[1];
+            console.log('通过onclick属性绑定第', habitNumber, '个习惯');
+            
+            // 移除内联事件，改为使用addEventListener
+            button.removeAttribute('onclick');
+            
+            button.addEventListener('click', function(e) {
                 e.preventDefault();
-                console.log('查看详情按钮被点击');
-                
-                if (habitNumber) {
-                    const number = habitNumber.textContent.trim();
-                    console.log('查看习惯', number, '详情');
-                    showHabitDetail(number);
-                } else {
-                    console.error('未找到习惯编号元素');
-                }
+                console.log('通过addEventListener开始学习习惯', habitNumber);
+                startHabitLearning(habitNumber, this.closest('.habit-card'));
             });
         }
     });
@@ -595,16 +607,6 @@ function startHabitLearning(habitNumber, habitCard) {
     }
 }
 
-function showHabitDetail(habitNumber) {
-    console.log('显示习惯详情，习惯编号:', habitNumber);
-    
-    try {
-        // 显示习惯详情
-        alert(`习惯${habitNumber}的详细信息功能正在开发中...`);
-    } catch (error) {
-        console.error('显示习惯详情出错:', error);
-    }
-}
 
 // checkAuth 函数现在使用 app.js 中的全局版本
 
@@ -614,4 +616,4 @@ window.onclick = function(event) {
     if (event.target === modal) {
         closeHabitModal();
     }
-}; 
+};

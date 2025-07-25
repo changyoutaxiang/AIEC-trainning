@@ -1,0 +1,94 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8faff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8f2ff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hearingGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ee5a52;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="understandingGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#44a08d;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradient)"/>
+  
+  <!-- Title -->
+  <text x="200" y="25" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#2c3e50">知彼解己核心理念</text>
+  
+  <!-- Left side: Surface Hearing -->
+  <g transform="translate(50, 60)">
+    <!-- Ear symbol -->
+    <path d="M30 40 C30 25, 45 10, 60 10 C75 10, 90 25, 90 40 C90 60, 75 80, 60 80 C50 80, 40 70, 40 60" 
+          fill="url(#hearingGradient)" filter="url(#shadow)" opacity="0.8"/>
+    <circle cx="60" cy="50" r="8" fill="#ffffff" opacity="0.9"/>
+    
+    <!-- Sound waves -->
+    <path d="M95 35 Q105 40, 95 45" stroke="#ff6b6b" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M100 30 Q115 40, 100 50" stroke="#ff6b6b" stroke-width="2" fill="none" opacity="0.4"/>
+    <path d="M105 25 Q125 40, 105 55" stroke="#ff6b6b" stroke-width="2" fill="none" opacity="0.3"/>
+    
+    <text x="60" y="110" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#e74c3c">表面聆听</text>
+    <text x="60" y="125" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#7f8c8d">仅听见词语</text>
+  </g>
+  
+  <!-- Arrow pointing right -->
+  <g transform="translate(180, 120)">
+    <path d="M0 0 L30 0 M20 -8 L30 0 L20 8" stroke="#3498db" stroke-width="2" fill="none"/>
+    <text x="15" y="-15" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#3498db">升华为</text>
+  </g>
+  
+  <!-- Right side: Deep Understanding -->
+  <g transform="translate(250, 60)">
+    <!-- Heart with mind symbol -->
+    <path d="M60 25 C50 15, 35 15, 30 30 C25 15, 10 15, 0 25 C-5 35, 10 55, 30 75 C50 55, 65 35, 60 25 Z" 
+          fill="url(#understandingGradient)" filter="url(#shadow)"/>
+    
+    <!-- Eye in heart -->
+    <ellipse cx="30" cy="35" rx="8" ry="5" fill="#ffffff" opacity="0.9"/>
+    <circle cx="30" cy="35" r="3" fill="#2c3e50"/>
+    
+    <!-- Understanding rays -->
+    <g opacity="0.6">
+      <line x1="15" y1="20" x2="10" y2="15" stroke="#4ecdc4" stroke-width="1.5"/>
+      <line x1="45" y1="20" x2="50" y2="15" stroke="#4ecdc4" stroke-width="1.5"/>
+      <line x1="5" y1="35" x2="0" y2="35" stroke="#4ecdc4" stroke-width="1.5"/>
+      <line x1="55" y1="35" x2="60" y2="35" stroke="#4ecdc4" stroke-width="1.5"/>
+    </g>
+    
+    <text x="30" y="110" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#16a085">移情理解</text>
+    <text x="30" y="125" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#7f8c8d">理解情感意图</text>
+  </g>
+  
+  <!-- Core philosophy text -->
+  <rect x="40" y="170" width="320" height="80" rx="12" fill="#ffffff" filter="url(#shadow)" opacity="0.9"/>
+  <text x="200" y="195" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#2c3e50">
+    "除非对方感觉到自己被充分理解了，
+  </text>
+  <text x="200" y="215" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#2c3e50">
+    否则他很难真正敞开心扉，去理解你"
+  </text>
+  <text x="200" y="240" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="11" fill="#7f8c8d">
+    沟通的关键，在于被理解
+  </text>
+  
+  <!-- Medical analogy icons -->
+  <g transform="translate(75, 265)" opacity="0.6">
+    <rect x="0" y="0" width="8" height="12" rx="1" fill="#e74c3c"/>
+    <rect x="4" y="-4" width="8" height="4" rx="1" fill="#e74c3c"/>
+    <text x="20" y="10" font-family="SF Pro Text, -apple-system, sans-serif" font-size="9" fill="#7f8c8d">如医生般诊断</text>
+  </g>
+  
+  <g transform="translate(275, 265)" opacity="0.6">
+    <circle cx="4" cy="4" r="4" fill="#4ecdc4"/>
+    <path d="M2 4 L3.5 5.5 L6 2.5" stroke="#ffffff" stroke-width="1.2" fill="none"/>
+    <text x="20" y="10" font-family="SF Pro Text, -apple-system, sans-serif" font-size="9" fill="#7f8c8d">建立深度信任</text>
+  </g>
+</svg>

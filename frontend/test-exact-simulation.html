@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精确模拟测试 - AIEC</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            margin: 20px; 
+            background: #f5f5f5; 
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .dilemma-input {
+            margin: 20px 0;
+        }
+        .dilemma-input textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            resize: vertical;
+        }
+        .test-button { 
+            background: #007AFF; 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            margin: 5px; 
+            font-size: 14px;
+        }
+        .test-button:hover { background: #0056b3; }
+        .test-button:disabled { background: #ccc; cursor: not-allowed; }
+        .status { 
+            padding: 10px; 
+            margin: 10px 0; 
+            border-radius: 4px; 
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #e7f3ff; color: #004085; }
+        .loading { background: #fff3cd; color: #856404; }
+        .conversation {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #007AFF;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .user-message {
+            background: #e3f2fd;
+            margin-left: 20px;
+        }
+        .ai-message {
+            background: #f3e5f5;
+            margin-right: 20px;
+        }
+        .debug-info {
+            background: #1e1e1e;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: Monaco, monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 精确模拟测试</h1>
+        <p>这个页面完全模拟habit-learning.html中的submitDilemmaThought函数执行环境</p>
+        
+        <div id="status-display" class="status info">
+            <strong>测试状态:</strong> 准备就绪
+        </div>
+        
+        <div class="dilemma-input">
+            <h3>选择测试难题:</h3>
+            <select id="testDilemmaSelect" onchange="updateDilemmaDisplay()">
+                <option value="">请选择难题...</option>
+                <option value="dilemma_1_1_1" selected>1.1.1 - 内驱与外驱的矛盾</option>
+                <option value="dilemma_1_1_2">1.1.2 - 机制的失效</option>
+                <option value="dilemma_1_1_3">1.1.3 - 对他人的期望</option>
+            </select>
+            
+            <div id="current-dilemma" style="margin: 15px 0; padding: 10px; background: #f0f8ff; border-radius: 4px;">
+                <h4 id="dilemma-title">内驱与外驱的矛盾</h4>
+                <p id="dilemma-question">如果我总是依赖外部机制来驱动自己，这是否意味着我缺乏真正的'内驱力'？一个优秀的人，难道不应该是完全靠内心热爱来驱动的吗？</p>
+            </div>
+            
+            <h3>输入你的思考:</h3>
+            <textarea id="thoughtInput" placeholder="请输入你对这个难题的思考...">我觉得依赖外部机制说明我意志力不够强，真正厉害的人应该都是靠内在动力的。但是我发现即使是很成功的人也会使用各种工具和系统来管理自己，这让我有点困惑。</textarea>
+        </div>
+        
+        <button class="test-button" onclick="runExactSimulation()" id="simulateBtn">🚀 运行精确模拟</button>
+        <button class="test-button" onclick="clearResults()">🗑️ 清空结果</button>
+        
+        <div id="debug-output">
+            <h3>调试输出:</h3>
+            <div class="debug-info" id="debug-info"></div>
+        </div>
+        
+        <div id="conversation-display"></div>
+    </div>
+
+    <!-- 完全相同的脚本加载顺序 -->
+    <script src="js/utils.js?v=1"></script>
+    <script src="js/app.js?v=10"></script>
+    <script src="js/aiService.js?v=2"></script>
+    
+    <script>
+        // 存储测试难题数据
+        const testDilemmas = {
+            "dilemma_1_1_1": {
+                "dilemmaId": "dilemma_1_1_1",
+                "title": "内驱与外驱的矛盾",
+                "question": "如果我总是依赖外部机制来驱动自己，这是否意味着我缺乏真正的'内驱力'？一个优秀的人，难道不应该是完全靠内心热爱来驱动的吗？",
+                "coachingLogic": "AI 会引导学员思考："内驱力"（如热爱、好奇心）和"外驱机制"（如承诺、DDL）是矛盾的，还是相辅相成的？"
+            },
+            "dilemma_1_1_2": {
+                "dilemmaId": "dilemma_1_1_2",
+                "title": "机制的失效",
+                "question": "我为自己设计了一套学习计划和打卡机制，但坚持了两周后，就因为一次意外出差而中断了。现在我很难重新开始，感觉之前的努力都白费了。这是不是说明外部机制本身就不靠谱？",
+                "coachingLogic": "AI 会引导学员思考：一个好的系统，是否应该包含'容错'和'重启'机制？"
+            },
+            "dilemma_1_1_3": {
+                "dilemmaId": "dilemma_1_1_3",
+                "title": "对他人的期望",
+                "question": "我为团队设计了一个很好的外部驱动机制（比如学习分享会），但总有几个同事参与度不高，这让我感到沮丧。我该如何平衡'为他人设计驱动机制'和'尊重他人选择'之间的关系？",
+                "coachingLogic": "AI 会引导学员思考：'积极主动'是否意味着我们能控制他人的行为？"
+            }
+        };
+        
+        let debugMessages = [];
+        let currentDilemma = testDilemmas["dilemma_1_1_1"];
+        let conversationHistory = [];
+        
+        // 捕获调试输出
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        function addDebugMessage(type, message) {
+            const timestamp = new Date().toLocaleTimeString();
+            debugMessages.push(`[${timestamp}] ${type.toUpperCase()}: ${message}`);
+            updateDebugDisplay();
+        }
+        
+        console.log = function(...args) {
+            addDebugMessage('log', args.join(' '));
+            originalLog.apply(console, args);
+        };
+        
+        console.error = function(...args) {
+            addDebugMessage('error', args.join(' '));
+            originalError.apply(console, args);
+        };
+        
+        function updateDebugDisplay() {
+            document.getElementById('debug-info').textContent = debugMessages.join('\n');
+            document.getElementById('debug-info').scrollTop = document.getElementById('debug-info').scrollHeight;
+        }
+        
+        function updateStatus(type, message) {
+            const statusEl = document.getElementById('status-display');
+            statusEl.className = `status ${type}`;
+            statusEl.innerHTML = `<strong>测试状态:</strong> ${message}`;
+        }
+        
+        function updateDilemmaDisplay() {
+            const selectValue = document.getElementById('testDilemmaSelect').value;
+            if (selectValue && testDilemmas[selectValue]) {
+                currentDilemma = testDilemmas[selectValue];
+                document.getElementById('dilemma-title').textContent = currentDilemma.title;
+                document.getElementById('dilemma-question').textContent = currentDilemma.question;
+            }
+        }
+        
+        function clearResults() {
+            debugMessages = [];
+            conversationHistory = [];
+            updateDebugDisplay();
+            document.getElementById('conversation-display').innerHTML = '';
+            updateStatus('info', '结果已清空');
+        }
+        
+        // 精确模拟submitDilemmaThought函数
+        async function runExactSimulation() {
+            const thoughtText = document.getElementById('thoughtInput').value.trim();
+            const btn = document.getElementById('simulateBtn');
+            
+            if (!thoughtText) {
+                updateStatus('error', '请输入思考内容');
+                return;
+            }
+            
+            btn.disabled = true;
+            updateStatus('loading', '正在模拟submitDilemmaThought函数...');
+            
+            try {
+                console.log('🎭 开始精确模拟submitDilemmaThought函数');
+                console.log('📝 当前难题:', currentDilemma.title);
+                console.log('💭 用户思考:', thoughtText);
+                
+                // 完全复制habit-learning.js中的逻辑
+                conversationHistory.push({
+                    role: 'user',
+                    content: thoughtText,
+                    timestamp: new Date().toISOString()
+                });
+                
+                // 调用AI服务获取引导 - 这里是关键部分
+                console.log('🔍 准备创建AIService实例...');
+                console.log('🔍 AIService类型:', typeof AIService);
+                console.log('🔍 window.AIService类型:', typeof window.AIService);
+                console.log('🔍 DilemmaManager类型:', typeof DilemmaManager);
+                console.log('🔍 window.DilemmaManager类型:', typeof window.DilemmaManager);
+                
+                if (typeof AIService === 'undefined') {
+                    throw new Error('AIService未定义，请检查aiService.js是否正确加载');
+                }
+                
+                const aiService = new AIService();
+                console.log('✅ AIService实例创建成功');
+                
+                const guidance = await aiService.guideDilemmaDiscussion(
+                    currentDilemma,
+                    thoughtText,
+                    conversationHistory
+                );
+                
+                console.log('✅ AI引导获取成功');
+                
+                // 添加AI的引导到对话历史
+                conversationHistory.push({
+                    role: 'ai',
+                    content: guidance.guidance || guidance,
+                    timestamp: new Date().toISOString()
+                });
+                
+                // 显示对话
+                displayConversation();
+                
+                updateStatus('success', '✅ 模拟成功完成！AI交互正常工作');
+                console.log('🎉 精确模拟完成 - 成功');
+                
+            } catch (error) {
+                console.error('❌ 模拟失败:', error.message);
+                updateStatus('error', `❌ 模拟失败: ${error.message}`);
+                
+                // 显示详细错误信息
+                const errorDisplay = document.createElement('div');
+                errorDisplay.className = 'status error';
+                errorDisplay.innerHTML = `
+                    <h4>错误详情:</h4>
+                    <p><strong>错误类型:</strong> ${error.name}</p>
+                    <p><strong>错误消息:</strong> ${error.message}</p>
+                    <p><strong>错误堆栈:</strong></p>
+                    <pre style="font-size: 10px; overflow-x: auto;">${error.stack}</pre>
+                `;
+                document.getElementById('conversation-display').appendChild(errorDisplay);
+            }
+            
+            btn.disabled = false;
+        }
+        
+        function displayConversation() {
+            const container = document.getElementById('conversation-display');
+            const conversationHtml = `
+                <div class="conversation">
+                    <h3>🗣️ 对话记录</h3>
+                    ${conversationHistory.map(msg => `
+                        <div class="message ${msg.role === 'user' ? 'user-message' : 'ai-message'}">
+                            <strong>${msg.role === 'user' ? '👤 用户' : '🤖 AI导师'}:</strong>
+                            <p>${msg.content}</p>
+                            <small style="opacity: 0.7;">${new Date(msg.timestamp).toLocaleTimeString()}</small>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            container.innerHTML = conversationHtml;
+        }
+        
+        // 页面加载完成后的初始检查
+        window.addEventListener('load', function() {
+            console.log('📄 精确模拟页面加载完成');
+            
+            setTimeout(() => {
+                console.log('🔍 执行初始环境检查...');
+                console.log('✅ AIService状态:', typeof AIService);
+                console.log('✅ DilemmaManager状态:', typeof DilemmaManager);
+                
+                if (typeof AIService !== 'undefined') {
+                    updateStatus('success', '✅ 环境检查通过，AIService已正确加载');
+                } else {
+                    updateStatus('error', '❌ 环境检查失败，AIService未定义');
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

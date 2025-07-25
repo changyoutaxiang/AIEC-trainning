@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI评估功能测试</title>
+    <style>
+        body { font-family: system-ui, -apple-system; max-width: 800px; margin: 50px auto; padding: 20px; }
+        .test-section { border: 1px solid #ddd; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        textarea { width: 100%; height: 100px; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        button { background: #007AFF; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; margin: 5px; }
+        button:hover { background: #0056CC; }
+        .result { background: #f9f9f9; padding: 15px; margin: 15px 0; border-radius: 4px; white-space: pre-wrap; }
+        .error { background: #fee; border-left: 4px solid #f66; }
+        .success { background: #efe; border-left: 4px solid #6c6; }
+    </style>
+</head>
+<body>
+    <h1>🤖 AI评估功能测试</h1>
+    
+    <div class="test-section">
+        <h2>1. API连通性测试</h2>
+        <button onclick="testHealthCheck()">测试健康检查</button>
+        <div id="healthResult" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. AI评估功能测试</h2>
+        <p><strong>场景：</strong>项目出现问题时如何响应</p>
+        <textarea id="userResponse" placeholder="请输入你的回复...">我认为在这种情况下，我应该主动承担责任，积极寻找解决方案，并与团队沟通协调。</textarea>
+        <button onclick="testAIEvaluation()">🤖 提交AI评估</button>
+        <div id="evaluationResult" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. 真实习惯学习页面测试</h2>
+        <button onclick="openHabitLearning()">打开习惯学习页面</button>
+    </div>
+
+    <script>
+        async function testHealthCheck() {
+            const resultDiv = document.getElementById('healthResult');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '测试中...';
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/health');
+                const result = await response.json();
+                
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `✅ 健康检查成功!\n\n${JSON.stringify(result, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ 健康检查失败:\n${error.message}`;
+            }
+        }
+
+        async function testAIEvaluation() {
+            const resultDiv = document.getElementById('evaluationResult');
+            const userInput = document.getElementById('userResponse').value.trim();
+            
+            if (!userInput) {
+                alert('请输入回复内容');
+                return;
+            }
+            
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '🤖 AI分析中...';
+            resultDiv.className = 'result';
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/ai/evaluate-practice', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userInput: userInput,
+                        scenario: '项目出现问题时如何响应',
+                        evaluationDimensions: ['责任感', '积极主动', '解决问题能力']
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    const eval = result.data.evaluation;
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = `✅ AI评估成功!\n\n` +
+                        `综合得分: ${eval.overallScore}/10\n\n` +
+                        `各维度得分:\n` +
+                        Object.entries(eval.dimensionScores).map(([dim, score]) => `  • ${dim}: ${score}/10`).join('\n') +
+                        `\n\n反馈:\n${eval.feedback}\n\n` +
+                        `亮点:\n${eval.highlights.map(h => `  • ${h}`).join('\n')}\n\n` +
+                        `改进建议:\n${eval.improvements.map(i => `  • ${i}`).join('\n')}`;
+                } else {
+                    throw new Error(result.error || '评估失败');
+                }
+                
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ AI评估失败:\n${error.message}`;
+            }
+        }
+
+        function openHabitLearning() {
+            window.open('http://localhost:8000/habit-learning.html?habit=1', '_blank');
+        }
+    </script>
+</body>
+</html>

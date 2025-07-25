@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI功能演示 - AIEC 七个习惯</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .demo-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .demo-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        .demo-button {
+            background: #007AFF;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 14px;
+        }
+        .demo-button:hover { background: #0056b3; }
+        .demo-button:disabled { background: #ccc; cursor: not-allowed; }
+        .result-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            white-space: pre-wrap;
+            font-family: Monaco, monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .input-area {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            resize: vertical;
+        }
+        .status-indicator {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .status-success { background: #d4edda; color: #155724; }
+        .status-error { background: #f8d7da; color: #721c24; }
+        .status-loading { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>🤖 AI功能演示</h1>
+        <p>测试AIEC七个习惯学习系统的AI功能，包括聊天、难题思辨引导和实战模拟评估。</p>
+        
+        <!-- 基础聊天功能 -->
+        <div class="demo-section">
+            <h2>💬 基础聊天功能</h2>
+            <p>测试AI的基础对话能力。</p>
+            <textarea class="input-area" id="chatInput" placeholder="请输入你想问的问题...">你好，我想了解一下习惯2"以终为始"的核心理念</textarea>
+            <br>
+            <button class="demo-button" onclick="testChat()" id="chatBtn">发送聊天</button>
+            <span class="status-indicator" id="chatStatus" style="display:none;"></span>
+            <div class="result-box" id="chatResult" style="display:none;"></div>
+        </div>
+
+        <!-- 难题思辨引导 -->
+        <div class="demo-section">
+            <h2>🤔 难题思辨引导</h2>
+            <p>测试AI对应用难题的苏格拉底式引导。</p>
+            <h4>选择一个难题：</h4>
+            <select id="dilemmaSelect" onchange="updateDilemmaDisplay()">
+                <option value="">请选择难题...</option>
+                <option value="dilemma_2_1_1">2.1 - 对"显得笨"的恐惧</option>
+                <option value="dilemma_2_1_2">2.1 - 面对"你看着办"的领导</option>
+                <option value="dilemma_2_1_3">2.1 - 紧急任务下的两难</option>
+                <option value="dilemma_2_2_1">2.2 - 过度规划与敏捷的矛盾</option>
+                <option value="dilemma_2_2_2">2.2 - 为未知任务做规划</option>
+                <option value="dilemma_2_2_3">2.2 - 当计划被他人打乱</option>
+            </select>
+            <div id="dilemmaDisplay" style="margin: 15px 0; padding: 10px; background: #e7f3ff; border-radius: 4px; display: none;">
+                <h5 id="dilemmaTitle"></h5>
+                <p id="dilemmaQuestion"></p>
+            </div>
+            <textarea class="input-area" id="thoughtInput" placeholder="请分享你对这个难题的思考...">我觉得问问题确实会让人觉得我不够聪明，特别是在会议上问问题，感觉很丢脸。但我又确实经常不太理解任务的具体要求。</textarea>
+            <br>
+            <button class="demo-button" onclick="testDilemmaGuidance()" id="dilemmaBtn" disabled>获取AI引导</button>
+            <span class="status-indicator" id="dilemmaStatus" style="display:none;"></span>
+            <div class="result-box" id="dilemmaResult" style="display:none;"></div>
+        </div>
+
+        <!-- 实战模拟评估 -->
+        <div class="demo-section">
+            <h2>🎯 实战模拟评估</h2>
+            <p>测试AI对实战模拟的多维度评估。</p>
+            <h4>场景：</h4>
+            <p style="background: #f0f0f0; padding: 10px; border-radius: 4px;">
+                你负责的一个项目刚刚结束，但在最终的复盘会上，你的领导在团队群里公开指出项目质量不达预期，影响了整体进度。
+            </p>
+            <h4>你的回复：</h4>
+            <textarea class="input-area" id="practiceInput" placeholder="请输入你的回复...">很抱歉项目没有达到预期。我需要承认，在项目规划阶段我对风险评估不够充分，导致后期出现了技术难题和时间压力。我已经总结了这次的经验教训，下个项目我会采用更严格的里程碑管理和风险预警机制。同时，我愿意主动承担由此造成的影响，并协助团队调整后续计划。</textarea>
+            <br>
+            <button class="demo-button" onclick="testPracticeEvaluation()" id="practiceBtn">获取AI评估</button>
+            <span class="status-indicator" id="practiceStatus" style="display:none;"></span>
+            <div class="result-box" id="practiceResult" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        // 难题数据库
+        const dilemmas = {
+            "dilemma_2_1_1": {
+                "dilemmaId": "dilemma_2_1_1",
+                "title": "对\"显得笨\"的恐惧",
+                "question": "我担心如果我问太多澄清性的问题，特别是向资深领导提问时，他们会觉得我理解能力差，或者不够主动，不能自己想办法。我该如何克服这种恐惧？",
+                "coachingLogic": "AI 会引导学员思考：一个好的问题，是暴露了你的'无知'，还是展现了你的'严谨'？"
+            },
+            "dilemma_2_1_2": {
+                "dilemmaId": "dilemma_2_1_2",
+                "title": "面对\"你看着办\"的领导",
+                "question": "我的领导在听完我的澄清问题后，经常会说：'我相信你的判断，你看着办就行。' 这让我还是很焦虑，因为我依然不确定最终的目标。我该如何应对这种情况？",
+                "coachingLogic": "AI 会引导学员思考：当领导说'你看着办'时，他是在考验你的什么能力？"
+            },
+            "dilemma_2_1_3": {
+                "dilemmaId": "dilemma_2_1_3",
+                "title": "紧急任务下的两难",
+                "question": "我接到了一个非常紧急的任务，要求今天下班前必须完成，但指令有些模糊。如果花时间去澄清，可能会耽误宝贵的工作时间；但如果不澄清，又可能做错。我该怎么办？",
+                "coachingLogic": "AI 会引导学员思考风险管理的智慧：这是一个经典的'效率'与'效果'的权衡。"
+            },
+            "dilemma_2_2_1": {
+                "dilemmaId": "dilemma_2_2_1",
+                "title": "过度规划与敏捷的矛盾",
+                "question": "我很担心花太多时间做一份详细的计划，结果刚做完，情况就变了，计划完全作废。在AIEC这种快速变化的环境里，我该如何平衡详细规划和敏捷响应之间的关系？",
+                "coachingLogic": "AI 会引导学员思考：计划的目的是为了'控制未来'，还是为了'更好地应对未来'？"
+            },
+            "dilemma_2_2_2": {
+                "dilemmaId": "dilemma_2_2_2",
+                "title": "为未知任务做规划",
+                "question": "领导让我负责一个我从未接触过的全新领域项目，我完全不知道这个项目会涉及多少工作，也无法预估时间。我该如何为这样一个'未知'的任务制定一份靠谱的计划？",
+                "coachingLogic": "AI 会引导学员思考：对于未知任务，'规划'的第一步是不是'执行'，而是'信息收集'？"
+            },
+            "dilemma_2_2_3": {
+                "dilemmaId": "dilemma_2_2_3",
+                "title": "当计划被他人打乱",
+                "question": "我制定了一份周密的计划，但协作方（如其他部门同事）没有按时交付他们负责的部分，导致我的整个计划都被打乱了。我感到很无力，也很生气。我该怎么办？",
+                "coachingLogic": "AI 会引导学员思考：一份好的计划，是否应该只包含你自己的任务？"
+            }
+        };
+
+        function setStatus(elementId, type, message) {
+            const statusEl = document.getElementById(elementId);
+            statusEl.style.display = 'inline-block';
+            statusEl.className = `status-indicator status-${type}`;
+            statusEl.textContent = message;
+        }
+
+        function updateDilemmaDisplay() {
+            const select = document.getElementById('dilemmaSelect');
+            const dilemmaId = select.value;
+            const display = document.getElementById('dilemmaDisplay');
+            const btn = document.getElementById('dilemmaBtn');
+            
+            if (dilemmaId && dilemmas[dilemmaId]) {
+                const dilemma = dilemmas[dilemmaId];
+                document.getElementById('dilemmaTitle').textContent = dilemma.title;
+                document.getElementById('dilemmaQuestion').textContent = dilemma.question;
+                display.style.display = 'block';
+                btn.disabled = false;
+            } else {
+                display.style.display = 'none';
+                btn.disabled = true;
+            }
+        }
+
+        async function testChat() {
+            const input = document.getElementById('chatInput').value;
+            const btn = document.getElementById('chatBtn');
+            const result = document.getElementById('chatResult');
+            
+            if (!input.trim()) {
+                alert('请输入问题');
+                return;
+            }
+            
+            btn.disabled = true;
+            setStatus('chatStatus', 'loading', '正在思考...');
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/ai/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: input })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    setStatus('chatStatus', 'success', '回复成功');
+                    result.textContent = data.data.response;
+                    result.style.display = 'block';
+                } else {
+                    throw new Error(data.error);
+                }
+            } catch (error) {
+                setStatus('chatStatus', 'error', '请求失败: ' + error.message);
+                result.textContent = '错误: ' + error.message;
+                result.style.display = 'block';
+            }
+            
+            btn.disabled = false;
+        }
+
+        async function testDilemmaGuidance() {
+            const dilemmaId = document.getElementById('dilemmaSelect').value;
+            const thought = document.getElementById('thoughtInput').value;
+            const btn = document.getElementById('dilemmaBtn');
+            const result = document.getElementById('dilemmaResult');
+            
+            if (!dilemmaId || !thought.trim()) {
+                alert('请选择难题并输入你的思考');
+                return;
+            }
+            
+            btn.disabled = true;
+            setStatus('dilemmaStatus', 'loading', '正在引导...');
+            
+            try {
+                const dilemma = dilemmas[dilemmaId];
+                const response = await fetch('http://localhost:3000/api/ai/guide-dilemma', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        dilemma: dilemma,
+                        userThought: thought
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    setStatus('dilemmaStatus', 'success', '引导成功');
+                    result.textContent = data.data.guidance;
+                    result.style.display = 'block';
+                } else {
+                    throw new Error(data.error);
+                }
+            } catch (error) {
+                setStatus('dilemmaStatus', 'error', '请求失败: ' + error.message);
+                result.textContent = '错误: ' + error.message;
+                result.style.display = 'block';
+            }
+            
+            btn.disabled = false;
+        }
+
+        async function testPracticeEvaluation() {
+            const userInput = document.getElementById('practiceInput').value;
+            const btn = document.getElementById('practiceBtn');
+            const result = document.getElementById('practiceResult');
+            
+            if (!userInput.trim()) {
+                alert('请输入你的回复');
+                return;
+            }
+            
+            btn.disabled = true;
+            setStatus('practiceStatus', 'loading', '正在评估...');
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/ai/evaluate-practice', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userInput: userInput,
+                        scenario: "你负责的一个项目刚刚结束，但在最终的复盘会上，你的领导在团队群里公开指出项目质量不达预期，影响了整体进度。",
+                        evaluationDimensions: [
+                            "直面差距 (Acknowledge the Gap)",
+                            "承担责任 (Take Responsibility)", 
+                            "主动担责 (Propose Action)"
+                        ]
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    setStatus('practiceStatus', 'success', '评估完成');
+                    const evaluation = data.data.evaluation;
+                    result.textContent = `综合得分: ${evaluation.overallScore}/10
+
+各维度得分:
+${Object.entries(evaluation.dimensionScores).map(([dim, score]) => `- ${dim}: ${score}/10`).join('\n')}
+
+详细反馈:
+${evaluation.feedback}
+
+亮点表现:
+${evaluation.highlights.map(h => `- ${h}`).join('\n')}
+
+改进建议:
+${evaluation.improvements.map(i => `- ${i}`).join('\n')}`;
+                    result.style.display = 'block';
+                } else {
+                    throw new Error(data.error);
+                }
+            } catch (error) {
+                setStatus('practiceStatus', 'error', '请求失败: ' + error.message);
+                result.textContent = '错误: ' + error.message;
+                result.style.display = 'block';
+            }
+            
+            btn.disabled = false;
+        }
+    </script>
+</body>
+</html>

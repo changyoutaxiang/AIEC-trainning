@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="engineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#007AFF;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#5856D6;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gearGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#34C759;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#30D158;stop-opacity:0.9"/>
+    </linearGradient>
+    <radialGradient id="energyGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#007AFF;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#007AFF;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- 背景能量光晕 -->
+  <circle cx="200" cy="150" r="100" fill="url(#energyGlow)"/>
+  
+  <!-- 主引擎核心 -->
+  <circle cx="200" cy="150" r="40" fill="url(#engineGradient)" stroke="#0056CC" stroke-width="2"/>
+  <circle cx="200" cy="150" r="25" fill="white" opacity="0.9"/>
+  <text x="200" y="145" font-family="system-ui" font-size="11" font-weight="600" fill="#007AFF" text-anchor="middle">自驱</text>
+  <text x="200" y="158" font-family="system-ui" font-size="11" font-weight="600" fill="#007AFF" text-anchor="middle">引擎</text>
+  
+  <!-- 齿轮系统 -->
+  <g transform="translate(150,110)">
+    <!-- 齿轮1 -->
+    <circle cx="0" cy="0" r="15" fill="url(#gearGradient)" stroke="#28A745" stroke-width="1"/>
+    <g stroke="#28A745" stroke-width="2">
+      <path d="M0,-18 L0,-12 M0,18 L0,12 M-18,0 L-12,0 M18,0 L12,0"/>
+      <path d="M-13,-13 L-8,-8 M13,13 L8,8 M-13,13 L-8,8 M13,-13 L8,-8"/>
+    </g>
+    <text x="0" y="-25" font-family="system-ui" font-size="8" fill="#34C759" text-anchor="middle">规则</text>
+    <text x="0" y="-15" font-family="system-ui" font-size="8" fill="#34C759" text-anchor="middle">设计</text>
+  </g>
+  
+  <g transform="translate(250,110)">
+    <!-- 齿轮2 -->
+    <circle cx="0" cy="0" r="15" fill="url(#gearGradient)" stroke="#28A745" stroke-width="1"/>
+    <g stroke="#28A745" stroke-width="2">
+      <path d="M0,-18 L0,-12 M0,18 L0,12 M-18,0 L-12,0 M18,0 L12,0"/>
+      <path d="M-13,-13 L-8,-8 M13,13 L8,8 M-13,13 L-8,8 M13,-13 L8,-8"/>
+    </g>
+    <text x="0" y="-25" font-family="system-ui" font-size="8" fill="#34C759" text-anchor="middle">智能</text>
+    <text x="0" y="-15" font-family="system-ui" font-size="8" fill="#34C759" text-anchor="middle">优化</text>
+  </g>
+  
+  <g transform="translate(150,190)">
+    <!-- 齿轮3 -->
+    <circle cx="0" cy="0" r="15" fill="url(#gearGradient)" stroke="#28A745" stroke-width="1"/>
+    <g stroke="#28A745" stroke-width="2">
+      <path d="M0,-18 L0,-12 M0,18 L0,12 M-18,0 L-12,0 M18,0 L12,0"/>
+      <path d="M-13,-13 L-8,-8 M13,13 L8,8 M-13,13 L-8,8 M13,-13 L8,-8"/>
+    </g>
+    <text x="0" y="30" font-family="system-ui" font-size="8" fill="#34C759" text-anchor="middle">动力</text>
+    <text x="0" y="40" font-family="system-ui" font-size="8" fill="#34C759" text-anchor="middle">系统</text>
+  </g>
+  
+  <g transform="translate(250,190)">
+    <!-- 齿轮4 -->
+    <circle cx="0" cy="0" r="15" fill="url(#gearGradient)" stroke="#28A745" stroke-width="1"/>
+    <g stroke="#28A745" stroke-width="2">
+      <path d="M0,-18 L0,-12 M0,18 L0,12 M-18,0 L-12,0 M18,0 L12,0"/>
+      <path d="M-13,-13 L-8,-8 M13,13 L8,8 M-13,13 L-8,8 M13,-13 L8,-8"/>
+    </g>
+    <text x="0" y="30" font-family="system-ui" font-size="8" fill="#34C759" text-anchor="middle">执行</text>
+    <text x="0" y="40" font-family="system-ui" font-size="8" fill="#34C759" text-anchor="middle">循环</text>
+  </g>
+  
+  <!-- 连接线（传动系统） -->
+  <g stroke="#007AFF" stroke-width="2" opacity="0.6" fill="none">
+    <path d="M165,125 L185,135"/>
+    <path d="M235,125 L215,135"/>
+    <path d="M165,175 L185,165"/>
+    <path d="M235,175 L215,165"/>
+  </g>
+  
+  <!-- 自循环箭头 -->
+  <g transform="translate(200,80)">
+    <path d="M-20,0 Q0,-20 20,0 Q0,10 -5,5" stroke="#FF9500" stroke-width="3" fill="none"/>
+    <path d="M-8,2 L-5,5 L-2,2" stroke="#FF9500" stroke-width="2" fill="none"/>
+    <text x="0" y="-25" font-family="system-ui" font-size="10" fill="#FF9500" text-anchor="middle" font-weight="600">自我循环</text>
+  </g>
+  
+  <!-- 能量输出 -->
+  <g transform="translate(320,150)">
+    <circle cx="0" cy="0" r="8" fill="#FFD60A" opacity="0.8"/>
+    <g stroke="#FFD60A" stroke-width="2" opacity="0.7">
+      <path d="M-12,0 L-20,0 M12,0 L20,0 M0,-12 L0,-20 M0,12 L0,20"/>
+      <path d="M-8,-8 L-12,-12 M8,8 L12,12 M-8,8 L-12,12 M8,-8 L12,-12"/>
+    </g>
+    <text x="0" y="25" font-family="system-ui" font-size="9" fill="#FF9500" text-anchor="middle">高效产出</text>
+  </g>
+  
+  <!-- 智能节点 -->
+  <g>
+    <circle cx="120" cy="150" r="4" fill="#5856D6"/>
+    <circle cx="280" cy="150" r="4" fill="#5856D6"/>
+    <circle cx="200" cy="100" r="4" fill="#5856D6"/>
+    <circle cx="200" cy="200" r="4" fill="#5856D6"/>
+    
+    <!-- 连接线 -->
+    <g stroke="#5856D6" stroke-width="1" opacity="0.5">
+      <path d="M124,150 L160,150"/>
+      <path d="M240,150 L276,150"/>
+      <path d="M200,104 L200,125"/>
+      <path d="M200,175 L200,196"/>
+    </g>
+  </g>
+  
+  <!-- 底部标题 -->
+  <text x="200" y="270" font-family="system-ui" font-size="14" font-weight="600" fill="#1C1C1E" text-anchor="middle">
+    聪明的自驱 (Smart Self-Motivation)
+  </text>
+  <text x="200" y="285" font-family="system-ui" font-size="11" fill="#666" text-anchor="middle" opacity="0.8">
+    为自己设计游戏规则
+  </text>
+</svg>

@@ -1,0 +1,128 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8faff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8f2ff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="glassesGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="empathyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradient)"/>
+  
+  <!-- Title -->
+  <text x="200" y="25" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#2c3e50">移情聆听</text>
+  <text x="200" y="45" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="12" fill="#7f8c8d">戴上对方的眼镜看世界</text>
+  
+  <!-- Central metaphor: Glasses transformation -->
+  <g transform="translate(200, 120)">
+    <!-- Person A (Self) -->
+    <g transform="translate(-120, 0)">
+      <circle cx="0" cy="-20" r="15" fill="#f39c12" filter="url(#shadow)"/>
+      <circle cx="-4" cy="-22" r="1.5" fill="#2c3e50"/>
+      <circle cx="4" cy="-22" r="1.5" fill="#2c3e50"/>
+      <path d="M-4 -16 Q0 -14, 4 -16" stroke="#2c3e50" stroke-width="1" fill="none"/>
+      
+      <!-- Own glasses -->
+      <g opacity="0.8">
+        <circle cx="-5" cy="-22" r="6" stroke="#e74c3c" stroke-width="2" fill="rgba(231,76,60,0.2)"/>
+        <circle cx="5" cy="-22" r="6" stroke="#e74c3c" stroke-width="2" fill="rgba(231,76,60,0.2)"/>
+        <line x1="1" y1="-22" x2="-1" y2="-22" stroke="#e74c3c" stroke-width="2"/>
+      </g>
+      
+      <text x="0" y="20" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#e74c3c">我的视角</text>
+    </g>
+    
+    <!-- Arrow with glasses exchange -->
+    <g transform="translate(0, -10)">
+      <path d="M-60 0 Q-20 -15, 20 0 Q60 15, 60 0" stroke="#3498db" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+      
+      <!-- Glasses in transition -->
+      <g transform="translate(0, -15)" filter="url(#glow)">
+        <circle cx="-8" cy="0" r="6" stroke="url(#glassesGradient)" stroke-width="2" fill="rgba(52,152,219,0.3)"/>
+        <circle cx="8" cy="0" r="6" stroke="url(#glassesGradient)" stroke-width="2" fill="rgba(52,152,219,0.3)"/>
+        <line x1="2" y1="0" x2="-2" y2="0" stroke="url(#glassesGradient)" stroke-width="2"/>
+      </g>
+      
+      <text x="0" y="20" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="9" font-weight="500" fill="#3498db">移情切换</text>
+    </g>
+    
+    <!-- Person B (Other) -->
+    <g transform="translate(120, 0)">
+      <circle cx="0" cy="-20" r="15" fill="#9b59b6" filter="url(#shadow)"/>
+      <circle cx="-4" cy="-22" r="1.5" fill="#2c3e50"/>
+      <circle cx="4" cy="-22" r="1.5" fill="#2c3e50"/>
+      <path d="M-4 -16 Q0 -14, 4 -16" stroke="#2c3e50" stroke-width="1" fill="none"/>
+      
+      <!-- Other's glasses -->
+      <g opacity="0.8">
+        <circle cx="-5" cy="-22" r="6" stroke="#9b59b6" stroke-width="2" fill="rgba(155,89,182,0.2)"/>
+        <circle cx="5" cy="-22" r="6" stroke="#9b59b6" stroke-width="2" fill="rgba(155,89,182,0.2)"/>
+        <line x1="1" y1="-22" x2="-1" y2="-22" stroke="#9b59b6" stroke-width="2"/>
+      </g>
+      
+      <text x="0" y="20" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#9b59b6">对方视角</text>
+    </g>
+  </g>
+  
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+     refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3498db" />
+    </marker>
+  </defs>
+  
+  <!-- Three levels of listening -->
+  <g transform="translate(50, 200)">
+    <rect x="0" y="0" width="300" height="70" rx="10" fill="#ffffff" filter="url(#shadow)" opacity="0.95"/>
+    
+    <!-- Level 1: Hearing -->
+    <g transform="translate(20, 20)">
+      <circle cx="8" cy="8" r="6" fill="#e74c3c" opacity="0.7"/>
+      <text x="8" y="12" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#ffffff" font-weight="600">听</text>
+      <text x="25" y="12" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#e74c3c" font-weight="500">听见词语</text>
+    </g>
+    
+    <!-- Level 2: Understanding -->
+    <g transform="translate(120, 20)">
+      <circle cx="8" cy="8" r="6" fill="#f39c12" opacity="0.8"/>
+      <text x="8" y="12" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#ffffff" font-weight="600">懂</text>
+      <text x="25" y="12" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#f39c12" font-weight="500">理解内容</text>
+    </g>
+    
+    <!-- Level 3: Empathy -->
+    <g transform="translate(220, 20)">
+      <circle cx="8" cy="8" r="6" fill="#27ae60" opacity="0.9"/>
+      <text x="8" y="12" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#ffffff" font-weight="600">感</text>
+      <text x="25" y="12" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#27ae60" font-weight="500">感受情感</text>
+    </g>
+    
+    <text x="150" y="50" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="11" fill="#7f8c8d">移情聆听的三个层次</text>
+  </g>
+  
+  <!-- Medical analogy -->
+  <g transform="translate(320, 60)" opacity="0.6">
+    <rect x="0" y="0" width="12" height="18" rx="2" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+    <circle cx="6" cy="6" r="2" fill="#e74c3c"/>
+    <line x1="6" y1="10" x2="6" y2="14" stroke="#2c3e50" stroke-width="1"/>
+    <text x="20" y="10" font-family="SF Pro Text, -apple-system, sans-serif" font-size="9" fill="#7f8c8d">如医生般</text>
+    <text x="20" y="22" font-family="SF Pro Text, -apple-system, sans-serif" font-size="9" fill="#7f8c8d">先诊断再开方</text>
+  </g>
+</svg>

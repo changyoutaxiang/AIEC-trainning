@@ -4,150 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIEC 职场软技能</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
-    <div class="container">
+    <div class="homepage-container">
         <header class="header">
             <nav class="nav">
                 <div class="logo">AIEC 职场软技能</div>
                 <div class="nav-links">
                     <a href="index.html">首页</a>
                     <a href="seven-habits.html">七个习惯</a>
-                    <a href="skills.html">技能训练</a>
+                    <a href="my-journey.html">我的旅程</a>
                     <a href="#" onclick="logout()">退出</a>
                 </div>
             </nav>
         </header>
 
-
-
-        <section class="features">
-            <div class="feature-card">
-                <div class="feature-icon">💡</div>
-                <h3>理念导入</h3>
-                <p>深入理解每个习惯的核心价值观，建立正确的思维模式和行为准则</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3>导师采撷</h3>
-                <p>Leon导师的实战经验分享，帮助你快速掌握关键技能和方法</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔥</div>
-                <h3>实战模拟</h3>
-                <p>在真实场景中练习和提升，将理论知识转化为实际能力</p>
+        <!-- Hero区域 - 词云图片 -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-image-container">
+                    <img src="assets/wordcloud-hero.png" alt="AI技能发展词云图" class="hero-wordcloud" />
+                </div>
             </div>
         </section>
 
-        <section class="habits-section">
-            <h2>七个习惯学习体系</h2>
-            <p>基于史蒂芬·柯维的经典理论，结合现代职场实战，为你打造完整的个人成长路径</p>
-            
-            <div class="habits-subsection">
-                <h3>个人成功（习惯1-3）</h3>
-                <div class="personal-habits">
-                    <div class="habit-card">
-                        <div class="habit-number">1</div>
-                        <h3>积极主动</h3>
-                        <p>掌握主动权，对自己的行为和选择负责，成为变化的推动者而非被动接受者</p>
-                        <div class="habit-progress">
-                            <div class="habit-progress-bar" style="width: 0%"></div>
-                        </div>
-                        <div class="habit-actions">
-                            <button class="btn btn-primary btn-small">开始学习</button>
-                            <button class="btn btn-secondary btn-small" title="详细内容正在完善中">查看详情 (完善中)</button>
-                        </div>
+        <!-- 学习方式介绍区域 -->
+        <section class="learning-methods-section" id="learning-methods">
+            <div class="section-container">
+                <h2 class="section-title">学习方式</h2>
+                <p class="section-subtitle">四种互补的学习方式，构建完整的能力培养体系</p>
+                <div class="learning-methods-grid">
+                    <div class="method-card">
+                        <div class="method-icon">🎓</div>
+                        <h3 class="method-title">理论导入</h3>
+                        <p class="method-description">深入理解核心理念和原理，建立扎实的理论基础</p>
                     </div>
-                    <div class="habit-card">
-                        <div class="habit-number">2</div>
-                        <h3>以终为始</h3>
-                        <p>明确目标和价值观，以清晰的愿景指导日常行为，确保每一步都朝着正确方向前进</p>
-                        <div class="habit-progress">
-                            <div class="habit-progress-bar" style="width: 0%"></div>
-                        </div>
-                        <div class="habit-actions">
-                            <button class="btn btn-primary btn-small">开始学习</button>
-                            <button class="btn btn-secondary btn-small" title="详细内容正在完善中">查看详情 (完善中)</button>
-                        </div>
+                    <div class="method-card">
+                        <div class="method-icon">👨‍🏫</div>
+                        <h3 class="method-title">导师采撷</h3>
+                        <p class="method-description">学习专家导师的实践经验和深度洞察</p>
                     </div>
-                    <div class="habit-card">
-                        <div class="habit-number">3</div>
-                        <h3>要事第一</h3>
-                        <p>优先处理重要而非紧急的事务，通过有效的时间管理实现个人和职业目标</p>
-                        <div class="habit-progress">
-                            <div class="habit-progress-bar" style="width: 0%"></div>
-                        </div>
-                        <div class="habit-actions">
-                            <button class="btn btn-primary btn-small">开始学习</button>
-                            <button class="btn btn-secondary btn-small" title="详细内容正在完善中">查看详情 (完善中)</button>
-                        </div>
+                    <div class="method-card">
+                        <div class="method-icon">🎯</div>
+                        <h3 class="method-title">场景练习</h3>
+                        <p class="method-description">在真实职场场景中练习和应用所学技能</p>
                     </div>
-                </div>
-            </div>
-
-            <div class="habits-subsection">
-                <h3>公众成功（习惯4-6）</h3>
-                <div class="public-habits">
-                    <div class="habit-card">
-                        <div class="habit-number">4</div>
-                        <h3>双赢思维</h3>
-                        <p>寻求互利共赢的解决方案，建立基于信任和合作的人际关系</p>
-                        <div class="habit-progress">
-                            <div class="habit-progress-bar" style="width: 0%"></div>
-                        </div>
-                        <div class="habit-actions">
-                            <button class="btn btn-primary btn-small">开始学习</button>
-                            <button class="btn btn-secondary btn-small" title="详细内容正在完善中">查看详情 (完善中)</button>
-                        </div>
-                    </div>
-                    <div class="habit-card">
-                        <div class="habit-number">5</div>
-                        <h3>知彼解己</h3>
-                        <p>先理解他人再寻求被理解，通过深度倾听建立有效的沟通桥梁</p>
-                        <div class="habit-progress">
-                            <div class="habit-progress-bar" style="width: 0%"></div>
-                        </div>
-                        <div class="habit-actions">
-                            <button class="btn btn-primary btn-small">开始学习</button>
-                            <button class="btn btn-secondary btn-small" title="详细内容正在完善中">查看详情 (完善中)</button>
-                        </div>
-                    </div>
-                    <div class="habit-card">
-                        <div class="habit-number">6</div>
-                        <h3>统合综效</h3>
-                        <p>通过团队合作创造1+1>2的效果，发挥集体智慧解决复杂问题</p>
-                        <div class="habit-progress">
-                            <div class="habit-progress-bar" style="width: 0%"></div>
-                        </div>
-                        <div class="habit-actions">
-                            <button class="btn btn-primary btn-small">开始学习</button>
-                            <button class="btn btn-secondary btn-small" title="详细内容正在完善中">查看详情 (完善中)</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="habits-subsection">
-                <h3>自我更新（习惯7）</h3>
-                <div class="renewal-habit">
-                    <div class="habit-card">
-                        <div class="habit-number">7</div>
-                        <h3>不断更新</h3>
-                        <p>持续学习和成长，在身体、心智、情感和精神层面不断提升自己，保持长期竞争力</p>
-                        <div class="habit-progress">
-                            <div class="habit-progress-bar" style="width: 0%"></div>
-                        </div>
-                        <div class="habit-actions">
-                            <button class="btn btn-primary btn-small">开始学习</button>
-                            <button class="btn btn-secondary btn-small" title="详细内容正在完善中">查看详情 (完善中)</button>
-                        </div>
+                    <div class="method-card">
+                        <div class="method-icon">🧩</div>
+                        <h3 class="method-title">应用难题</h3>
+                        <p class="method-description">解决复杂的实际问题，深化理解和应用</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- 核心功能导航区域 -->
+        <section class="core-features-section">
+            <div class="section-container">
+                <h2 class="section-title">核心功能</h2>
+                <p class="section-subtitle">选择适合你的学习路径，开始成长之旅</p>
+                <div class="features-grid" style="grid-template-columns: 1fr; max-width: 400px; margin: 0 auto;">
+                    <div class="feature-card feature-available">
+                        <div class="feature-icon">💎</div>
+                        <h3 class="feature-title">七个习惯</h3>
+                        <p class="feature-description">完整的个人效能和团队协作体系，7个习惯21个训练单元</p>
+                        <div class="feature-status">
+                            <span class="status-badge status-ready">完整体系</span>
+                        </div>
+                        <button class="btn btn-primary btn-large" onclick="window.location.href='seven-habits.html'">进入学习</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div>
 
+    <script src="js/utils.js"></script>
     <script src="js/app.js"></script>
+    <script>
+        // 首页专用JavaScript函数
+        function scrollToLearningMethods() {
+            const element = document.getElementById('learning-methods');
+            if (element) {
+                element.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    </script>
 </body>
-</html> 
+</html>

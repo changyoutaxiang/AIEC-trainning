@@ -1,0 +1,287 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="phoneGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="upgradeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="skillGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="performanceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fa709a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fee140;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="400" height="300" fill="#f8fafc"/>
+  
+  <!-- 标题 -->
+  <text x="200" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2d3748">
+    心智更新：智能手机的系统升级
+  </text>
+  
+  <!-- 中央手机设备 -->
+  <g transform="translate(200, 140)">
+    <!-- 手机外壳 -->
+    <rect x="-30" y="-50" width="60" height="100" fill="url(#phoneGradient)" rx="12" filter="url(#shadow)"/>
+    <rect x="-27" y="-47" width="54" height="94" fill="#1a202c" rx="10"/>
+    
+    <!-- 屏幕 -->
+    <rect x="-24" y="-40" width="48" height="80" fill="#2d3748" rx="6"/>
+    <rect x="-22" y="-38" width="44" height="76" fill="white" rx="4"/>
+    
+    <!-- 屏幕内容 - 系统升级界面 -->
+    <g opacity="0.9">
+      <!-- 升级图标 -->
+      <circle cx="0" cy="-20" r="8" fill="url(#upgradeGradient)">
+        <animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <path d="M -3 -17 L 0 -23 L 3 -17 M 0 -23 L 0 -17" stroke="white" stroke-width="2" fill="none"/>
+      
+      <!-- 升级进度条 -->
+      <rect x="-15" y="-5" width="30" height="4" fill="#e2e8f0" rx="2"/>
+      <rect x="-15" y="-5" width="20" height="4" fill="url(#upgradeGradient)" rx="2">
+        <animate attributeName="width" values="5;25;30;25;5" dur="4s" repeatCount="indefinite"/>
+      </rect>
+      
+      <!-- 版本信息 -->
+      <text x="0" y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="#4a5568">
+        智能OS 2.0
+      </text>
+      <text x="0" y="16" text-anchor="middle" font-family="Arial, sans-serif" font-size="5" fill="#718096">
+        心智升级中...
+      </text>
+    </g>
+    
+    <!-- 手机按钮 -->
+    <circle cx="0" cy="42" r="4" fill="#4a5568" opacity="0.3"/>
+    
+    <!-- 升级状态指示灯 -->
+    <circle cx="22" cy="-35" r="3" fill="#48bb78">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- 左侧：新技能学习 -->
+  <g transform="translate(80, 100)">
+    <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#38f9d7">
+      技能学习
+    </text>
+    
+    <!-- 学习图标组 -->
+    <g>
+      <!-- 书籍 -->
+      <rect x="-12" y="10" width="8" height="12" fill="url(#skillGradient)" rx="1"/>
+      <rect x="-11" y="12" width="6" height="1" fill="white" opacity="0.7"/>
+      <rect x="-11" y="15" width="6" height="1" fill="white" opacity="0.7"/>
+      <rect x="-11" y="18" width="6" height="1" fill="white" opacity="0.7"/>
+      
+      <!-- 在线课程 -->
+      <rect x="-2" y="10" width="10" height="8" fill="#4299e1" rx="1"/>
+      <polygon points="2,14 6,16 2,18" fill="white"/>
+      
+      <!-- 证书 -->
+      <rect x="10" y="12" width="8" height="6" fill="#ed8936" rx="1"/>
+      <circle cx="14" cy="15" r="1.5" fill="white"/>
+      <text x="14" y="16" text-anchor="middle" font-family="Arial, sans-serif" font-size="4" fill="white">✓</text>
+    </g>
+    
+    <!-- 说明文字 -->
+    <text x="0" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4a5568">
+      持续学习
+    </text>
+    <text x="0" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4a5568">
+      知识更新
+    </text>
+    
+    <!-- 连接线 -->
+    <path d="M 20 20 Q 60 40 120 90" stroke="url(#skillGradient)" stroke-width="3" fill="none" marker-end="url(#arrowSkill)" opacity="0.7"/>
+  </g>
+  
+  <!-- 右上：思维模式升级 -->
+  <g transform="translate(320, 80)">
+    <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#667eea">
+      思维升级
+    </text>
+    
+    <!-- 思维网络 -->
+    <g fill="url(#phoneGradient)" opacity="0.8">
+      <!-- 中心节点 -->
+      <circle cx="0" cy="25" r="6"/>
+      
+      <!-- 连接节点 -->
+      <circle cx="-15" cy="15" r="4"/>
+      <circle cx="15" cy="15" r="4"/>
+      <circle cx="-10" cy="35" r="4"/>
+      <circle cx="10" cy="35" r="4"/>
+      
+      <!-- 连接线 -->
+      <g stroke="url(#phoneGradient)" stroke-width="2" fill="none" opacity="0.6">
+        <line x1="0" y1="25" x2="-15" y2="15"/>
+        <line x1="0" y1="25" x2="15" y2="15"/>
+        <line x1="0" y1="25" x2="-10" y2="35"/>
+        <line x1="0" y1="25" x2="10" y2="35"/>
+        <line x1="-15" y1="15" x2="15" y2="15"/>
+        <line x1="-10" y1="35" x2="10" y2="35"/>
+      </g>
+      
+      <!-- 活跃信号 -->
+      <g>
+        <circle cx="0" cy="25" r="8" fill="none" stroke="#667eea" stroke-width="1" opacity="0.4">
+          <animate attributeName="r" values="6;12;6" dur="3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.4;0.1;0.4" dur="3s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+    </g>
+    
+    <!-- 说明文字 -->
+    <text x="0" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4a5568">
+      认知框架
+    </text>
+    <text x="0" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4a5568">
+      思维模式
+    </text>
+    
+    <!-- 连接线 -->
+    <path d="M -20 35 Q -60 55 -120 100" stroke="url(#phoneGradient)" stroke-width="3" fill="none" marker-end="url(#arrowThinking)" opacity="0.7"/>
+  </g>
+  
+  <!-- 右下：创新能力 -->
+  <g transform="translate(320, 200)">
+    <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#f093fb">
+      创新能力
+    </text>
+    
+    <!-- 创新火花 -->
+    <g>
+      <!-- 灯泡 -->
+      <ellipse cx="0" cy="20" rx="8" ry="10" fill="#ffd700" opacity="0.8"/>
+      <rect x="-3" y="28" width="6" height="4" fill="#e2e8f0" rx="1"/>
+      <rect x="-4" y="32" width="8" height="2" fill="#a0aec0" rx="1"/>
+      
+      <!-- 螺纹 -->
+      <g stroke="#d69e2e" stroke-width="1" fill="none" opacity="0.6">
+        <line x1="-6" y1="26" x2="6" y2="26"/>
+        <line x1="-6" y1="24" x2="6" y2="24"/>
+        <line x1="-6" y1="22" x2="6" y2="22"/>
+      </g>
+      
+      <!-- 灯丝 -->
+      <path d="M -3 15 Q 0 18 3 15 Q 0 22 -3 19" stroke="#ff6b35" stroke-width="1.5" fill="none">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+      </path>
+      
+      <!-- 创意火花 -->
+      <g fill="#ff6b35" opacity="0.7">
+        <circle cx="-12" cy="12" r="1">
+          <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="0s"/>
+        </circle>
+        <circle cx="12" cy="8" r="1">
+          <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+        </circle>
+        <circle cx="-8" cy="28" r="1">
+          <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="1s"/>
+        </circle>
+        <circle cx="10" cy="25" r="1">
+          <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="1.5s"/>
+        </circle>
+      </g>
+    </g>
+    
+    <!-- 说明文字 -->
+    <text x="0" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4a5568">
+      创意思维
+    </text>
+    <text x="0" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4a5568">
+      解决方案
+    </text>
+    
+    <!-- 连接线 -->
+    <path d="M -20 15 Q -60 -15 -120 -35" stroke="#f093fb" stroke-width="3" fill="none" marker-end="url(#arrowInnovation)" opacity="0.7"/>
+  </g>
+  
+  <!-- 左下：性能提升 -->
+  <g transform="translate(80, 220)">
+    <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#fa709a">
+      性能提升
+    </text>
+    
+    <!-- 性能图表 -->
+    <g>
+      <!-- 背景 -->
+      <rect x="-20" y="10" width="40" height="30" fill="white" stroke="#e2e8f0" stroke-width="1" rx="2"/>
+      
+      <!-- 性能曲线 -->
+      <path d="M -15 35 Q -5 25 5 20 Q 15 15 25 10" stroke="url(#performanceGradient)" stroke-width="3" fill="none"/>
+      
+      <!-- 数据点 -->
+      <circle cx="-15" cy="35" r="2" fill="#fa709a"/>
+      <circle cx="-5" cy="25" r="2" fill="#fa709a"/>
+      <circle cx="5" cy="20" r="2" fill="#fa709a"/>
+      <circle cx="15" cy="15" r="2" fill="#fa709a">
+        <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      
+      <!-- 网格线 -->
+      <g stroke="#f7fafc" stroke-width="0.5" opacity="0.5">
+        <line x1="-15" y1="15" x2="15" y2="15"/>
+        <line x1="-15" y1="20" x2="15" y2="20"/>
+        <line x1="-15" y1="25" x2="15" y2="25"/>
+        <line x1="-15" y1="30" x2="15" y2="30"/>
+        <line x1="-15" y1="35" x2="15" y2="35"/>
+      </g>
+      
+      <!-- 坐标轴标签 -->
+      <text x="18" y="12" font-family="Arial, sans-serif" font-size="6" fill="#718096">高</text>
+      <text x="18" y="38" font-family="Arial, sans-serif" font-size="6" fill="#718096">低</text>
+    </g>
+    
+    <!-- 说明文字 -->
+    <text x="0" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4a5568">
+      效率提升
+    </text>
+    <text x="0" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4a5568">
+      能力增强
+    </text>
+    
+    <!-- 连接线 -->
+    <path d="M 20 30 Q 60 10 120 95" stroke="url(#performanceGradient)" stroke-width="3" fill="none" marker-end="url(#arrowPerformance)" opacity="0.7"/>
+  </g>
+  
+  <!-- 箭头标记 -->
+  <defs>
+    <marker id="arrowSkill" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="url(#skillGradient)" />
+    </marker>
+    <marker id="arrowThinking" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="url(#phoneGradient)" />
+    </marker>
+    <marker id="arrowInnovation" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f093fb" />
+    </marker>
+    <marker id="arrowPerformance" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="url(#performanceGradient)" />
+    </marker>
+  </defs>
+  
+  <!-- 底部说明 -->
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#4a5568">
+    定期更新你的心智操作系统
+  </text>
+</svg>

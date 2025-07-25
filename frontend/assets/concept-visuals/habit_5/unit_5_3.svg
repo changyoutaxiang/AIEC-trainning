@@ -1,0 +1,164 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8faff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8f2ff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="heartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="mindGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bridgeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#9b59b6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3498db;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradient)"/>
+  
+  <!-- Title -->
+  <text x="200" y="25" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#2c3e50">在理解的基础上表达</text>
+  <text x="200" y="45" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="12" fill="#7f8c8d">先赢得人心，再赢得观点</text>
+  
+  <!-- Central metaphor: Heart to Mind Bridge -->
+  <g transform="translate(200, 120)">
+    <!-- Heart (emotional connection) -->
+    <g transform="translate(-100, 0)">
+      <path d="M0 -10 C-8 -20, -20 -20, -20 -8 C-20 0, -10 15, 0 25 C10 15, 20 0, 20 -8 C20 -20, 8 -20, 0 -10 Z" 
+            fill="url(#heartGradient)" filter="url(#shadow)"/>
+      
+      <!-- Pulse waves from heart -->
+      <g opacity="0.6" filter="url(#glow)">
+        <path d="M-35 0 Q-30 -5, -25 0 Q-20 5, -15 0" stroke="#e74c3c" stroke-width="2" fill="none"/>
+        <path d="M-40 0 Q-33 -7, -25 0 Q-17 7, -10 0" stroke="#e74c3c" stroke-width="1.5" fill="none" opacity="0.7"/>
+      </g>
+      
+      <text x="0" y="45" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#e74c3c" font-weight="500">赢得人心</text>
+      <text x="0" y="58" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="9" fill="#7f8c8d">建立情感连接</text>
+    </g>
+    
+    <!-- Bridge (understanding-based expression) -->
+    <g transform="translate(0, 0)">
+      <rect x="-60" y="-5" width="120" height="10" rx="5" fill="url(#bridgeGradient)" filter="url(#shadow)" opacity="0.8"/>
+      
+      <!-- Bridge pillars -->
+      <rect x="-40" y="-15" width="4" height="25" fill="#9b59b6" opacity="0.7"/>
+      <rect x="-20" y="-15" width="4" height="25" fill="#9b59b6" opacity="0.7"/>
+      <rect x="16" y="-15" width="4" height="25" fill="#9b59b6" opacity="0.7"/>
+      <rect x="36" y="-15" width="4" height="25" fill="#9b59b6" opacity="0.7"/>
+      
+      <!-- Understanding elements floating above bridge -->
+      <g transform="translate(0, -25)" opacity="0.8">
+        <circle cx="-30" cy="0" r="3" fill="#ffffff" stroke="#e74c3c" stroke-width="1"/>
+        <text x="-30" y="2" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="6" fill="#e74c3c">情</text>
+        
+        <circle cx="0" cy="0" r="3" fill="#ffffff" stroke="#9b59b6" stroke-width="1"/>
+        <text x="0" y="2" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="6" fill="#9b59b6">理</text>
+        
+        <circle cx="30" cy="0" r="3" fill="#ffffff" stroke="#3498db" stroke-width="1"/>
+        <text x="30" y="2" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="6" fill="#3498db">智</text>
+      </g>
+      
+      <text x="0" y="35" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#9b59b6" font-weight="500">理解之桥</text>
+    </g>
+    
+    <!-- Mind (rational acceptance) -->
+    <g transform="translate(100, 0)">
+      <circle cx="0" cy="0" r="20" fill="url(#mindGradient)" filter="url(#shadow)"/>
+      
+      <!-- Brain pattern inside -->
+      <g opacity="0.8">
+        <path d="M-8 -5 Q0 -10, 8 -5" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+        <path d="M-8 0 Q0 -3, 8 0" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+        <path d="M-8 5 Q0 3, 8 5" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+      </g>
+      
+      <!-- Thought bubbles emanating -->
+      <g opacity="0.6" filter="url(#glow)">
+        <circle cx="25" cy="-10" r="3" stroke="#3498db" stroke-width="1" fill="rgba(52,152,219,0.2)"/>
+        <circle cx="30" cy="0" r="4" stroke="#3498db" stroke-width="1" fill="rgba(52,152,219,0.2)"/>
+        <circle cx="25" cy="10" r="3" stroke="#3498db" stroke-width="1" fill="rgba(52,152,219,0.2)"/>
+      </g>
+      
+      <text x="0" y="45" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#3498db" font-weight="500">赢得观点</text>
+      <text x="0" y="58" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="9" fill="#7f8c8d">获得理性认同</text>
+    </g>
+  </g>
+  
+  <!-- Three-step process -->
+  <g transform="translate(50, 200)">
+    <rect x="0" y="0" width="300" height="70" rx="10" fill="#ffffff" filter="url(#shadow)" opacity="0.95"/>
+    
+    <!-- Step 1: Listen -->
+    <g transform="translate(20, 20)">
+      <circle cx="8" cy="8" r="6" fill="#e74c3c" opacity="0.8"/>
+      <path d="M5 5 Q8 3, 11 5" stroke="#ffffff" stroke-width="1" fill="none"/>
+      <path d="M5 8 Q8 6, 11 8" stroke="#ffffff" stroke-width="1" fill="none"/>
+      <path d="M5 11 Q8 9, 11 11" stroke="#ffffff" stroke-width="1" fill="none"/>
+      
+      <text x="8" y="25" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="9" fill="#e74c3c" font-weight="500">1. 聆听</text>
+      <text x="8" y="35" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#7f8c8d">理解情感</text>
+    </g>
+    
+    <!-- Arrow 1 -->
+    <g transform="translate(65, 28)">
+      <path d="M0 0 L15 0 M10 -3 L15 0 L10 3" stroke="#9b59b6" stroke-width="1.5" fill="none"/>
+    </g>
+    
+    <!-- Step 2: Diagnose -->
+    <g transform="translate(100, 20)">
+      <circle cx="8" cy="8" r="6" fill="#f39c12" opacity="0.8"/>
+      <text x="8" y="11" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="8" fill="#ffffff" font-weight="bold">?</text>
+      
+      <text x="8" y="25" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="9" fill="#f39c12" font-weight="500">2. 诊断</text>
+      <text x="8" y="35" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#7f8c8d">探寻根因</text>
+    </g>
+    
+    <!-- Arrow 2 -->
+    <g transform="translate(145, 28)">
+      <path d="M0 0 L15 0 M10 -3 L15 0 L10 3" stroke="#9b59b6" stroke-width="1.5" fill="none"/>
+    </g>
+    
+    <!-- Step 3: Express -->
+    <g transform="translate(180, 20)">
+      <circle cx="8" cy="8" r="6" fill="#3498db" opacity="0.8"/>
+      <path d="M4 8 L8 5 L12 8 L8 11 Z" fill="#ffffff"/>
+      
+      <text x="8" y="25" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="9" fill="#3498db" font-weight="500">3. 表达</text>
+      <text x="8" y="35" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#7f8c8d">针对表达</text>
+    </g>
+    
+    <!-- Result: Understanding -->
+    <g transform="translate(230, 20)">
+      <circle cx="8" cy="8" r="6" fill="#27ae60" opacity="0.9"/>
+      <path d="M4 8 L6 10 L12 4" stroke="#ffffff" stroke-width="2" fill="none"/>
+      
+      <text x="8" y="25" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="9" fill="#27ae60" font-weight="500">双赢</text>
+      <text x="8" y="35" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#7f8c8d">共识达成</text>
+    </g>
+  </g>
+  
+  <!-- Key principle -->
+  <g transform="translate(300, 70)" opacity="0.7">
+    <rect x="0" y="0" width="90" height="50" rx="8" fill="#ecf0f1" filter="url(#shadow)"/>
+    <text x="45" y="15" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#2c3e50">表达原则</text>
+    <text x="45" y="28" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#7f8c8d">用对方的语言</text>
+    <text x="45" y="38" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#7f8c8d">解决对方的问题</text>
+  </g>
+</svg>

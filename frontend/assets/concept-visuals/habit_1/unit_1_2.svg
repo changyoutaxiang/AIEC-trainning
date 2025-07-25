@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#007AFF;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#007AFF;stop-opacity:0.8"/>
+    </linearGradient>
+    <linearGradient id="figureGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#007AFF;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#0056CC;stop-opacity:1"/>
+    </linearGradient>
+    <radialGradient id="explorationGlow" cx="80%" cy="40%" r="60%">
+      <stop offset="0%" style="stop-color:#007AFF;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#007AFF;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- 背景探索区域光晕 -->
+  <ellipse cx="320" cy="120" rx="80" ry="60" fill="url(#explorationGlow)"/>
+  
+  <!-- 已知区域（左侧） -->
+  <rect x="30" y="80" width="150" height="120" fill="#f8f9fa" stroke="#ddd" stroke-width="2" rx="8"/>
+  <text x="105" y="135" font-family="system-ui" font-size="12" fill="#666" text-anchor="middle">已知区域</text>
+  <text x="105" y="150" font-family="system-ui" font-size="10" fill="#999" text-anchor="middle">Comfort Zone</text>
+  
+  <!-- 通向未知区域的路径 -->
+  <path d="M180,140 Q250,120 320,140" stroke="url(#pathGradient)" stroke-width="4" fill="none" stroke-dasharray="5,5"/>
+  
+  <!-- 探索路径上的足迹点 -->
+  <circle cx="200" cy="135" r="3" fill="#007AFF" opacity="0.6"/>
+  <circle cx="230" cy="130" r="3" fill="#007AFF" opacity="0.7"/>
+  <circle cx="260" cy="132" r="3" fill="#007AFF" opacity="0.8"/>
+  <circle cx="290" cy="137" r="3" fill="#007AFF" opacity="0.9"/>
+  
+  <!-- 主动探索者形象（简化的人形） -->
+  <g transform="translate(200,140)">
+    <!-- 身体 -->
+    <ellipse cx="0" cy="0" rx="15" ry="25" fill="url(#figureGradient)"/>
+    <!-- 头部 -->
+    <circle cx="0" cy="-20" r="8" fill="url(#figureGradient)"/>
+    <!-- 前进的手臂 -->
+    <path d="M-10,-5 Q5,-15 15,-8" stroke="#0056CC" stroke-width="3" fill="none"/>
+    <!-- 迈步的腿 -->
+    <path d="M-5,15 L-8,30 M5,15 L12,28" stroke="#0056CC" stroke-width="3"/>
+  </g>
+  
+  <!-- 未知区域的价值点（宝藏） -->
+  <g transform="translate(320,140)">
+    <!-- 价值核心 -->
+    <circle cx="0" cy="0" r="20" fill="#FFD60A" opacity="0.8" stroke="#FF9500" stroke-width="2"/>
+    <circle cx="0" cy="0" r="12" fill="#FFD60A"/>
+    <!-- 价值光芒 -->
+    <g stroke="#FFD60A" stroke-width="2" opacity="0.6">
+      <path d="M0,-25 L0,-30 M0,25 L0,30 M-25,0 L-30,0 M25,0 L30,0"/>
+      <path d="M-18,-18 L-21,-21 M18,18 L21,21 M-18,18 L-21,21 M18,-18 L21,-21"/>
+    </g>
+    <text x="0" y="5" font-family="system-ui" font-size="10" font-weight="600" fill="#FF9500" text-anchor="middle">价值</text>
+  </g>
+  
+  <!-- 动态箭头指向未知区域 -->
+  <g transform="translate(280,100)" opacity="0.7">
+    <path d="M0,0 L20,0 L15,-5 M20,0 L15,5" stroke="#007AFF" stroke-width="2" fill="none"/>
+    <text x="10" y="-8" font-family="system-ui" font-size="10" fill="#007AFF" text-anchor="middle">探索</text>
+  </g>
+  
+  <!-- 未知区域标识 -->
+  <text x="320" y="200" font-family="system-ui" font-size="12" fill="#666" text-anchor="middle">未知区域</text>
+  <text x="320" y="215" font-family="system-ui" font-size="10" fill="#999" text-anchor="middle">Value Discovery Zone</text>
+  
+  <!-- 底部标题 -->
+  <text x="200" y="270" font-family="system-ui" font-size="14" font-weight="600" fill="#1C1C1E" text-anchor="middle">
+    积极主动 (Proactiveness)
+  </text>
+  <text x="200" y="285" font-family="system-ui" font-size="11" fill="#666" text-anchor="middle" opacity="0.8">
+    在无人区寻找价值
+  </text>
+</svg>

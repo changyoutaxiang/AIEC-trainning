@@ -1,0 +1,21 @@
+{
+  "name": "aiec-learning-system",
+  "version": "1.0.0",
+  "description": "AIEC职场软技能AI学习系统",
+  "main": "server.js",
+  "scripts": {
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev",
+    "build": "echo 'No build step required for static frontend'",
+    "postinstall": "cd backend && npm install"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": ["aiec", "learning", "ai", "skills"],
+  "author": "AIEC Development Team",
+  "license": "MIT"
+}

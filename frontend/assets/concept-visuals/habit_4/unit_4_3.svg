@@ -1,0 +1,144 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient definitions -->
+    <linearGradient id="solutionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.9"/>
+      <stop offset="50%" style="stop-color:#00f2fe;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#667eea;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff8e53;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:0.9"/>
+    </linearGradient>
+    <radialGradient id="lightbulbGradient" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#ffb347;stop-opacity:0.8"/>
+    </radialGradient>
+    <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:0.8"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8fafc"/>
+  
+  <!-- Title -->
+  <text x="200" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2d3748">设计双赢方案</text>
+  <text x="200" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4a5568">"寻找两全其美的第三选择"</text>
+  
+  <!-- Central orange metaphor -->
+  <g transform="translate(200, 100)">
+    <!-- The famous orange -->
+    <circle cx="0" cy="0" r="25" fill="url(#orangeGradient)" stroke="#e67e22" stroke-width="2"/>
+    <path d="M0,-15 Q-3,-22 0,-25 Q3,-22 0,-15" fill="#27ae60"/>
+    <text x="0" y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" font-weight="bold">🍊</text>
+    
+    <!-- Division line through orange (compromise) -->
+    <line x1="-25" y1="0" x2="25" y2="0" stroke="#ffffff" stroke-width="2" stroke-dasharray="3,3" opacity="0.7"/>
+    
+    <!-- Creative separation -->
+    <!-- Left side: Orange peel -->
+    <g transform="translate(-50, -15)">
+      <path d="M0,0 Q-10,-5 -15,0 Q-15,10 -10,15 Q-5,20 0,15 Q5,10 5,0 Q0,-5 0,0" 
+            fill="#ff8e53" stroke="#e67e22" stroke-width="1"/>
+      <text x="-5" y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff">橙皮</text>
+      <text x="-5" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#2d3748" font-weight="bold">烘焙用</text>
+      <text x="-5" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#4a5568">朋友需要</text>
+    </g>
+    
+    <!-- Right side: Orange pulp -->
+    <g transform="translate(50, -15)">
+      <circle cx="0" cy="8" r="12" fill="#ffa726" stroke="#ff8f65" stroke-width="1"/>
+      <circle cx="-3" cy="3" r="3" fill="#ff8e53"/>
+      <circle cx="4" cy="5" r="2" fill="#ff8e53"/>
+      <circle cx="0" cy="12" r="2" fill="#ff8e53"/>
+      <text x="0" y="12" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="#ffffff">果肉</text>
+      <text x="0" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#2d3748" font-weight="bold">榨汁用</text>
+      <text x="0" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#4a5568">我需要</text>
+    </g>
+    
+    <!-- Creative insight lightbulb -->
+    <g transform="translate(0, -60)">
+      <path d="M0,-15 Q-8,-12 -10,-5 Q-10,2 -5,8 Q0,10 5,8 Q10,2 10,-5 Q8,-12 0,-15" 
+            fill="url(#lightbulbGradient)" stroke="#d4a574" stroke-width="1"/>
+      <rect x="-3" y="8" width="6" height="4" fill="#8b4513" rx="1"/>
+      <text x="0" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#d4a574" font-weight="bold">第三选择</text>
+    </g>
+  </g>
+  
+  <!-- Process flow: A vs B -> C -->
+  <g transform="translate(80, 180)">
+    <!-- Option A -->
+    <rect x="0" y="0" width="50" height="25" fill="#ff6b6b" rx="3" opacity="0.8"/>
+    <text x="25" y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#ffffff" font-weight="bold">方案A</text>
+    <text x="25" y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff">我的立场</text>
+    
+    <!-- VS -->
+    <text x="75" y="15" font-family="Arial, sans-serif" font-size="14" fill="#4a5568" font-weight="bold">VS</text>
+    
+    <!-- Option B -->
+    <rect x="100" y="0" width="50" height="25" fill="#ffa726" rx="3" opacity="0.8"/>
+    <text x="125" y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#ffffff" font-weight="bold">方案B</text>
+    <text x="125" y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff">对方立场</text>
+    
+    <!-- Transformation arrow -->
+    <g transform="translate(175, 12)">
+      <path d="M0,0 L25,0 M20,-5 L25,0 L20,5" stroke="#4facfe" stroke-width="2" fill="none"/>
+      <text x="12" y="-8" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4facfe" font-weight="bold">创新</text>
+    </g>
+    
+    <!-- Option C (Third Alternative) -->
+    <rect x="210" y="0" width="60" height="25" fill="url(#solutionGradient)" rx="3"/>
+    <text x="240" y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#ffffff" font-weight="bold">方案C</text>
+    <text x="240" y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff">第三选择</text>
+  </g>
+  
+  <!-- Creative process steps -->
+  <g transform="translate(50, 220)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="11" fill="#2d3748" font-weight="bold">第三选择设计流程：</text>
+    
+    <!-- Step 1 -->
+    <circle cx="0" cy="20" r="8" fill="#667eea"/>
+    <text x="0" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff" font-weight="bold">1</text>
+    <text x="15" y="25" font-family="Arial, sans-serif" font-size="9" fill="#4a5568">理解双方真实需求（超越立场）</text>
+    
+    <!-- Step 2 -->
+    <circle cx="0" cy="40" r="8" fill="#4facfe"/>
+    <text x="0" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff" font-weight="bold">2</text>
+    <text x="15" y="45" font-family="Arial, sans-serif" font-size="9" fill="#4a5568">寻找需求间的创造性连接</text>
+    
+    <!-- Step 3 -->
+    <circle cx="0" cy="60" r="8" fill="#f093fb"/>
+    <text x="0" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff" font-weight="bold">3</text>
+    <text x="15" y="65" font-family="Arial, sans-serif" font-size="9" fill="#4a5568">设计让双方都超预期的方案</text>
+  </g>
+  
+  <!-- Innovation thinking symbols -->
+  <g transform="translate(320, 200)">
+    <!-- Puzzle pieces fitting together -->
+    <g>
+      <!-- Piece 1 -->
+      <path d="M0,0 L20,0 Q25,5 20,10 L10,10 Q5,15 0,10 Z" 
+            fill="#4facfe" stroke="#3182ce" stroke-width="1" opacity="0.8"/>
+      <text x="10" y="7" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="#ffffff">需求A</text>
+      
+      <!-- Piece 2 -->
+      <path d="M20,10 L30,10 Q35,5 30,0 L20,0 Q25,5 20,10 Z" 
+            fill="#f093fb" stroke="#d53f8c" stroke-width="1" opacity="0.8"/>
+      <text x="25" y="7" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="#ffffff">需求B</text>
+    </g>
+    
+    <text x="15" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4a5568">完美拼合</text>
+  </g>
+  
+  <!-- Win-Win result indicator -->
+  <g transform="translate(200, 220)">
+    <rect x="-30" y="0" width="60" height="20" fill="url(#solutionGradient)" rx="10"/>
+    <text x="0" y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#ffffff" font-weight="bold">1+1>2</text>
+    <text x="0" y="16" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff">价值倍增</text>
+  </g>
+  
+  <!-- Key insight -->
+  <text x="200" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#4a5568" font-style="italic">"最好的答案，往往不在选项A和B里"</text>
+</svg>

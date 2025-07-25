@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIService 调试页面 - AIEC</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            margin: 20px; 
+            background: #f5f5f5; 
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+        }
+        .test-button { 
+            background: #007AFF; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            margin: 5px; 
+        }
+        .status { 
+            padding: 10px; 
+            margin: 10px 0; 
+            border-radius: 4px; 
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #e7f3ff; color: #004085; }
+        .console-output {
+            background: #1e1e1e;
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: Monaco, monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐛 AIService 调试页面</h1>
+        <p>这个页面将帮助我们调试AIService加载问题</p>
+        
+        <div class="status info">
+            <strong>页面加载时间:</strong> <span id="loadTime"></span><br>
+            <strong>测试状态:</strong> <span id="testStatus">等待测试...</span>
+        </div>
+        
+        <button class="test-button" onclick="runDebugTests()">运行调试测试</button>
+        <button class="test-button" onclick="clearConsole()">清空控制台</button>
+        
+        <div id="console-container">
+            <h3>控制台输出:</h3>
+            <div class="console-output" id="console-output"></div>
+        </div>
+        
+        <div id="test-results"></div>
+    </div>
+
+    <!-- 按照相同顺序加载脚本 -->
+    <script src="js/utils.js?v=1"></script>
+    <script src="js/app.js?v=10"></script>
+    <script src="js/aiService.js?v=2"></script>
+    
+    <script>
+        // 记录页面加载时间
+        document.getElementById('loadTime').textContent = new Date().toLocaleTimeString();
+        
+        // 捕获console.log输出
+        let consoleMessages = [];
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        console.log = function(...args) {
+            consoleMessages.push({type: 'log', message: args.join(' '), time: new Date().toLocaleTimeString()});
+            updateConsoleDisplay();
+            originalLog.apply(console, args);
+        };
+        
+        console.error = function(...args) {
+            consoleMessages.push({type: 'error', message: args.join(' '), time: new Date().toLocaleTimeString()});
+            updateConsoleDisplay();
+            originalError.apply(console, args);
+        };
+        
+        function updateConsoleDisplay() {
+            const output = document.getElementById('console-output');
+            output.innerHTML = consoleMessages.map(msg => 
+                `[${msg.time}] ${msg.type.toUpperCase()}: ${msg.message}`
+            ).join('\n');
+            output.scrollTop = output.scrollHeight;
+        }
+        
+        function clearConsole() {
+            consoleMessages = [];
+            updateConsoleDisplay();
+        }
+        
+        function showStatus(type, message) {
+            document.getElementById('testStatus').innerHTML = `<span class="${type}">${message}</span>`;
+        }
+        
+        function runDebugTests() {
+            console.log('🚀 开始运行调试测试...');
+            
+            const results = [];
+            
+            // 测试1: 全局对象检查
+            console.log('📋 测试1: 检查全局对象');
+            results.push(`window对象: ${typeof window}`);
+            results.push(`document对象: ${typeof document}`);
+            
+            // 测试2: AIService相关检查
+            console.log('📋 测试2: 检查AIService相关定义');
+            results.push(`AIService: ${typeof AIService}`);
+            results.push(`window.AIService: ${typeof window.AIService}`);
+            results.push(`DilemmaManager: ${typeof DilemmaManager}`);
+            results.push(`window.DilemmaManager: ${typeof window.DilemmaManager}`);
+            
+            // 测试3: 其他相关对象
+            console.log('📋 测试3: 检查其他相关对象');
+            results.push(`frontendAIService: ${typeof frontendAIService}`);
+            results.push(`window.frontendAIService: ${typeof window.frontendAIService}`);
+            results.push(`ChatSession: ${typeof ChatSession}`);
+            results.push(`PracticeManager: ${typeof PracticeManager}`);
+            
+            // 测试4: 尝试创建实例
+            console.log('📋 测试4: 尝试创建AIService实例');
+            try {
+                if (typeof AIService !== 'undefined') {
+                    const aiService = new AIService();
+                    results.push(`✅ AIService实例创建成功: ${typeof aiService}`);
+                    
+                    // 检查方法
+                    if (typeof aiService.guideDilemmaDiscussion === 'function') {
+                        results.push(`✅ guideDilemmaDiscussion方法存在`);
+                    } else {
+                        results.push(`❌ guideDilemmaDiscussion方法不存在`);
+                    }
+                } else {
+                    results.push(`❌ AIService未定义，无法创建实例`);
+                }
+            } catch (error) {
+                results.push(`❌ 创建AIService实例失败: ${error.message}`);
+                console.error('创建实例失败:', error);
+            }
+            
+            // 显示结果
+            document.getElementById('test-results').innerHTML = `
+                <div class="status info">
+                    <h3>测试结果:</h3>
+                    ${results.map(result => `<div>${result}</div>`).join('')}
+                </div>
+            `;
+            
+            // 最终状态
+            if (typeof AIService !== 'undefined') {
+                showStatus('success', '✅ AIService 已正确加载');
+                console.log('🎉 AIService调试测试完成 - 成功');
+            } else {
+                showStatus('error', '❌ AIService 加载失败');
+                console.log('💥 AIService调试测试完成 - 失败');
+            }
+        }
+        
+        // 页面加载完成后自动运行测试
+        window.addEventListener('load', function() {
+            console.log('📄 页面加载完成');
+            setTimeout(runDebugTests, 1000);
+        });
+        
+        // 模拟点击难题提交的情况
+        function simulateDilemmaSubmit() {
+            console.log('🎭 模拟难题提交...');
+            try {
+                if (typeof AIService === 'undefined') {
+                    throw new Error('AIService未定义，请检查aiService.js是否正确加载');
+                }
+                
+                const aiService = new AIService();
+                console.log('✅ 模拟创建AIService成功');
+                showStatus('success', '✅ 模拟难题提交成功');
+            } catch (error) {
+                console.error('❌ 模拟难题提交失败:', error.message);
+                showStatus('error', `❌ 模拟失败: ${error.message}`);
+            }
+        }
+        
+        // 添加模拟按钮
+        setTimeout(() => {
+            const button = document.createElement('button');
+            button.className = 'test-button';
+            button.textContent = '模拟难题提交';
+            button.onclick = simulateDilemmaSubmit;
+            document.querySelector('.container').appendChild(button);
+        }, 2000);
+    </script>
+</body>
+</html>

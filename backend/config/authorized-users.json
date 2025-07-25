@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2025-07-24",
+  "description": "AIEC团队成员企业邮箱白名单",
+  "authorizedEmails": [
+    "wangdong@company.com",
+    "example1@company.com",
+    "example2@company.com",
+    "example3@company.com",
+    "wangdong@51talk.com"
+  ],
+  "adminEmails": [
+    "wangdong@company.com"
+  ],
+  "companyDomain": "company.com",
+  "settings": {
+    "requireEmailVerification": false,
+    "allowSelfRegistration": true,
+    "maxUsersLimit": 20
+  }
+}

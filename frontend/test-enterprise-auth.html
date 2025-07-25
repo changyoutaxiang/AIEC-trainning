@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业邮箱认证系统测试</title>
+    <link rel="stylesheet" href="css/style.css?v=3">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        
+        .test-title {
+            color: #1d1d1f;
+            margin-bottom: 16px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .test-button {
+            margin: 8px;
+            padding: 10px 16px;
+            background: #007AFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .test-button:hover {
+            background: #0056CC;
+        }
+        
+        .test-button.danger {
+            background: #FF3B30;
+        }
+        
+        .test-button.danger:hover {
+            background: #CC2E24;
+        }
+        
+        .test-result {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+        
+        .test-result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .test-result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .whitelist-info {
+            background: #f0f8ff;
+            border: 1px solid #e3f2fd;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .form-test {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .form-test input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔐 企业邮箱认证系统测试</h1>
+        
+        <!-- 白名单信息 -->
+        <div class="whitelist-info">
+            <h3>📋 当前白名单配置</h3>
+            <p><strong>授权邮箱：</strong><span id="authorizedEmails">加载中...</span></p>
+            <p><strong>管理员：</strong><span id="adminEmails">加载中...</span></p>
+            <p><strong>企业域名：</strong><span id="companyDomain">加载中...</span></p>
+        </div>
+        
+        <!-- API连接测试 -->
+        <div class="test-section">
+            <h2 class="test-title">🌐 API连接测试</h2>
+            <button class="test-button" onclick="testApiConnection()">测试后端连接</button>
+            <button class="test-button" onclick="testWhitelistAPI()">测试白名单API</button>
+            <div id="apiTestResult" class="test-result" style="display: none;"></div>
+        </div>
+        
+        <!-- 邮箱和密码验证测试 -->
+        <div class="test-section">
+            <h2 class="test-title">✅ 验证功能测试</h2>
+            <div class="form-test">
+                <h4>邮箱验证测试：</h4>
+                <input type="email" id="testEmail" placeholder="输入邮箱地址测试">
+                <button class="test-button" onclick="testEmailValidation()">验证邮箱</button>
+                
+                <h4 style="margin-top: 20px;">密码验证测试：</h4>
+                <input type="password" id="testPassword" placeholder="输入密码测试" maxlength="6">
+                <button class="test-button" onclick="testPasswordValidation()">验证密码</button>
+            </div>
+            <div id="emailTestResult" class="test-result" style="display: none;"></div>
+        </div>
+        
+        <!-- 注册流程测试 -->
+        <div class="test-section">
+            <h2 class="test-title">📝 注册流程测试</h2>
+            <div class="form-test">
+                <h4>测试用户信息：</h4>
+                <input type="email" id="regEmail" placeholder="企业邮箱" value="wangdong@company.com">
+                <input type="text" id="regName" placeholder="姓名" value="王东">  
+                <input type="text" id="regDept" placeholder="部门" value="技术部">
+                <input type="text" id="regPos" placeholder="职位" value="架构师">
+                <input type="password" id="regPassword" placeholder="6位数字密码" value="123456" maxlength="6">
+                <button class="test-button" onclick="testRegistration()">测试注册</button>
+            </div>
+            <div id="regTestResult" class="test-result" style="display: none;"></div>
+        </div>
+        
+        <!-- 登录流程测试 -->
+        <div class="test-section">
+            <h2 class="test-title">🔑 登录流程测试</h2>
+            <div class="form-test">
+                <input type="email" id="loginEmail" placeholder="企业邮箱" value="wangdong@company.com">
+                <input type="password" id="loginPassword" placeholder="6位数字密码" value="123456" maxlength="6">
+                <button class="test-button" onclick="testLogin()">测试登录</button>
+            </div>
+            <div id="loginTestResult" class="test-result" style="display: none;"></div>
+        </div>
+        
+        <!-- 学习记录测试 -->
+        <div class="test-section">
+            <h2 class="test-title">📚 学习记录测试</h2>
+            <button class="test-button" onclick="testSaveLearningRecord()">保存测试记录</button>
+            <button class="test-button" onclick="testGetLearningHistory()">获取学习历史</button>
+            <div id="recordTestResult" class="test-result" style="display: none;"></div>
+        </div>
+        
+        <!-- 系统状态 -->
+        <div class="test-section">
+            <h2 class="test-title">📊 系统状态</h2>
+            <button class="test-button" onclick="checkSystemStatus()">检查系统状态</button>
+            <button class="test-button danger" onclick="clearAllData()">清空测试数据</button>
+            <div id="statusResult" class="test-result" style="display: none;"></div>
+        </div>
+        
+        <!-- 返回导航 -->
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="login.html" class="test-button">前往登录页面</a>
+            <a href="register.html" class="test-button">前往注册页面</a>
+            <a href="index.html" class="test-button">返回首页</a>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/enterprise-auth.js"></script>
+    <script>
+        const API_BASE = 'http://localhost:3000/api';
+        
+        // 页面加载时获取白名单信息
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWhitelistInfo();
+        });
+        
+        // 加载白名单信息
+        async function loadWhitelistInfo() {
+            try {
+                const response = await fetch(`${API_BASE}/auth/whitelist`);
+                const result = await response.json();
+                
+                // 模拟白名单数据（实际应该从API获取）
+                document.getElementById('authorizedEmails').textContent = 'wangdong@company.com, example1@company.com, example2@company.com, example3@company.com';
+                document.getElementById('adminEmails').textContent = 'wangdong@company.com';
+                document.getElementById('companyDomain').textContent = 'company.com';
+            } catch (error) {
+                console.error('获取白名单信息失败:', error);
+            }
+        }
+        
+        // 测试API连接
+        async function testApiConnection() {
+            const resultDiv = document.getElementById('apiTestResult');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '测试中...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    resultDiv.className = 'test-result success';
+                    resultDiv.textContent = `✅ API连接成功！版本: ${result.version}`;
+                } else {
+                    resultDiv.className = 'test-result error';
+                    resultDiv.textContent = `❌ API响应异常: ${result.message}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ API连接失败: ${error.message}`;
+            }
+        }
+        
+        // 测试白名单API
+        async function testWhitelistAPI() {
+            const resultDiv = document.getElementById('apiTestResult');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '测试白名单API...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/whitelist`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    resultDiv.className = 'test-result success';
+                    resultDiv.textContent = `✅ 白名单API正常！用户数: ${result.whitelist.totalUsers}/${result.whitelist.maxUsers}`;
+                } else {
+                    resultDiv.className = 'test-result error';
+                    resultDiv.textContent = `❌ 白名单API异常: ${result.message}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ 白名单API连接失败: ${error.message}`;
+            }
+        }
+        
+        // 测试邮箱验证
+        function testEmailValidation() {
+            const email = document.getElementById('testEmail').value;
+            const resultDiv = document.getElementById('emailTestResult');
+            resultDiv.style.display = 'block';
+            
+            if (!email) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = '❌ 请输入邮箱地址';
+                return;
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const isValidFormat = emailRegex.test(email);
+            const isInWhitelist = ['wangdong@company.com', 'example1@company.com', 'example2@company.com', 'example3@company.com'].includes(email);
+            
+            if (isValidFormat && isInWhitelist) {
+                resultDiv.className = 'test-result success';
+                resultDiv.textContent = `✅ 邮箱验证通过！${email} 在白名单中`;
+            } else if (isValidFormat && !isInWhitelist) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ 邮箱格式正确但不在白名单中: ${email}`;
+            } else {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ 邮箱格式不正确: ${email}`;
+            }
+        }
+        
+        // 测试密码验证
+        function testPasswordValidation() {
+            const password = document.getElementById('testPassword').value;
+            const resultDiv = document.getElementById('emailTestResult');
+            resultDiv.style.display = 'block';
+            
+            if (!password) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = '❌ 请输入密码';
+                return;
+            }
+            
+            const isValidFormat = /^[0-9]{6}$/.test(password);
+            
+            if (isValidFormat) {
+                resultDiv.className = 'test-result success';
+                resultDiv.textContent = `✅ 密码格式正确！${password} 是有效的6位数字密码`;
+            } else {
+                resultDiv.className = 'test-result error';
+                if (password.length !== 6) {
+                    resultDiv.textContent = `❌ 密码长度错误: ${password} (${password.length}位，需要6位)`;
+                } else if (!/^[0-9]+$/.test(password)) {
+                    resultDiv.textContent = `❌ 密码格式错误: ${password} (包含非数字字符)`;
+                } else {
+                    resultDiv.textContent = `❌ 密码格式不正确: ${password}`;
+                }
+            }
+        }
+        
+        // 测试注册
+        async function testRegistration() {
+            const email = document.getElementById('regEmail').value;
+            const name = document.getElementById('regName').value;
+            const department = document.getElementById('regDept').value;
+            const position = document.getElementById('regPos').value;
+            const password = document.getElementById('regPassword').value;
+            
+            const resultDiv = document.getElementById('regTestResult');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '注册测试中...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email,  
+                        name,
+                        department,
+                        position,
+                        password
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    resultDiv.className = 'test-result success';
+                    resultDiv.textContent = `✅ 注册成功！用户ID: ${result.user.id}，邮箱: ${result.user.email}`;
+                } else {
+                    resultDiv.className = 'test-result error';
+                    resultDiv.textContent = `❌ 注册失败: ${result.message}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ 注册请求失败: ${error.message}`;
+            }
+        }
+        
+        // 测试登录
+        async function testLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const resultDiv = document.getElementById('loginTestResult');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '登录测试中...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    resultDiv.className = 'test-result success';
+                    resultDiv.textContent = `✅ 登录成功！用户: ${result.user.name}，最后登录: ${result.user.last_login || '首次登录'}`;
+                } else {
+                    resultDiv.className = 'test-result error';
+                    resultDiv.textContent = `❌ 登录失败: ${result.message}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ 登录请求失败: ${error.message}`;
+            }
+        }
+        
+        // 测试保存学习记录
+        async function testSaveLearningRecord() {
+            const resultDiv = document.getElementById('recordTestResult');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '保存学习记录测试中...';
+            
+            // 模拟学习记录数据
+            const testRecord = {
+                userId: 1,
+                habitId: 1,
+                unitId: 'unit_1_1',
+                exerciseType: 'practice',
+                exerciseId: 'exercise_1',
+                userResponse: '这是一个测试回答',
+                aiEvaluation: {
+                    score: 85,
+                    feedback: '回答质量良好',
+                    suggestions: ['可以更具体一些', '添加实际例子']
+                },
+                score: 85
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/save-learning-record`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testRecord)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    resultDiv.className = 'test-result success';
+                    resultDiv.textContent = `✅ 学习记录保存成功！记录ID: ${result.recordId}`;
+                } else {
+                    resultDiv.className = 'test-result error';
+                    resultDiv.textContent = `❌ 学习记录保存失败: ${result.message}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ 保存学习记录请求失败: ${error.message}`;
+            }
+        }
+        
+        // 测试获取学习历史
+        async function testGetLearningHistory() {
+            const resultDiv = document.getElementById('recordTestResult');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '获取学习历史测试中...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/learning-history/1?limit=5`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    resultDiv.className = 'test-result success';
+                    resultDiv.textContent = `✅ 学习历史获取成功！记录数: ${result.records.length}`;
+                } else {
+                    resultDiv.className = 'test-result error';
+                    resultDiv.textContent = `❌ 学习历史获取失败: ${result.message}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ 获取学习历史请求失败: ${error.message}`;
+            }
+        }
+        
+        // 检查系统状态
+        async function checkSystemStatus() {
+            const resultDiv = document.getElementById('statusResult');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '检查系统状态中...';
+            
+            try {
+                // 检查后端健康状态
+                const healthResponse = await fetch(`${API_BASE}/health`);
+                const healthResult = await healthResponse.json();
+                
+                // 检查数据库连接
+                const dbTestResponse = await fetch(`${API_BASE}/auth/whitelist`);
+                const dbTestResult = await dbTestResponse.json();
+                
+                if (healthResult.success && dbTestResult.success) {
+                    resultDiv.className = 'test-result success';
+                    resultDiv.textContent = `✅ 系统状态正常！
+Backend: ${healthResult.version}
+Database: 连接正常
+Whitelist: ${dbTestResult.whitelist.totalUsers} 用户已授权
+Time: ${new Date().toLocaleString()}`;
+                } else {
+                    resultDiv.className = 'test-result error';
+                    resultDiv.textContent = '❌ 系统状态异常，请检查服务配置';
+                }
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = `❌ 系统状态检查失败: ${error.message}`;
+            }
+        }
+        
+        // 清空测试数据
+        function clearAllData() {
+            if (confirm('确定要清空所有测试数据吗？这将删除数据库中的所有用户和学习记录。')) {
+                const resultDiv = document.getElementById('statusResult');
+                resultDiv.style.display = 'block';  
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = '⚠️ 数据清空功能暂未实现，请手动删除数据库文件: backend/database/aiec_users.db';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "aiec-learning-system",
+  "services": [
+    {
+      "name": "web",
+      "type": "nodejs",
+      "buildCommand": "npm install",
+      "startCommand": "npm start",
+      "port": 3000,
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "volumes": [
+        {
+          "name": "database",
+          "mountPath": "/app/backend/database"
+        },
+        {
+          "name": "uploads",
+          "mountPath": "/app/frontend/assets/avatars/uploads"
+        }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "name": "database",
+      "size": "1GB"
+    },
+    {
+      "name": "uploads", 
+      "size": "500MB"
+    }
+  ]
+}

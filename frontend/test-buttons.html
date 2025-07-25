@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>按钮功能测试 - AIEC 职场软技能</title>
+    <link rel="stylesheet" href="css/style.css?v=2">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .test-button {
+            margin: 10px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: #007AFF;
+            color: white;
+        }
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        .btn-primary:hover {
+            background: #0056CC;
+        }
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎯 按钮功能测试</h1>
+        <p>这个页面用于测试"开始学习"和"查看详情"按钮的功能是否正常工作。</p>
+        
+        <div class="test-section">
+            <h2>测试开始学习按钮</h2>
+            <p>点击下面的按钮测试跳转到学习页面：</p>
+            <button class="test-button btn-primary" onclick="startHabitLearning(1)">开始学习习惯1 - 积极主动</button>
+            <button class="test-button btn-primary" onclick="startHabitLearning(2)">开始学习习惯2 - 以终为始</button>
+            <button class="test-button btn-primary" onclick="startHabitLearning(3)">开始学习习惯3 - 要事第一</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>测试查看详情按钮</h2>
+            <p>点击下面的按钮测试详情模态框：</p>
+            <button class="test-button btn-secondary" onclick="showHabitDetail(1)">查看习惯1详情</button>
+            <button class="test-button btn-secondary" onclick="showHabitDetail(2)">查看习惯2详情</button>
+            <button class="test-button btn-secondary" onclick="showHabitDetail(3)">查看习惯3详情</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>测试用户登录状态</h2>
+            <p>当前登录状态：<span id="loginStatus">检查中...</span></p>
+            <button class="test-button btn-secondary" onclick="checkLoginStatus()">检查登录状态</button>
+            <button class="test-button btn-primary" onclick="window.location.href='login.html'">去登录</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>导航测试</h2>
+            <button class="test-button btn-secondary" onclick="window.location.href='index.html'">返回首页</button>
+            <button class="test-button btn-secondary" onclick="window.location.href='seven-habits.html'">七个习惯页面</button>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // 检查登录状态
+        function checkLoginStatus() {
+            const statusElement = document.getElementById('loginStatus');
+            if (window.app && window.app.isLoggedIn()) {
+                statusElement.textContent = `已登录 - 用户：${window.app.currentUser.name}`;
+                statusElement.style.color = '#34C759';
+            } else {
+                statusElement.textContent = '未登录';
+                statusElement.style.color = '#FF3B30';
+            }
+        }
+        
+        // 页面加载时检查登录状态
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(checkLoginStatus, 500);
+        });
+    </script>
+</body>
+</html> 

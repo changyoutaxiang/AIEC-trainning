@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯五功能测试 - AIEC</title>
+    <link rel="stylesheet" href="css/style.css?v=5">
+    <style>
+        .test-section {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="nav">
+                <div class="logo">AIEC 职场软技能</div>
+                <div class="nav-links">
+                    <a href="index.html">首页</a>
+                    <a href="seven-habits.html">七个习惯</a>
+                    <a href="habit-learning.html?habit=5">习惯五学习</a>
+                </div>
+            </nav>
+        </header>
+
+        <div class="main-content">
+            <h1>🧪 习惯五：知彼解己 - 功能测试</h1>
+            
+            <div class="test-section">
+                <h3>📋 测试项目</h3>
+                <div id="test-results"></div>
+                <button onclick="runAllTests()" class="btn btn-primary">开始测试</button>
+            </div>
+            
+            <div class="test-section">
+                <h3>🎯 快速访问</h3>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="habit-learning.html?habit=5" class="btn btn-primary">习惯五学习页面</a>
+                    <a href="habit-learning.html?habit=5&unit=1" class="btn btn-secondary">单元5.1 移情聆听</a>
+                    <a href="habit-learning.html?habit=5&unit=2" class="btn btn-secondary">单元5.2 诊断式提问</a>
+                    <a href="habit-learning.html?habit=5&unit=3" class="btn btn-secondary">单元5.3 理解基础表达</a>
+                </div>
+            </div>
+            
+            <div class="test-section">
+                <h3>🖼️ SVG素材测试</h3>
+                <div id="svg-test-results"></div>
+                <button onclick="testSVGAssets()" class="btn btn-secondary">测试SVG素材</button>
+            </div>
+            
+            <div class="test-section">
+                <h3>🤖 AI评估测试</h3>
+                <div id="ai-test-results"></div>
+                <textarea id="test-response" placeholder="输入测试回复内容..." style="width: 100%; height: 80px; margin: 10px 0;"></textarea>
+                <button onclick="testAIEvaluation()" class="btn btn-success">测试AI评估</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils.js?v=11"></script>
+    <script>
+        // 测试结果显示
+        function addTestResult(message, type = 'info') {
+            const resultsDiv = document.getElementById('test-results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `test-result ${type}`;
+            resultDiv.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong> - ${message}`;
+            resultsDiv.appendChild(resultDiv);
+        }
+
+        // 运行所有测试
+        async function runAllTests() {
+            document.getElementById('test-results').innerHTML = '';
+            addTestResult('开始运行习惯五功能测试...', 'info');
+
+            // 测试1: JSON数据加载
+            try {
+                const response = await fetch('content/seven_habits.json?v=' + Date.now());
+                const data = await response.json();
+                
+                if (data.habits.habit_5) {
+                    addTestResult('✅ 习惯五JSON数据加载成功', 'success');
+                    
+                    if (data.habits.habit_5.units) {
+                        addTestResult(`✅ 发现 ${Object.keys(data.habits.habit_5.units).length} 个训练单元`, 'success');
+                    }
+                    
+                    if (data.habits.habit_5.status === 'available') {
+                        addTestResult('✅ 习惯五状态为可用', 'success');
+                    } else {
+                        addTestResult('❌ 习惯五状态不可用：' + data.habits.habit_5.status, 'error');
+                    }
+                } else {
+                    addTestResult('❌ 习惯五数据未找到', 'error');
+                }
+            } catch (error) {
+                addTestResult('❌ JSON数据加载失败: ' + error.message, 'error');
+            }
+
+            // 测试2: 页面访问
+            try {
+                const pageResponse = await fetch('habit-learning.html?habit=5');
+                if (pageResponse.ok) {
+                    addTestResult('✅ 习惯五学习页面访问正常', 'success');
+                } else {
+                    addTestResult('❌ 习惯五学习页面访问失败', 'error');
+                }
+            } catch (error) {
+                addTestResult('❌ 页面访问测试失败: ' + error.message, 'error');
+            }
+
+            // 测试3: 后端服务
+            try {
+                const backendResponse = await fetch('http://localhost:3000/api/test');
+                if (backendResponse.ok || backendResponse.status === 404) {
+                    addTestResult('✅ 后端服务运行正常', 'success');
+                } else {
+                    addTestResult('❌ 后端服务异常', 'error');
+                }
+            } catch (error) {
+                addTestResult('⚠️ 后端服务连接失败，请检查服务是否启动', 'error');
+            }
+
+            addTestResult('测试完成！', 'info');
+        }
+
+        // 测试SVG素材
+        async function testSVGAssets() {
+            const svgResults = document.getElementById('svg-test-results');
+            svgResults.innerHTML = '';
+            
+            const svgFiles = [
+                'assets/concept-visuals/habit_5/core-philosophy.svg',
+                'assets/concept-visuals/habit_5/unit_5_1.svg',
+                'assets/concept-visuals/habit_5/unit_5_2.svg',
+                'assets/concept-visuals/habit_5/unit_5_3.svg'
+            ];
+            
+            for (const svgFile of svgFiles) {
+                try {
+                    const response = await fetch(svgFile);
+                    if (response.ok) {
+                        const resultDiv = document.createElement('div');
+                        resultDiv.className = 'test-result success';
+                        resultDiv.innerHTML = `✅ ${svgFile} 加载成功`;
+                        svgResults.appendChild(resultDiv);
+                        
+                        // 显示SVG预览
+                        const svg = await response.text();
+                        const previewDiv = document.createElement('div');
+                        previewDiv.style.cssText = 'width: 200px; height: 150px; margin: 10px; border: 1px solid #ddd; display: inline-block;';
+                        previewDiv.innerHTML = svg;
+                        svgResults.appendChild(previewDiv);
+                    } else {
+                        const resultDiv = document.createElement('div');
+                        resultDiv.className = 'test-result error';
+                        resultDiv.innerHTML = `❌ ${svgFile} 加载失败`;
+                        svgResults.appendChild(resultDiv);
+                    }
+                } catch (error) {
+                    const resultDiv = document.createElement('div');
+                    resultDiv.className = 'test-result error';
+                    resultDiv.innerHTML = `❌ ${svgFile} 测试异常: ${error.message}`;
+                    svgResults.appendChild(resultDiv);
+                }
+            }
+        }
+
+        // 测试AI评估
+        async function testAIEvaluation() {
+            const resultsDiv = document.getElementById('ai-test-results');
+            const userResponse = document.getElementById('test-response').value.trim();
+            
+            if (!userResponse) {
+                resultsDiv.innerHTML = '<div class="test-result error">请输入测试回复内容</div>';
+                return;
+            }
+            
+            resultsDiv.innerHTML = '<div class="test-result info">正在测试AI评估功能...</div>';
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/ai/evaluate-practice', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userInput: userResponse,
+                        scenario: '你的同事Peter，一位负责后端开发的工程师，看起来非常沮丧地对你说：这个新的AI模型太难用了！',
+                        evaluationDimensions: ['情绪反映 (Reflecting Feelings)', '内容复述 (Paraphrasing Content)', '避免过早建议 (Avoiding Premature Advice)']
+                    })
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    const evaluation = result.data.evaluation;
+                    resultsDiv.innerHTML = `
+                        <div class="test-result success">✅ AI评估成功</div>
+                        <div class="test-result info">
+                            <strong>评估结果：</strong><br>
+                            总分：${evaluation.overallScore}/10<br>
+                            反馈：${evaluation.feedback}<br>
+                            改进建议：${evaluation.improvements.join('; ')}
+                        </div>
+                    `;
+                } else {
+                    const errorData = await response.json();
+                    resultsDiv.innerHTML = `<div class="test-result error">❌ AI评估失败: ${errorData.message}</div>`;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="test-result error">❌ AI评估测试异常: ${error.message}</div>`;
+            }
+        }
+
+        // 页面加载时显示基本信息
+        window.addEventListener('DOMContentLoaded', function() {
+            addTestResult('习惯五测试页面加载完成', 'success');
+        });
+    </script>
+</body>
+</html>

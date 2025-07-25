@@ -27,10 +27,8 @@ class AppState {
     
     // 从本地存储加载用户信息
     loadUserFromStorage() {
-        const savedUser = localStorage.getItem('aiec_current_user');
-        if (savedUser) {
-            this.currentUser = JSON.parse(savedUser);
-        }
+        const currentUserData = localStorage.getItem('aiec_current_user');
+        this.currentUser = currentUserData ? JSON.parse(currentUserData) : null;
     }
     
     // 保存用户信息到本地存储
@@ -101,7 +99,7 @@ class AppState {
                 window.location.href = 'login.html';
                 break;
             case 'habits':
-                window.location.href = 'skills.html';
+                window.location.href = 'seven-habits.html';
                 break;
             case 'seven-habits':
                 window.location.href = 'seven-habits.html';
@@ -197,7 +195,7 @@ function initializeButtons() {
                 
                 const user = checkAuth();
                 if (user) {
-                    alert('技能练习功能正在开发中...');
+                    AIEC.MessageHandler.info('技能练习功能正在开发中...');
                 } else {
                     console.log('用户未登录，跳转到登录页面');
                     window.location.href = 'login.html';
@@ -209,23 +207,13 @@ function initializeButtons() {
 
 // 检查用户是否已登录
 function checkAuth() {
-    const user = localStorage.getItem('aiec_current_user');
-    if (user) {
-        try {
-            return JSON.parse(user);
-        } catch (e) {
-            console.log('用户数据解析失败，清除数据');
-            localStorage.removeItem('user');
-            return null;
-        }
-    }
-    return null;
+    return AIEC.UserManager.getUser();
 }
 
 // 登出功能
 function logout() {
     console.log('用户登出');
-    localStorage.removeItem('aiec_current_user');
+    AIEC.UserManager.clearUser();
     window.location.href = 'login.html';
 }
 
@@ -247,7 +235,7 @@ function goToRegister() {
 function goToHabits() {
     console.log('跳转到七个习惯学习页面');
     if (!app.isLoggedIn()) {
-        alert('请先登录');
+        AIEC.MessageHandler.warning('请先登录');
         app.navigateTo('login');
         return;
     }
@@ -331,7 +319,35 @@ function debug(message, data = null) {
     console.log(`[AIEC Debug] ${message}`, data || '');
 }
 
+// =====================
+// 习惯学习功能
+// =====================
+
+// 开始学习特定习惯
+function startHabitLearning(habitNumber) {
+    console.log(`开始学习习惯 ${habitNumber}`);
+    
+    // 检查用户是否已登录
+    if (!app.isLoggedIn()) {
+        showMessage('请先登录后再开始学习', 'error');
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 1500);
+        return;
+    }
+    
+    // 跳转到学习页面
+    try {
+        window.location.href = `habit-learning.html?habit=${habitNumber}`;
+    } catch (error) {
+        console.error('跳转到学习页面失败:', error);
+        showMessage('页面跳转失败，请稍后重试', 'error');
+    }
+}
+
+
 // 导出给其他文件使用
 window.app = app;
 window.showMessage = showMessage;
-window.debug = debug; 
+window.debug = debug;
+window.startHabitLearning = startHabitLearning;

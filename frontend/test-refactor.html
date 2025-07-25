@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重构功能测试 - AIEC</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
+        .test-button { margin: 10px; padding: 10px 20px; background: #007AFF; color: white; border: none; border-radius: 6px; cursor: pointer; }
+        .test-button:hover { background: #0056CC; }
+        .result { margin: 10px 0; padding: 10px; background: #f5f5f5; border-radius: 4px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>🧪 AIEC Phase 2 重构功能测试</h1>
+    
+    <div class="test-section">
+        <h3>1. 消息提示系统测试</h3>
+        <button class="test-button" onclick="testMessages()">测试消息提示</button>
+        <div id="message-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>2. 用户状态管理测试</h3>
+        <button class="test-button" onclick="testUserManager()">测试用户管理</button>
+        <div id="user-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>3. 存储管理器测试</h3>
+        <button class="test-button" onclick="testStorageManager()">测试存储管理</button>
+        <div id="storage-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>4. 错误处理系统测试</h3>
+        <button class="test-button" onclick="testErrorHandler()">测试错误处理</button>
+        <div id="error-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>5. HTTP管理器测试</h3>
+        <button class="test-button" onclick="testHttpManager()">测试HTTP请求</button>
+        <div id="http-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>6. 全局对象检查</h3>
+        <button class="test-button" onclick="checkGlobalObjects()">检查全局对象</button>
+        <div id="global-result" class="result"></div>
+    </div>
+
+    <script src="js/utils.js?v=1"></script>
+    <script>
+        function testMessages() {
+            const result = document.getElementById('message-result');
+            try {
+                AIEC.MessageHandler.success('成功消息测试', 2000);
+                AIEC.MessageHandler.error('错误消息测试', 2000);
+                AIEC.MessageHandler.warning('警告消息测试', 2000);
+                AIEC.MessageHandler.info('信息消息测试', 2000);
+                
+                result.className = 'result success';
+                result.innerHTML = '✅ 消息提示系统测试通过';
+            } catch (error) {
+                result.className = 'result error';
+                result.innerHTML = '❌ 消息提示系统测试失败: ' + error.message;
+            }
+        }
+        
+        function testUserManager() {
+            const result = document.getElementById('user-result');
+            try {
+                // 测试用户管理功能
+                const testUser = {
+                    username: 'testUser',
+                    email: 'test@example.com',
+                    loginTime: new Date().toISOString()
+                };
+                
+                // 设置用户
+                AIEC.UserManager.setUser(testUser);
+                
+                // 获取用户
+                const savedUser = AIEC.UserManager.getUser();
+                
+                // 检查是否登录
+                const isLoggedIn = AIEC.UserManager.isLoggedIn();
+                
+                // 获取邮箱
+                const email = AIEC.UserManager.getUserEmail();
+                
+                if (savedUser && isLoggedIn && email === testUser.email) {
+                    result.className = 'result success';
+                    result.innerHTML = '✅ 用户管理系统测试通过<br>用户: ' + JSON.stringify(savedUser);
+                } else {
+                    throw new Error('用户数据不匹配');
+                }
+                
+                // 清理测试数据
+                AIEC.UserManager.clearUser();
+                
+            } catch (error) {
+                result.className = 'result error';
+                result.innerHTML = '❌ 用户管理系统测试失败: ' + error.message;
+            }
+        }
+        
+        function testStorageManager() {
+            const result = document.getElementById('storage-result');
+            try {
+                const testData = { test: '重构测试数据', timestamp: Date.now() };
+                
+                // 存储数据
+                AIEC.StorageManager.set('test_key', testData);
+                
+                // 读取数据
+                const retrieved = AIEC.StorageManager.get('test_key');
+                
+                // 检查是否存在
+                const exists = AIEC.StorageManager.has('test_key');
+                
+                if (exists && retrieved && retrieved.test === testData.test) {
+                    result.className = 'result success';
+                    result.innerHTML = '✅ 存储管理器测试通过<br>数据: ' + JSON.stringify(retrieved);
+                } else {
+                    throw new Error('存储数据不匹配');
+                }
+                
+                // 清理测试数据
+                AIEC.StorageManager.remove('test_key');
+                
+            } catch (error) {
+                result.className = 'result error';
+                result.innerHTML = '❌ 存储管理器测试失败: ' + error.message;
+            }
+        }
+        
+        function testErrorHandler() {
+            const result = document.getElementById('error-result');
+            try {
+                // 测试不同类型的错误处理
+                const networkError = new Error('fetch failed');
+                networkError.name = 'NetworkError';
+                
+                const apiError = new Error('API服务异常');
+                
+                // 处理错误（会显示消息）
+                AIEC.ErrorHandler.handle(networkError, '网络请求');
+                AIEC.ErrorHandler.handle(apiError, 'API调用');
+                
+                result.className = 'result success';
+                result.innerHTML = '✅ 错误处理系统测试通过（请查看消息提示）';
+                
+            } catch (error) {
+                result.className = 'result error';
+                result.innerHTML = '❌ 错误处理系统测试失败: ' + error.message;
+            }
+        }
+        
+        async function testHttpManager() {
+            const result = document.getElementById('http-result');
+            try {
+                // 测试一个简单的HTTP请求（本地JSON文件）
+                const data = await AIEC.HttpManager.get('content/seven_habits.json');
+                
+                if (data && data.habits) {
+                    result.className = 'result success';
+                    result.innerHTML = '✅ HTTP管理器测试通过<br>成功加载习惯数据: ' + data.habits.length + '个习惯';
+                } else {
+                    throw new Error('HTTP响应数据格式不正确');
+                }
+                
+            } catch (error) {
+                result.className = 'result error';
+                result.innerHTML = '❌ HTTP管理器测试失败: ' + error.message;
+            }
+        }
+        
+        function checkGlobalObjects() {
+            const result = document.getElementById('global-result');
+            try {
+                const checks = [
+                    { name: 'AIEC', obj: window.AIEC },
+                    { name: 'AIEC.ErrorHandler', obj: window.AIEC?.ErrorHandler },
+                    { name: 'AIEC.MessageHandler', obj: window.AIEC?.MessageHandler },
+                    { name: 'AIEC.StorageManager', obj: window.AIEC?.StorageManager },
+                    { name: 'AIEC.UserManager', obj: window.AIEC?.UserManager },
+                    { name: 'AIEC.HttpManager', obj: window.AIEC?.HttpManager },
+                    { name: 'showMessage', obj: window.showMessage },
+                    { name: 'showSuccess', obj: window.showSuccess },
+                    { name: 'showError', obj: window.showError },
+                ];
+                
+                const missing = checks.filter(check => !check.obj);
+                
+                if (missing.length === 0) {
+                    result.className = 'result success';
+                    result.innerHTML = '✅ 所有全局对象检查通过<br>已加载: ' + checks.map(c => c.name).join(', ');
+                } else {
+                    result.className = 'result error';
+                    result.innerHTML = '❌ 缺少全局对象: ' + missing.map(m => m.name).join(', ');
+                }
+                
+            } catch (error) {
+                result.className = 'result error';
+                result.innerHTML = '❌ 全局对象检查失败: ' + error.message;
+            }
+        }
+        
+        // 页面加载完成后自动运行检查
+        window.onload = function() {
+            console.log('🧪 重构测试页面加载完成');
+            checkGlobalObjects();
+        };
+    </script>
+</body>
+</html>

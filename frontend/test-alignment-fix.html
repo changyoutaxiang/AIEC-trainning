@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>七个习惯标题对齐测试</title>
+    <link rel="stylesheet" href="css/style.css?v=3">
+    <style>
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 40px 0;
+            padding: 20px;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+        }
+        .test-title {
+            color: #007AFF;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .alignment-indicator {
+            position: relative;
+        }
+        .alignment-indicator::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #ff0000;
+            transform: translateX(-50%);
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="test-title">📐 七个习惯页面标题对齐修复测试</h1>
+        
+        <div class="test-section">
+            <h3 class="test-title">修复前 vs 修复后对比</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                <tr style="background: #f8f9fa;">
+                    <th style="padding: 12px; border: 1px solid #ddd;">元素</th>
+                    <th style="padding: 12px; border: 1px solid #ddd;">修复前</th>
+                    <th style="padding: 12px; border: 1px solid #ddd;">修复后</th>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><strong>习惯标题 (h2)</strong></td>
+                    <td style="padding: 12px; border: 1px solid #ddd; color: #d63384;">左对齐</td>
+                    <td style="padding: 12px; border: 1px solid #ddd; color: #2e7d32;">居中对齐 ✅</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><strong>描述文字 (p)</strong></td>
+                    <td style="padding: 12px; border: 1px solid #ddd; color: #d63384;">左对齐</td>
+                    <td style="padding: 12px; border: 1px solid #ddd; color: #2e7d32;">居中对齐 ✅</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><strong>习惯卡片内容</strong></td>
+                    <td style="padding: 12px; border: 1px solid #ddd; color: #2e7d32;">居中对齐 ✅</td>
+                    <td style="padding: 12px; border: 1px solid #ddd; color: #2e7d32;">居中对齐 ✅</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="test-section alignment-indicator">
+            <h3 class="test-title">实际效果预览（红线为页面中心线）</h3>
+            
+            <!-- 模拟个人成功习惯部分 -->
+            <div class="habits-section">
+                <h2>个人成功（习惯1-3）</h2>
+                <p>从依赖走向独立，建立个人效能的基础</p>
+            </div>
+
+            <!-- 模拟公众成功习惯部分 -->
+            <div class="habits-section">
+                <h2>公众成功（习惯4-6）</h2>
+                <p>从独立走向互赖，建立优秀的人际关系和团队协作能力</p>
+            </div>
+
+            <!-- 模拟自我更新习惯部分 -->
+            <div class="habits-section">
+                <h2>自我更新（习惯7）</h2>
+                <p>持续学习和成长，保持长期竞争力</p>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3 class="test-title">✅ 修复结果</h3>
+            <div style="background: #e8f5e8; padding: 20px; border-radius: 8px;">
+                <p><strong>修复内容：</strong></p>
+                <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
+                    <li>为 <code>.habits-section h2</code> 添加 <code>text-align: center</code></li>
+                    <li>为 <code>.habits-section p</code> 添加 <code>text-align: center</code></li>
+                    <li>确保所有习惯分区的标题和描述都居中对齐</li>
+                    <li>与习惯卡片内容的居中对齐保持视觉一致性</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3 class="test-title">🔗 验证链接</h3>
+            <p>请访问以下链接查看实际修复效果：</p>
+            <a href="/seven-habits.html" style="display: inline-block; background: #007AFF; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; margin: 10px;">
+                查看七个习惯页面
+            </a>
+        </div>
+    </div>
+</body>
+</html>

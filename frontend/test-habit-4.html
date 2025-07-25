@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯四测试页面</title>
+    <link rel="stylesheet" href="css/style.css?v=4">
+    <style>
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+        .test-section h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        .svg-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .svg-item {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .svg-item img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+        }
+        .test-button {
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #5a67d8;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .status.success {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 1px solid #9ae6b4;
+        }
+        .status.error {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 1px solid #fc8181;
+        }
+        .json-preview {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 习惯四：双赢思维 - 完整功能测试</h1>
+        
+        <!-- JSON数据测试 -->
+        <div class="test-section">
+            <h3>📊 1. JSON数据结构测试</h3>
+            <button class="test-button" onclick="testJsonData()">测试JSON数据加载</button>
+            <div id="json-status"></div>
+            <div id="json-preview"></div>
+        </div>
+        
+        <!-- SVG可视化测试 -->
+        <div class="test-section">
+            <h3>🎨 2. SVG可视化素材测试</h3>
+            <button class="test-button" onclick="testSvgFiles()">测试SVG文件</button>
+            <div id="svg-status"></div>
+            <div class="svg-preview" id="svg-preview"></div>
+        </div>
+        
+        <!-- 学习流程测试 -->
+        <div class="test-section">
+            <h3>🎓 3. 学习流程测试</h3>
+            <button class="test-button" onclick="testLearningFlow()">测试完整学习流程</button>
+            <button class="test-button" onclick="openHabit4()">打开习惯四学习页面</button>
+            <div id="flow-status"></div>
+        </div>
+        
+        <!-- AI评估测试 -->
+        <div class="test-section">
+            <h3>🤖 4. AI评估功能测试</h3>
+            <button class="test-button" onclick="testAiEvaluation()">测试AI后端连接</button>
+            <div id="ai-status"></div>
+        </div>
+        
+        <!-- 特色功能测试 -->
+        <div class="test-section">
+            <h3>✨ 5. 双赢思维特色功能测试</h3>
+            <button class="test-button" onclick="testWinWinFeatures()">测试双赢思维核心概念</button>
+            <div id="winwin-status"></div>
+        </div>
+        
+        <!-- 测试结果汇总 -->
+        <div class="test-section">
+            <h3>📋 6. 测试结果汇总</h3>
+            <div id="test-summary"></div>
+        </div>
+    </div>
+
+    <script>
+        let testResults = {
+            json: false,
+            svg: false,
+            flow: false,
+            ai: false,
+            winwin: false
+        };
+
+        // 测试JSON数据加载
+        async function testJsonData() {
+            const statusDiv = document.getElementById('json-status');
+            const previewDiv = document.getElementById('json-preview');
+            
+            try {
+                statusDiv.innerHTML = '<div class="status">正在加载JSON数据...</div>';
+                
+                const response = await fetch('/content/seven_habits.json?v=' + Date.now());
+                const data = await response.json();
+                
+                if (data.habits && data.habits.habit_4) {
+                    const habit4 = data.habits.habit_4;
+                    
+                    // 检查状态是否为available
+                    if (habit4.status !== 'available') {
+                        throw new Error('习惯四状态应为available，当前为: ' + habit4.status);
+                    }
+                    
+                    statusDiv.innerHTML = '<div class="status success">✅ JSON数据加载成功</div>';
+                    
+                    const preview = {
+                        habitName: habit4.habitName,
+                        corePhilosophy: habit4.corePhilosophy?.substring(0, 100) + '...',
+                        status: habit4.status,
+                        prerequisite: habit4.prerequisite,
+                        unitsCount: Object.keys(habit4.units || {}).length,
+                        totalPractices: Object.values(habit4.units || {}).reduce((total, unit) => {
+                            return total + (unit.sections?.practice_arena?.length || 0);
+                        }, 0),
+                        totalDilemmas: Object.values(habit4.units || {}).reduce((total, unit) => {
+                            return total + (unit.sections?.dilemma_zone?.length || 0);
+                        }, 0)
+                    };
+                    
+                    previewDiv.innerHTML = '<pre class="json-preview">' + JSON.stringify(preview, null, 2) + '</pre>';
+                    testResults.json = true;
+                } else {
+                    throw new Error('习惯四数据不存在');
+                }
+            } catch (error) {
+                statusDiv.innerHTML = '<div class="status error">❌ JSON数据加载失败: ' + error.message + '</div>';
+                testResults.json = false;
+            }
+            updateSummary();
+        }
+
+        // 测试SVG文件
+        async function testSvgFiles() {
+            const statusDiv = document.getElementById('svg-status');
+            const previewDiv = document.getElementById('svg-preview');
+            
+            const svgFiles = [
+                { name: '核心理念', file: 'core-philosophy.svg', desc: '双赢思维蛋糕增长理念' },
+                { name: '培养富足心态', file: 'unit_4_1.svg', desc: '苹果树与富足心态' },
+                { name: '识别对方的"赢"', file: 'unit_4_2.svg', desc: '换位思考与深层需求' },
+                { name: '设计双赢方案', file: 'unit_4_3.svg', desc: '橙子与第三选择' }
+            ];
+            
+            statusDiv.innerHTML = '<div class="status">正在测试SVG文件...</div>';
+            previewDiv.innerHTML = '';
+            
+            let successCount = 0;
+            
+            for (const svg of svgFiles) {
+                try {
+                    const response = await fetch(`/assets/concept-visuals/habit_4/${svg.file}`);
+                    if (response.ok) {
+                        const svgContent = await response.text();
+                        
+                        const svgItem = document.createElement('div');
+                        svgItem.className = 'svg-item';
+                        svgItem.innerHTML = `
+                            <h4>${svg.name}</h4>
+                            <div style="width: 100%; height: 200px; border: 1px solid #e2e8f0; border-radius: 4px; overflow: hidden;">
+                                ${svgContent}
+                            </div>
+                            <p style="color: #4a5568; font-size: 12px; margin-top: 10px;">✅ ${svg.desc}</p>
+                        `;
+                        previewDiv.appendChild(svgItem);
+                        successCount++;
+                    } else {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                } catch (error) {
+                    const svgItem = document.createElement('div');
+                    svgItem.className = 'svg-item';
+                    svgItem.innerHTML = `
+                        <h4>${svg.name}</h4>
+                        <div style="width: 100%; height: 200px; border: 1px solid #fed7d7; border-radius: 4px; background: #fed7d7; display: flex; align-items: center; justify-content: center;">
+                            <p style="color: #742a2a;">加载失败</p>
+                        </div>
+                        <p style="color: #742a2a; font-size: 12px; margin-top: 10px;">❌ ${error.message}</p>
+                    `;
+                    previewDiv.appendChild(svgItem);
+                }
+            }
+            
+            if (successCount === svgFiles.length) {
+                statusDiv.innerHTML = '<div class="status success">✅ 所有SVG文件加载成功，双赢思维可视化完美呈现</div>';
+                testResults.svg = true;
+            } else {
+                statusDiv.innerHTML = `<div class="status error">❌ ${successCount}/${svgFiles.length} SVG文件加载成功</div>`;
+                testResults.svg = false;
+            }
+            updateSummary();
+        }
+
+        // 测试学习流程
+        function testLearningFlow() {
+            const statusDiv = document.getElementById('flow-status');
+            
+            if (testResults.json && testResults.svg) {
+                statusDiv.innerHTML = '<div class="status success">✅ 学习流程基础组件就绪，双赢思维可以进行完整测试</div>';
+                testResults.flow = true;
+            } else {
+                statusDiv.innerHTML = '<div class="status error">❌ 学习流程依赖未满足，请先完成JSON和SVG测试</div>';
+                testResults.flow = false;
+            }
+            updateSummary();
+        }
+
+        // 打开习惯四学习页面
+        function openHabit4() {
+            window.open('/habit-learning.html?habit=4&v=' + Date.now(), '_blank');
+        }
+
+        // 测试AI评估
+        async function testAiEvaluation() {
+            const statusDiv = document.getElementById('ai-status');
+            
+            try {
+                statusDiv.innerHTML = '<div class="status">正在测试AI后端连接...</div>';
+                
+                const response = await fetch('http://localhost:3000/api/ai/health');
+                const data = await response.json();
+                
+                if (data.success && data.data.healthy) {
+                    statusDiv.innerHTML = '<div class="status success">✅ AI后端服务正常，可支持双赢思维实战练习智能评估</div>';
+                    testResults.ai = true;
+                } else {
+                    throw new Error('AI后端不健康');
+                }
+            } catch (error) {
+                statusDiv.innerHTML = '<div class="status error">❌ AI后端连接失败: ' + error.message + '</div>';
+                testResults.ai = false;
+            }
+            updateSummary();
+        }
+
+        // 测试双赢思维特色功能
+        async function testWinWinFeatures() {
+            const statusDiv = document.getElementById('winwin-status');
+            
+            try {
+                statusDiv.innerHTML = '<div class="status">正在测试双赢思维特色功能...</div>';
+                
+                const response = await fetch('/content/seven_habits.json?v=' + Date.now());
+                const data = await response.json();
+                const habit4 = data.habits.habit_4;
+                
+                // 检查核心特色
+                const features = {
+                    corePhilosophy: habit4.corePhilosophy?.includes('从"我"到"我们"'),
+                    abundanceMentality: habit4.units?.unit_4_1?.unitName?.includes('富足心态'),
+                    identifyWin: habit4.units?.unit_4_2?.unitName?.includes('识别对方的"赢"'),
+                    thirdAlternative: habit4.units?.unit_4_3?.unitName?.includes('双赢方案'),
+                    practiceScenarios: Object.values(habit4.units || {}).some(unit => 
+                        unit.sections?.practice_arena?.some(practice => 
+                            practice.scenario?.includes('预算') || 
+                            practice.scenario?.includes('资源') ||
+                            practice.scenario?.includes('合作')
+                        )
+                    )
+                };
+                
+                const passedFeatures = Object.values(features).filter(f => f).length;
+                const totalFeatures = Object.keys(features).length;
+                
+                if (passedFeatures === totalFeatures) {
+                    statusDiv.innerHTML = `
+                        <div class="status success">✅ 双赢思维特色功能完整 (${passedFeatures}/${totalFeatures})</div>
+                        <ul style="margin-top: 10px; padding-left: 20px; font-size: 12px;">
+                            <li>✅ 从"我"到"我们"的哲学转换</li>
+                            <li>✅ 富足心态培养体系</li>
+                            <li>✅ 识别对方真实需求</li>
+                            <li>✅ 第三选择创新方案</li>
+                            <li>✅ 真实协作场景练习</li>
+                        </ul>
+                    `;
+                    testResults.winwin = true;
+                } else {
+                    statusDiv.innerHTML = `<div class="status error">❌ 双赢思维特色功能不完整 (${passedFeatures}/${totalFeatures})</div>`;
+                    testResults.winwin = false;
+                }
+            } catch (error) {
+                statusDiv.innerHTML = '<div class="status error">❌ 双赢思维特色功能测试失败: ' + error.message + '</div>';
+                testResults.winwin = false;
+            }
+            updateSummary();
+        }
+
+        // 更新测试汇总
+        function updateSummary() {
+            const summaryDiv = document.getElementById('test-summary');
+            const total = Object.keys(testResults).length;
+            const passed = Object.values(testResults).filter(result => result).length;
+            
+            let summaryHtml = `<h4>测试进度: ${passed}/${total}</h4><ul>`;
+            summaryHtml += `<li>JSON数据: ${testResults.json ? '✅ 通过' : '❌ 失败'}</li>`;
+            summaryHtml += `<li>SVG素材: ${testResults.svg ? '✅ 通过' : '❌ 失败'}</li>`;
+            summaryHtml += `<li>学习流程: ${testResults.flow ? '✅ 通过' : '❌ 失败'}</li>`;
+            summaryHtml += `<li>AI评估: ${testResults.ai ? '✅ 通过' : '❌ 失败'}</li>`;
+            summaryHtml += `<li>双赢特色: ${testResults.winwin ? '✅ 通过' : '❌ 失败'}</li>`;
+            summaryHtml += '</ul>';
+            
+            if (passed === total) {
+                summaryHtml += '<div class="status success">🎉 所有测试通过！习惯四：双赢思维开发完成</div>';
+                summaryHtml += '<p style="margin-top: 10px; font-size: 14px; color: #4a5568;"><strong>用户可以体验：</strong></p>';
+                summaryHtml += '<ul style="margin-top: 5px; padding-left: 20px; color: #4a5568; font-size: 12px;">';
+                summaryHtml += '<li>🎨 4个专业SVG可视化插图</li>';
+                summaryHtml += '<li>📚 3个完整训练单元学习</li>';
+                summaryHtml += '<li>🎯 9个实战练习场景</li>';
+                summaryHtml += '<li>🤖 AI智能评估反馈</li>';
+                summaryHtml += '<li>💡 双赢思维核心理念转换</li>';
+                summaryHtml += '</ul>';
+            } else {
+                summaryHtml += '<div class="status error">⚠️ 部分测试失败，需要修复</div>';
+            }
+            
+            summaryDiv.innerHTML = summaryHtml;
+        }
+
+        // 页面加载时自动运行基础测试
+        window.onload = function() {
+            setTimeout(() => {
+                testJsonData();
+                setTimeout(() => {
+                    testSvgFiles();
+                    setTimeout(() => {
+                        testAiEvaluation();
+                        setTimeout(() => {
+                            testWinWinFeatures();
+                        }, 1000);
+                    }, 1000);
+                }, 1000);
+            }, 500);
+        };
+    </script>
+</body>
+</html>

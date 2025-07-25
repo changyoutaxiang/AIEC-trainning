@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多轮对话修复测试 - AIEC</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            margin: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            background: rgba(255,255,255,0.1); 
+            padding: 30px; 
+            border-radius: 20px; 
+            backdrop-filter: blur(10px);
+        }
+        .title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 300;
+        }
+        .test-button { 
+            background: rgba(255,255,255,0.2); 
+            color: white; 
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 15px 30px; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            margin: 10px; 
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .test-button:hover { 
+            background: rgba(255,255,255,0.3); 
+            transform: translateY(-2px);
+        }
+        .test-button:disabled { 
+            background: rgba(255,255,255,0.1); 
+            cursor: not-allowed; 
+            opacity: 0.5;
+        }
+        .status { 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 15px; 
+            backdrop-filter: blur(10px);
+        }
+        .success { background: rgba(76, 175, 80, 0.3); border: 2px solid rgba(76, 175, 80, 0.5); }
+        .error { background: rgba(244, 67, 54, 0.3); border: 2px solid rgba(244, 67, 54, 0.5); }
+        .info { background: rgba(33, 150, 243, 0.3); border: 2px solid rgba(33, 150, 243, 0.5); }
+        .loading { background: rgba(255, 193, 7, 0.3); border: 2px solid rgba(255, 193, 7, 0.5); }
+        .debug-output {
+            background: rgba(0,0,0,0.7);
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: Monaco, monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 20px 0;
+            border: 2px solid rgba(0,255,0,0.3);
+        }
+        .conversation-display {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .message {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .user-message {
+            background: rgba(33, 150, 243, 0.3);
+            margin-left: 20px;
+        }
+        .ai-message {
+            background: rgba(156, 39, 176, 0.3);
+            margin-right: 20px;
+        }
+        .input-section {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        .input-section textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 16px;
+            font-family: inherit;
+            resize: vertical;
+        }
+        .input-section textarea::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        .turn-indicator {
+            background: rgba(255, 193, 7, 0.3);
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🔄 多轮对话修复测试</h1>
+        <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px;">测试AI的多轮对话功能是否正常工作</p>
+        
+        <div id="status-display" class="status info">
+            <strong>🔍 状态:</strong> 准备测试多轮对话修复...
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <button class="test-button" onclick="startConversation()" id="startBtn">🚀 开始对话测试</button>
+            <button class="test-button" onclick="clearAll()" id="clearBtn">🗑️ 清空重置</button>
+        </div>
+        
+        <div class="debug-output" id="debug-output">等待测试开始...</div>
+        
+        <div id="conversation-container"></div>
+        
+        <div class="input-section" id="input-section" style="display: none;">
+            <h4>💭 继续对话:</h4>
+            <textarea id="user-input" placeholder="输入你的回复继续对话..."></textarea>
+            <div style="text-align: center; margin-top: 15px;">
+                <button class="test-button" onclick="sendMessage()" id="sendBtn">📤 发送消息</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载最新版本的脚本 -->
+    <script src="js/utils.js?v=1"></script>
+    <script src="js/app.js?v=10"></script>
+    <script src="js/aiService.js?v=4"></script>
+    
+    <script>
+        let debugMessages = [];
+        let conversationHistory = [];
+        let currentDilemma = null;
+        let turnCount = 0;
+        
+        function addDebug(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            debugMessages.push(`[${timestamp}] ${message}`);
+            document.getElementById('debug-output').textContent = debugMessages.join('\n');
+            document.getElementById('debug-output').scrollTop = document.getElementById('debug-output').scrollHeight;
+        }
+        
+        function updateStatus(type, message) {
+            const statusEl = document.getElementById('status-display');
+            statusEl.className = `status ${type}`;
+            statusEl.innerHTML = `<strong>${type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'loading' ? '⏳' : '🔍'} 状态:</strong> ${message}`;
+        }
+        
+        function clearAll() {
+            debugMessages = [];
+            conversationHistory = [];
+            turnCount = 0;
+            document.getElementById('debug-output').textContent = '已清空，准备重新开始...';
+            document.getElementById('conversation-container').innerHTML = '';
+            document.getElementById('input-section').style.display = 'none';
+            document.getElementById('user-input').value = '';
+            updateStatus('info', '已重置，准备开始新的对话测试');
+        }
+        
+        function displayConversation() {
+            const container = document.getElementById('conversation-container');
+            if (conversationHistory.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+            
+            const conversationHtml = `
+                <div class="conversation-display">
+                    <h3 style="text-align: center; margin-bottom: 20px;">💬 对话历史 (${conversationHistory.length} 条消息)</h3>
+                    ${conversationHistory.map((msg, index) => `
+                        <div class="message ${msg.role === 'user' ? 'user-message' : 'ai-message'}">
+                            <strong>${msg.role === 'user' ? '👤 用户' : '🤖 AI导师'} (第${Math.floor(index/2)+1}轮):</strong>
+                            <p style="margin: 10px 0 5px 0;">${msg.content}</p>
+                            <small style="opacity: 0.7; font-size: 0.8em;">${new Date(msg.timestamp).toLocaleTimeString()}</small>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            container.innerHTML = conversationHtml;
+        }
+        
+        async function startConversation() {
+            const btn = document.getElementById('startBtn');
+            btn.disabled = true;
+            updateStatus('loading', '开始第一轮对话测试...');
+            
+            try {
+                addDebug('🚀 开始多轮对话测试');
+                turnCount = 1;
+                
+                // 创建测试难题
+                currentDilemma = {
+                    dilemmaId: 'multi_turn_test',
+                    title: '多轮对话测试',
+                    question: '这是一个测试多轮对话功能的问题',
+                    coachingLogic: '测试AI能否维持连续的对话'
+                };
+                
+                const firstMessage = '我想测试多轮对话功能，这是第一条消息';
+                
+                addDebug(`🎯 第${turnCount}轮对话开始`);
+                addDebug(`📝 难题: ${currentDilemma.title}`);
+                addDebug(`📝 用户消息: ${firstMessage}`);
+                
+                // 发送第一条消息
+                const dilemmaManager = new DilemmaManager();
+                const response1 = await dilemmaManager.guideDilemmaDiscussion(
+                    currentDilemma,
+                    firstMessage,
+                    conversationHistory
+                );
+                
+                addDebug(`✅ 第${turnCount}轮AI回复成功`);
+                addDebug(`📄 AI回复: ${response1.substring(0, 100)}...`);
+                
+                // 添加到对话历史
+                conversationHistory.push({
+                    role: 'user',
+                    content: firstMessage,
+                    timestamp: new Date().toISOString()
+                });
+                
+                conversationHistory.push({
+                    role: 'assistant',
+                    content: response1,
+                    timestamp: new Date().toISOString()
+                });
+                
+                displayConversation();
+                
+                // 显示输入框，准备第二轮对话
+                document.getElementById('input-section').style.display = 'block';
+                document.getElementById('user-input').value = '谢谢你的回复，我想继续深入探讨这个问题';
+                
+                updateStatus('success', `✅ 第${turnCount}轮对话成功！准备第${turnCount+1}轮对话`);
+                addDebug(`🎉 第${turnCount}轮对话完成，准备继续`);
+                
+            } catch (error) {
+                updateStatus('error', `❌ 第${turnCount}轮对话失败: ${error.message}`);
+                addDebug(`❌ 第${turnCount}轮对话失败: ${error.message}`);
+                addDebug(`❌ 错误堆栈: ${error.stack}`);
+            }
+            
+            btn.disabled = false;
+        }
+        
+        async function sendMessage() {
+            const btn = document.getElementById('sendBtn');
+            const input = document.getElementById('user-input');
+            const userMessage = input.value.trim();
+            
+            if (!userMessage) {
+                alert('请输入消息内容');
+                return;
+            }
+            
+            btn.disabled = true;
+            turnCount++;
+            updateStatus('loading', `正在进行第${turnCount}轮对话...`);
+            
+            try {
+                addDebug(`🎯 第${turnCount}轮对话开始`);
+                addDebug(`📝 用户消息: ${userMessage}`);
+                addDebug(`📊 当前对话历史长度: ${conversationHistory.length}`);
+                
+                // 发送消息，包含完整的对话历史
+                const dilemmaManager = new DilemmaManager();
+                const response = await dilemmaManager.guideDilemmaDiscussion(
+                    currentDilemma,
+                    userMessage,
+                    conversationHistory  // 这里传递完整的对话历史
+                );
+                
+                addDebug(`✅ 第${turnCount}轮AI回复成功`);
+                addDebug(`📄 AI回复: ${response.substring(0, 100)}...`);
+                
+                // 添加到对话历史
+                conversationHistory.push({
+                    role: 'user',
+                    content: userMessage,
+                    timestamp: new Date().toISOString()
+                });
+                
+                conversationHistory.push({
+                    role: 'assistant',
+                    content: response,
+                    timestamp: new Date().toISOString()
+                });
+                
+                displayConversation();
+                
+                // 清空输入框，准备下一轮
+                input.value = '';
+                if (turnCount === 2) {
+                    input.placeholder = '继续第3轮对话...';
+                } else if (turnCount === 3) {
+                    input.placeholder = '测试完成，可以继续更多轮对话...';
+                }
+                
+                updateStatus('success', `🎉 第${turnCount}轮对话成功！多轮对话功能正常工作`);
+                addDebug(`🎊 第${turnCount}轮对话完成 - 多轮对话修复成功！`);
+                
+                if (turnCount >= 3) {
+                    addDebug('🏆 多轮对话测试完成 - 所有功能正常！');
+                }
+                
+            } catch (error) {
+                updateStatus('error', `❌ 第${turnCount}轮对话失败: ${error.message}`);
+                addDebug(`❌ 第${turnCount}轮对话失败: ${error.message}`);
+                addDebug(`❌ 这表明多轮对话功能仍有问题`);
+                addDebug(`❌ 错误堆栈: ${error.stack}`);
+            }
+            
+            btn.disabled = false;
+        }
+        
+        // 页面加载完成后显示信息
+        window.addEventListener('load', function() {
+            addDebug('📄 多轮对话修复测试页面加载完成');
+            addDebug('🔧 修复内容: 修改了后端guideDilemmaDiscussion方法，避免消息重复');
+            addDebug('🔧 后端已重启，应用了最新修复');
+            
+            setTimeout(() => {
+                addDebug('⚡ 准备开始多轮对话测试...');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

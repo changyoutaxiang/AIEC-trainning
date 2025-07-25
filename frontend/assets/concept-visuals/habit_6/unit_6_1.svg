@@ -1,0 +1,108 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 渐变定义 -->
+    <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="businessGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#E65100;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="userGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9C27B0;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#4A148C;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="operationGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#66BB6A;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1B5E20;stop-opacity:1"/>
+    </linearGradient>
+    <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.9"/>
+      <stop offset="50%" style="stop-color:#FFA726;stop-opacity:0.7"/>
+      <stop offset="100%" style="stop-color:#FF7043;stop-opacity:0.5"/>
+    </radialGradient>
+    <!-- 阴影效果 -->
+    <filter id="shadow">
+      <feDropShadow dx="3" dy="3" stdDeviation="2" flood-opacity="0.3"/>
+    </filter>
+    <!-- 箭头标记 -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#555"/>
+    </marker>
+  </defs>
+  <!-- 背景 -->
+  <rect width="800" height="600" fill="#f5f7fa"/>
+  <!-- 标题 -->
+  <text x="400" y="50" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="32" font-weight="bold" fill="#2c3e50">
+    尊重差异：拼接完整的认知地图
+  </text>
+  <!-- 技术视角 -->
+  <rect x="80" y="120" width="120" height="80" rx="8" fill="url(#techGradient)" filter="url(#shadow)"/>
+  <text x="140" y="150" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="18" font-weight="bold" fill="white">技术</text>
+  <text x="140" y="170" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="18" font-weight="bold" fill="white">视角</text>
+  <!-- 商业视角 -->
+  <rect x="600" y="120" width="120" height="80" rx="8" fill="url(#businessGradient)" filter="url(#shadow)"/>
+  <text x="660" y="150" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="18" font-weight="bold" fill="white">商业</text>
+  <text x="660" y="170" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="18" font-weight="bold" fill="white">视角</text>
+  <!-- 用户视角 -->
+  <rect x="80" y="380" width="120" height="80" rx="8" fill="url(#userGradient)" filter="url(#shadow)"/>
+  <text x="140" y="410" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="18" font-weight="bold" fill="white">用户</text>
+  <text x="140" y="430" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="18" font-weight="bold" fill="white">视角</text>
+  <!-- 运营视角 -->
+  <rect x="600" y="380" width="120" height="80" rx="8" fill="url(#operationGradient)" filter="url(#shadow)"/>
+  <text x="660" y="410" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="18" font-weight="bold" fill="white">运营</text>
+  <text x="660" y="430" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="18" font-weight="bold" fill="white">视角</text>
+  <!-- 连接箭头 -->
+  <path d="M 200 160 L 300 220" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+  <path d="M 600 160 L 500 220" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+  <path d="M 200 420 L 300 380" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+  <path d="M 600 420 L 500 380" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+  <!-- 中央完整认知区域 -->
+  <circle cx="400" cy="300" r="100" fill="url(#centerGradient)" filter="url(#shadow)" opacity="0.9"/>
+  <!-- 中央区域的扇形分割 -->
+  <path d="M 400 300 L 400 200 A 100 100 0 0 1 471 242 Z" fill="#4CAF50" opacity="0.3"/>
+  <path d="M 400 300 L 471 242 A 100 100 0 0 1 471 358 Z" fill="#FF9800" opacity="0.3"/>
+  <path d="M 400 300 L 471 358 A 100 100 0 0 1 329 358 Z" fill="#66BB6A" opacity="0.3"/>
+  <path d="M 400 300 L 329 358 A 100 100 0 0 1 400 200 Z" fill="#9C27B0" opacity="0.3"/>
+  <!-- 中央文字 -->
+  <text x="400" y="295" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="20" font-weight="bold" fill="#2c3e50">完整</text>
+  <text x="400" y="315" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="20" font-weight="bold" fill="#2c3e50">认知</text>
+  <!-- 盲区标注 -->
+  <g opacity="0.6">
+    <circle cx="120" cy="260" r="15" fill="#e74c3c"/>
+    <text x="120" y="266" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="12" font-weight="bold" fill="white">盲区</text>
+    <circle cx="680" cy="260" r="15" fill="#e74c3c"/>
+    <text x="680" y="266" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="12" font-weight="bold" fill="white">盲区</text>
+    <circle cx="120" cy="340" r="15" fill="#e74c3c"/>
+    <text x="120" y="346" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="12" font-weight="bold" fill="white">盲区</text>
+    <circle cx="680" cy="340" r="15" fill="#e74c3c"/>
+    <text x="680" y="346" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="12" font-weight="bold" fill="white">盲区</text>
+  </g>
+  <!-- 底部眼镜图标 -->
+  <g transform="translate(100, 520)">
+    <circle cx="15" cy="15" r="12" fill="none" stroke="#3498db" stroke-width="2"/>
+    <circle cx="35" cy="15" r="12" fill="none" stroke="#3498db" stroke-width="2"/>
+    <path d="M 27 15 L 23 15" stroke="#3498db" stroke-width="2"/>
+    <path d="M 3 15 L 8 12" stroke="#3498db" stroke-width="2"/>
+    <path d="M 47 15 L 42 12" stroke="#3498db" stroke-width="2"/>
+  </g>
+  <g transform="translate(650, 520)">
+    <circle cx="15" cy="15" r="12" fill="none" stroke="#27ae60" stroke-width="2"/>
+    <circle cx="35" cy="15" r="12" fill="none" stroke="#27ae60" stroke-width="2"/>
+    <path d="M 27 15 L 23 15" stroke="#27ae60" stroke-width="2"/>
+    <path d="M 3 15 L 8 12" stroke="#27ae60" stroke-width="2"/>
+    <path d="M 47 15 L 42 12" stroke="#27ae60" stroke-width="2"/>
+  </g>
+  <!-- 底部文字 -->
+  <text x="400" y="550" text-anchor="middle" font-family="微软雅黑, sans-serif" font-size="22" font-weight="bold" fill="#2c3e50">
+    你的视角，是我地图上缺失的那一块
+  </text>
+  <!-- 装饰性拼图边缘 -->
+  <g opacity="0.4">
+    <path d="M 300 250 Q 290 240 300 230 Q 310 240 300 250" fill="#34495e"/>
+    <path d="M 500 250 Q 510 240 500 230 Q 490 240 500 250" fill="#34495e"/>
+    <path d="M 350 350 Q 340 360 350 370 Q 360 360 350 350" fill="#34495e"/>
+    <path d="M 450 350 Q 460 360 450 370 Q 440 360 450 350" fill="#34495e"/>
+  </g>
+</svg>

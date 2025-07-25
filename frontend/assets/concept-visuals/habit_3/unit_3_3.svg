@@ -1,0 +1,140 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient definitions -->
+    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.9"/>
+      <stop offset="50%" style="stop-color:#00f2fe;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#667eea;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="treasureGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#ffb347;stop-opacity:0.8"/>
+    </linearGradient>
+    <radialGradient id="noGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#ff4757;stop-opacity:1"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8fafc"/>
+  
+  <!-- Title -->
+  <text x="200" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2d3748">捍卫要事</text>
+  <text x="200" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4a5568">"对次要之事优雅地说不"</text>
+  
+  <!-- Central Knight/Guardian figure with shield -->
+  <g transform="translate(200, 130)">
+    <!-- Knight's shield (main protection) -->
+    <path d="M0,-40 Q-20,-35 -25,-10 Q-25,10 -20,25 Q-10,35 0,40 Q10,35 20,25 Q25,10 25,-10 Q20,-35 0,-40 Z" 
+          fill="url(#shieldGradient)" stroke="#2d3748" stroke-width="2"/>
+    
+    <!-- Shield emblem (important tasks) -->
+    <circle cx="0" cy="-5" r="12" fill="url(#treasureGradient)" stroke="#d4a574" stroke-width="1"/>
+    <text x="0" y="-8" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#2d3748" font-weight="bold">要事</text>
+    <text x="0" y="2" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#2d3748">第二象限</text>
+    
+    <!-- Knight's head/helmet -->
+    <circle cx="0" cy="-55" r="10" fill="#4a5568"/>
+    <rect x="-8" y="-65" width="16" height="8" fill="#4a5568" rx="2"/>
+    
+    <!-- Knight's body -->
+    <rect x="-8" y="-45" width="16" height="30" fill="#718096" rx="2"/>
+    
+    <!-- Arms holding shield -->
+    <circle cx="-15" cy="-25" r="4" fill="#d69e2e"/>
+    <circle cx="15" cy="-25" r="4" fill="#d69e2e"/>
+  </g>
+  
+  <!-- Incoming distractions/requests being deflected -->
+  <!-- Left side requests -->
+  <g transform="translate(60, 100)">
+    <!-- Request bubble 1 -->
+    <ellipse cx="0" cy="0" rx="35" ry="20" fill="#ffa726" opacity="0.7" stroke="#f57c00" stroke-width="1"/>
+    <text x="0" y="-5" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#ffffff">帮我看看PPT</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff">很急！</text>
+    
+    <!-- Deflection arrow -->
+    <path d="M35,0 Q50,5 65,0" stroke="#ff6b6b" stroke-width="2" fill="none" marker-end="url(#deflectArrow)"/>
+  </g>
+  
+  <g transform="translate(80, 180)">
+    <!-- Request bubble 2 -->
+    <ellipse cx="0" cy="0" rx="30" ry="18" fill="#9e9e9e" opacity="0.7" stroke="#757575" stroke-width="1"/>
+    <text x="0" y="-5" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#ffffff">临时会议</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff">马上开始</text>
+    
+    <!-- Deflection arrow -->
+    <path d="M30,0 Q45,5 60,0" stroke="#ff6b6b" stroke-width="2" fill="none" marker-end="url(#deflectArrow)"/>
+  </g>
+  
+  <!-- Right side requests -->
+  <g transform="translate(340, 120)">
+    <!-- Request bubble 3 -->
+    <ellipse cx="0" cy="0" rx="32" ry="18" fill="#ff9800" opacity="0.7" stroke="#e65100" stroke-width="1"/>
+    <text x="0" y="-5" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#ffffff">聊聊项目</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff">有空吗？</text>
+    
+    <!-- Deflection arrow -->
+    <path d="M-32,0 Q-47,5 -62,0" stroke="#ff6b6b" stroke-width="2" fill="none" marker-end="url(#deflectArrow)"/>
+  </g>
+  
+  <g transform="translate(320, 200)">
+    <!-- Request bubble 4 -->
+    <ellipse cx="0" cy="0" rx="28" ry="16" fill="#795548" opacity="0.7" stroke="#5d4037" stroke-width="1"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff">技术调研</text>
+    <text x="0" y="4" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff">领导要</text>
+    
+    <!-- Deflection arrow -->
+    <path d="M-28,0 Q-40,5 -52,0" stroke="#ff6b6b" stroke-width="2" fill="none" marker-end="url(#deflectArrow)"/>
+  </g>
+  
+  <!-- Deflection arrows marker -->
+  <defs>
+    <marker id="deflectArrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ff6b6b"/>
+    </marker>
+  </defs>
+  
+  <!-- "No" responses with elegance -->
+  <g transform="translate(140, 80)">
+    <circle cx="0" cy="0" r="15" fill="url(#noGradient)"/>
+    <text x="0" y="-8" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" font-weight="bold">NO</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="#ffffff">但优雅</text>
+  </g>
+  
+  <g transform="translate(260, 80)">
+    <circle cx="0" cy="0" r="15" fill="url(#noGradient)"/>
+    <text x="0" y="-8" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" font-weight="bold">NO</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="#ffffff">有原则</text>
+  </g>
+  
+  <!-- Elegant refusal principles at bottom -->
+  <g transform="translate(50, 240)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="11" fill="#2d3748" font-weight="bold">优雅拒绝的三步法：</text>
+    
+    <!-- Step 1 -->
+    <circle cx="0" cy="20" r="8" fill="#4facfe"/>
+    <text x="0" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff" font-weight="bold">1</text>
+    <text x="15" y="25" font-family="Arial, sans-serif" font-size="9" fill="#4a5568">共情理解："我理解这很重要..."</text>
+    
+    <!-- Step 2 -->
+    <circle cx="0" cy="40" r="8" fill="#667eea"/>
+    <text x="0" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff" font-weight="bold">2</text>
+    <text x="15" y="45" font-family="Arial, sans-serif" font-size="9" fill="#4a5568">说明原则："但我需要专注于..."</text>
+    
+    <!-- Step 3 -->
+    <circle cx="0" cy="60" r="8" fill="#f093fb"/>
+    <text x="0" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#ffffff" font-weight="bold">3</text>
+    <text x="15" y="65" font-family="Arial, sans-serif" font-size="9" fill="#4a5568">提供替代："建议你可以..."</text>
+  </g>
+  
+  <!-- Treasure chest (protected important tasks) in background -->
+  <g transform="translate(200, 220)">
+    <rect x="-20" y="-8" width="40" height="16" fill="url(#treasureGradient)" rx="2" stroke="#d4a574" stroke-width="1"/>
+    <rect x="-18" y="-15" width="36" height="8" fill="url(#treasureGradient)" rx="4" stroke="#d4a574" stroke-width="1"/>
+    <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#2d3748" font-weight="bold">保护的时间</text>
+    <text x="0" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4a5568">专注深度工作</text>
+  </g>
+  
+</svg>

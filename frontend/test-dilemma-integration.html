@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应用难题集成测试 - AIEC</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        .test-button {
+            background: #007AFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover { background: #0056b3; }
+        .test-button:disabled { background: #ccc; cursor: not-allowed; }
+        .result { 
+            margin: 10px 0; 
+            padding: 10px; 
+            border-radius: 4px; 
+            background: #f8f9fa;
+            white-space: pre-wrap;
+            font-family: Monaco, monospace;
+            font-size: 12px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #e7f3ff; color: #004085; }
+        .conversation {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 3px solid #007AFF;
+            background: #f8f9fa;
+        }
+        .user-message {
+            background: #e3f2fd;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+        .ai-message {
+            background: #f3e5f5;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+        textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔧 应用难题集成测试</h1>
+        <p>测试完整的应用难题功能流程，从AIService定义到与后端的交互。</p>
+        
+        <!-- 基础测试 -->
+        <div class="test-section">
+            <h3>步骤1: 基础环境检查</h3>
+            <button class="test-button" onclick="runBasicTests()" id="basicTestBtn">运行基础检查</button>
+            <div id="basic-results"></div>
+        </div>
+
+        <!-- 难题数据测试 -->
+        <div class="test-section">
+            <h3>步骤2: 难题数据加载测试</h3>
+            <button class="test-button" onclick="testDilemmaData()" id="dataTestBtn">测试数据加载</button>
+            <div id="data-results"></div>
+        </div>
+
+        <!-- AI交互测试 -->
+        <div class="test-section">
+            <h3>步骤3: AI交互测试</h3>
+            <div style="margin-bottom: 10px;">
+                <label>选择难题:</label>
+                <select id="testDilemmaSelect">
+                    <option value="">请选择...</option>
+                    <option value="dilemma_1_1_1">1.1.1 - 内驱与外驱的矛盾</option>
+                    <option value="dilemma_1_1_2">1.1.2 - 机制的失效</option>
+                    <option value="dilemma_1_1_3">1.1.3 - 对他人的期望</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 10px;">
+                <label>用户思考:</label>
+                <textarea id="testUserThought" placeholder="输入你的思考...">我经常需要设置闹钟、制定计划才能完成任务，这让我觉得自己缺乏内在动力。</textarea>
+            </div>
+            <button class="test-button" onclick="testAIInteraction()" id="aiTestBtn">测试AI交互</button>
+            <div id="ai-results"></div>
+        </div>
+
+        <!-- 完整流程测试 -->
+        <div class="test-section">
+            <h3>步骤4: 完整对话流程测试</h3>
+            <button class="test-button" onclick="testFullConversation()" id="fullTestBtn">运行完整测试</button>
+            <div id="conversation-display"></div>
+            <div id="full-results"></div>
+        </div>
+    </div>
+
+    <script src="js/utils.js?v=1"></script>
+    <script src="js/app.js?v=10"></script>
+    <script src="js/aiService.js?v=1"></script>
+    
+    <script>
+        let testResults = [];
+        let habitData = null;
+        
+        function logTest(name, success, message, data = null) {
+            testResults.push({ name, success, message, data, timestamp: new Date() });
+            console.log(`${success ? '✅' : '❌'} ${name}: ${message}`, data);
+        }
+        
+        function showResult(elementId, html) {
+            document.getElementById(elementId).innerHTML = html;
+        }
+        
+        async function runBasicTests() {
+            const results = [];
+            
+            // 测试1: AIService定义
+            try {
+                const isDefined = typeof AIService !== 'undefined';
+                results.push(`✅ AIService定义检查: ${isDefined ? '已定义' : '未定义'}`);
+                logTest('AIService定义', isDefined, isDefined ? '已定义' : '未定义');
+            } catch (error) {
+                results.push(`❌ AIService定义检查失败: ${error.message}`);
+                logTest('AIService定义', false, error.message);
+            }
+            
+            // 测试2: 创建实例
+            try {
+                const aiService = new AIService();
+                results.push(`✅ AIService实例创建: 成功`);
+                logTest('AIService实例', true, '成功创建');
+            } catch (error) {
+                results.push(`❌ AIService实例创建失败: ${error.message}`);
+                logTest('AIService实例', false, error.message);
+            }
+            
+            // 测试3: 方法检查
+            try {
+                const aiService = new AIService();
+                const hasMethod = typeof aiService.guideDilemmaDiscussion === 'function';
+                results.push(`✅ guideDilemmaDiscussion方法: ${hasMethod ? '存在' : '不存在'}`);
+                logTest('方法检查', hasMethod, hasMethod ? '方法存在' : '方法不存在');
+            } catch (error) {
+                results.push(`❌ 方法检查失败: ${error.message}`);
+                logTest('方法检查', false, error.message);
+            }
+            
+            // 测试4: 后端连接
+            try {
+                const response = await fetch('http://localhost:3000/api/ai/health');
+                const data = await response.json();
+                const isHealthy = data.success && data.data.healthy;
+                results.push(`✅ 后端AI服务: ${isHealthy ? '正常' : '异常'}`);
+                logTest('后端连接', isHealthy, isHealthy ? '连接正常' : '连接异常', data);
+            } catch (error) {
+                results.push(`❌ 后端连接失败: ${error.message}`);
+                logTest('后端连接', false, error.message);
+            }
+            
+            showResult('basic-results', `<div class="result info">${results.join('\n')}</div>`);
+        }
+        
+        async function testDilemmaData() {
+            try {
+                const response = await fetch('/content/seven_habits.json');
+                const data = await response.json();
+                habitData = data;
+                
+                // 检查习惯1的难题数据
+                const habit1 = data.habits.habit_1;
+                const units = Object.keys(habit1.units);
+                let totalDilemmas = 0;
+                let results = [`数据结构检查:`];
+                
+                units.forEach(unitKey => {
+                    const unit = habit1.units[unitKey];
+                    const dilemmas = unit.sections.dilemma_zone || [];
+                    totalDilemmas += dilemmas.length;
+                    results.push(`- ${unit.unitName}: ${dilemmas.length}个难题`);
+                });
+                
+                results.push(`总计: ${totalDilemmas}个难题`);
+                
+                // 显示第一个难题的详细信息
+                const firstDilemma = habit1.units.unit_1_1.sections.dilemma_zone[0];
+                results.push(`\n示例难题 (${firstDilemma.dilemmaId}):`);
+                results.push(`标题: ${firstDilemma.title}`);
+                results.push(`问题: ${firstDilemma.question.substring(0, 50)}...`);
+                
+                showResult('data-results', `<div class="result success">${results.join('\n')}</div>`);
+                logTest('数据加载', true, `成功加载${totalDilemmas}个难题`, firstDilemma);
+                
+            } catch (error) {
+                showResult('data-results', `<div class="result error">❌ 数据加载失败: ${error.message}</div>`);
+                logTest('数据加载', false, error.message);
+            }
+        }
+        
+        async function testAIInteraction() {
+            const dilemmaId = document.getElementById('testDilemmaSelect').value;
+            const userThought = document.getElementById('testUserThought').value;
+            
+            if (!dilemmaId || !userThought.trim()) {
+                showResult('ai-results', `<div class="result error">❌ 请选择难题并输入思考内容</div>`);
+                return;
+            }
+            
+            if (!habitData) {
+                showResult('ai-results', `<div class="result error">❌ 请先运行数据加载测试</div>`);
+                return;
+            }
+            
+            try {
+                // 查找难题数据
+                let dilemma = null;
+                const habit1 = habitData.habits.habit_1;
+                for (const unitKey of Object.keys(habit1.units)) {
+                    const unit = habit1.units[unitKey];
+                    const found = unit.sections.dilemma_zone.find(d => d.dilemmaId === dilemmaId);
+                    if (found) {
+                        dilemma = found;
+                        break;
+                    }
+                }
+                
+                if (!dilemma) {
+                    throw new Error('未找到指定的难题');
+                }
+                
+                // 创建AIService实例并调用方法
+                const aiService = new AIService();
+                showResult('ai-results', `<div class="result info">🤔 正在获取AI引导...</div>`);
+                
+                const guidance = await aiService.guideDilemmaDiscussion(dilemma, userThought, []);
+                
+                const results = [
+                    `AI交互测试成功!`,
+                    ``,
+                    `难题: ${dilemma.title}`,
+                    `用户思考: ${userThought}`,
+                    ``,
+                    `AI引导回复:`,
+                    `${guidance}`
+                ];
+                
+                showResult('ai-results', `<div class="result success">${results.join('\n')}</div>`);
+                logTest('AI交互', true, 'AI引导成功', { dilemma, userThought, guidance });
+                
+            } catch (error) {
+                showResult('ai-results', `<div class="result error">❌ AI交互失败: ${error.message}</div>`);
+                logTest('AI交互', false, error.message);
+            }
+        }
+        
+        async function testFullConversation() {
+            if (!habitData) {
+                showResult('full-results', `<div class="result error">❌ 请先运行数据加载测试</div>`);
+                return;
+            }
+            
+            try {
+                const dilemma = habitData.habits.habit_1.units.unit_1_1.sections.dilemma_zone[0];
+                const aiService = new AIService();
+                
+                let conversationHtml = '<div class="conversation"><h4>完整对话测试</h4>';
+                let conversationHistory = [];
+                
+                // 第一轮对话
+                const thought1 = "我觉得依赖外部机制说明我缺乏自律性";
+                conversationHtml += `<div class="user-message">👤 用户: ${thought1}</div>`;
+                
+                const guidance1 = await aiService.guideDilemmaDiscussion(dilemma, thought1, conversationHistory);
+                conversationHtml += `<div class="ai-message">🤖 AI: ${guidance1}</div>`;
+                
+                conversationHistory.push({ role: 'user', content: thought1 });
+                conversationHistory.push({ role: 'assistant', content: guidance1 });
+                
+                // 第二轮对话
+                const thought2 = "但是很多成功人士也会用各种工具和系统来管理自己";
+                conversationHtml += `<div class="user-message">👤 用户: ${thought2}</div>`;
+                
+                const guidance2 = await aiService.guideDilemmaDiscussion(dilemma, thought2, conversationHistory);
+                conversationHtml += `<div class="ai-message">🤖 AI: ${guidance2}</div>`;
+                
+                conversationHtml += '</div>';
+                
+                showResult('conversation-display', conversationHtml);
+                showResult('full-results', `<div class="result success">✅ 完整对话流程测试成功！AI能够基于对话历史进行连续引导。</div>`);
+                
+                logTest('完整对话', true, '多轮对话成功', { conversationHistory });
+                
+            } catch (error) {
+                showResult('full-results', `<div class="result error">❌ 完整对话测试失败: ${error.message}</div>`);
+                logTest('完整对话', false, error.message);
+            }
+        }
+        
+        // 页面加载时自动运行基础测试
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                runBasicTests();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

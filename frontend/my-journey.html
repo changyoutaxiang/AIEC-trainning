@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的旅程 - AIEC学习成长档案</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/journey.css">
+    <style>
+        :root {
+            /* 主色调 */
+            --primary-blue: #007AFF;
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            
+            /* 习惯色彩 */
+            --habit-1: #FF6B6B; /* 积极主动 - 活力红 */
+            --habit-2: #4ECDC4; /* 以终为始 - 远见绿 */
+            --habit-3: #45B7D1; /* 要事第一 - 效率蓝 */
+            --habit-4: #96CEB4; /* 双赢思维 - 协作绿 */
+            --habit-5: #FFEAA7; /* 知彼解己 - 理解黄 */
+            --habit-6: #DDA0DD; /* 统合综效 - 创新紫 */
+            --habit-7: #98D8C8; /* 不断更新 - 成长青 */
+            
+            /* 功能色彩 */
+            --success: #28A745;
+            --warning: #FFC107;
+            --error: #DC3545;
+            --info: #17A2B8;
+            
+            /* 中性色 */
+            --text-primary: #1d1d1f;
+            --text-secondary: #8e8e93;
+            --background: #ffffff;
+            --surface: #f8f9ff;
+            --border: #e5e5e7;
+            
+            /* 间距系统 */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 48px;
+            
+            /* 圆角规范 */
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            
+            /* 阴影规范 */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.15);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        
+        /* 重置样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--surface);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+        }
+        
+        /* 页面加载状态 */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">AIEC 职场软技能</div>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="seven-habits.html">七个习惯</a>
+                <a href="my-journey.html" class="active">我的旅程</a>
+                <a href="#" onclick="logout()">退出</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 主内容区域 -->
+    <main class="journey-main">
+        <div class="container">
+            <!-- 加载状态 -->
+            <div class="loading" id="loadingState">
+                <div class="loading-spinner"></div>
+                <p>正在加载您的学习数据...</p>
+            </div>
+
+            <!-- 页面内容 -->
+            <div class="journey-content" id="journeyContent" style="display: none;">
+                <!-- 学习数据概览区 -->
+                <section class="profile-overview" id="profileOverview">
+                    <div class="profile-card">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number" id="totalStudyHours">0</div>
+                                <div class="stat-label">学习时长(小时)</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="completedExercises">0</div>
+                                <div class="stat-label">完成练习</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="averageScore">0</div>
+                                <div class="stat-label">平均分数</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="habitsCompleted">0</div>
+                                <div class="stat-label">掌握习惯</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 仪表盘区域 -->
+                <section class="dashboard-section">
+                    <div class="dashboard-grid">
+                        <!-- 七个习惯雷达图 -->
+                        <div class="dashboard-card radar-card">
+                            <h3 class="card-title">
+                                <span class="card-icon">🎯</span>
+                                七个习惯掌握度
+                            </h3>
+                            <div class="radar-container" id="radarContainer">
+                                <canvas id="radarChart" width="300" height="300"></canvas>
+                            </div>
+                            <div class="radar-legend" id="radarLegend">
+                                <!-- 动态生成 -->
+                            </div>
+                        </div>
+
+                        <!-- 整体进度环图 -->
+                        <div class="dashboard-card progress-card">
+                            <h3 class="card-title">
+                                <span class="card-icon">⭕</span>
+                                整体学习进度
+                            </h3>
+                            <div class="progress-container">
+                                <div class="progress-circle" id="progressCircle">
+                                    <svg viewBox="0 0 200 200" class="progress-svg">
+                                        <circle cx="100" cy="100" r="80" class="progress-bg"></circle>
+                                        <circle cx="100" cy="100" r="80" class="progress-fill" id="progressBar"></circle>
+                                    </svg>
+                                    <div class="progress-content">
+                                        <div class="progress-percentage" id="progressPercentage">0%</div>
+                                        <div class="progress-label">总体完成度</div>
+                                    </div>
+                                </div>
+                                <div class="progress-details">
+                                    <p>已完成单元：<span id="completedUnits">0</span> / <span id="totalUnits">21</span></p>
+                                    <p>下个里程碑：<span id="nextMilestone">80%</span></p>
+                                    <p>预计完成：<span id="estimatedCompletion">5天后</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+            </div>
+        </div>
+    </main>
+
+
+    <!-- JavaScript -->
+    <script src="js/utils.js?v=8"></script>
+    <script src="js/journey.js?v=8"></script>
+</body>
+</html>

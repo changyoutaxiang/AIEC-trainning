@@ -100,10 +100,8 @@ class APIManager {
             }
             
         } catch (error) {
-            console.error('❌ AI评分请求失败:', error);
-            
-            // 处理网络异常
-            this.handleAPIError(error);
+            AIEC.ErrorHandler.handle(error, 'AI评分');
+            throw error;
             
         } finally {
             // 隐藏Loading状态
@@ -139,7 +137,6 @@ class APIManager {
      */
     async makeRequest(endpoint, options = {}) {
         const url = `${this.baseURL}${endpoint}`;
-        const timeout = options.timeout || this.timeout;
         
         console.log('🚀 发送HTTP请求:', {
             url: url,
@@ -148,46 +145,21 @@ class APIManager {
             endpoint: endpoint
         });
         
-        // 创建请求控制器用于超时处理
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), timeout);
-        
         try {
-            const response = await fetch(url, {
+            const data = await AIEC.HttpManager.request(url, {
                 ...options,
-                signal: controller.signal
+                timeout: options.timeout || this.timeout
             });
             
-            clearTimeout(timeoutId);
-            
-            console.log('📦 收到HTTP响应:', {
-                status: response.status,
-                statusText: response.statusText,
-                url: response.url
-            });
-            
-            // 检查HTTP状态码
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            // 解析JSON响应
-            const data = await response.json();
+            console.log('📦 收到HTTP响应:', data);
             return data;
             
         } catch (error) {
-            clearTimeout(timeoutId);
-            
             console.error('💥 HTTP请求失败:', {
                 url: url,
                 error: error.message,
                 name: error.name
             });
-            
-            if (error.name === 'AbortError') {
-                throw new Error('请求超时，请检查网络连接');
-            }
-            
             throw error;
         }
     }

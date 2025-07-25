@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>强制刷新跳转 - AIEC</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            margin: 0; 
+            padding: 50px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .button {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 10px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .info {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            border-left: 4px solid #fff;
+            text-align: left;
+        }
+        .timestamp {
+            font-family: Monaco, monospace;
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🔄 AIService 修复完成</h1>
+        <p class="subtitle">请点击下面的链接访问最新版本的学习页面</p>
+        
+        <div class="info">
+            <h3>🛠️ 已完成的修复：</h3>
+            <ul>
+                <li>✅ 添加了 aiService.js 脚本引用</li>
+                <li>✅ 创建了 AIService 全局别名</li>
+                <li>✅ 增加了详细的调试日志</li>
+                <li>✅ 强制刷新浏览器缓存 (v=2)</li>
+            </ul>
+        </div>
+        
+        <a href="#" class="button" id="freshLink">🚀 访问习惯1学习页面 (最新版)</a>
+        <a href="test-aiservice-debug.html" class="button">🐛 打开调试页面</a>
+        <a href="test-dilemma-integration.html" class="button">🧪 集成测试页面</a>
+        
+        <div class="info">
+            <h3>📋 使用说明：</h3>
+            <ol>
+                <li>点击"访问习惯1学习页面"按钮</li>
+                <li>进入页面后，点击"应用难题"模块</li>
+                <li>选择任意难题并输入你的思考</li>
+                <li>点击"提交思考"按钮测试AI功能</li>
+                <li>查看浏览器控制台了解详细加载情况</li>
+            </ol>
+        </div>
+        
+        <p class="timestamp">生成时间: <span id="timestamp"></span></p>
+    </div>
+
+    <script>
+        // 生成带时间戳的链接以强制刷新缓存
+        const timestamp = Date.now();
+        const freshUrl = `habit-learning.html?habit=1&_fresh=${timestamp}`;
+        document.getElementById('freshLink').href = freshUrl;
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+        
+        // 3秒后自动跳转
+        let countdown = 3;
+        const countdownInterval = setInterval(() => {
+            if (countdown > 0) {
+                document.querySelector('.subtitle').textContent = 
+                    `${countdown}秒后自动跳转到学习页面，或点击下面的按钮立即访问`;
+                countdown--;
+            } else {
+                clearInterval(countdownInterval);
+                window.location.href = freshUrl;
+            }
+        }, 1000);
+        
+        // 点击任意按钮时清除自动跳转
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('click', () => {
+                clearInterval(countdownInterval);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -26,8 +26,8 @@ class AuthManager {
     
     // 从本地存储加载用户数据
     loadUsersFromStorage() {
-        const savedUsers = localStorage.getItem('aiec_users');
-        return savedUsers ? JSON.parse(savedUsers) : [];
+        const users = localStorage.getItem('aiec_users');
+        return users ? JSON.parse(users) : [];
     }
     
     // 保存用户数据到本地存储
@@ -158,9 +158,9 @@ class AuthManager {
         
         showMessage(`欢迎回来，${user.name}！`, 'success');
         
-        // 跳转到七个习惯学习页面
+        // 跳转到首页
         setTimeout(() => {
-            window.location.href = 'seven-habits.html';
+            window.location.href = 'index.html';
         }, 1500);
     }
     
@@ -252,15 +252,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // 目前使用模拟登录
             if (username && password) {
                 // 模拟登录成功
-                localStorage.setItem('aiec_current_user', JSON.stringify({
+                AIEC.UserManager.setUser({
                     username: username,
+                    email: username, // 临时使用username作为email
                     loginTime: new Date().toISOString()
-                }));
+                });
                 
-                // 跳转到七个习惯学习页面
-                window.location.href = 'seven-habits.html';
+                // 跳转到首页
+                window.location.href = 'index.html';
             } else {
-                alert('请输入用户名和密码');
+                AIEC.MessageHandler.error('请输入用户名和密码');
             }
         });
     }
@@ -286,18 +287,19 @@ document.addEventListener('DOMContentLoaded', function() {
             // 目前使用模拟注册
             if (fullName && email && username && password) {
                 // 模拟注册成功
-                localStorage.setItem('aiec_current_user', JSON.stringify({
+                AIEC.UserManager.setUser({
                     fullName: fullName,
                     email: email,
                     username: username,
                     registerTime: new Date().toISOString()
-                }));
+                });
                 
-                alert('注册成功！欢迎加入AIEC职场软技能！');
-                // 跳转到七个习惯学习页面
-                window.location.href = 'seven-habits.html';
+                AIEC.MessageHandler.success('注册成功！欢迎加入AIEC职场软技能！');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
             } else {
-                alert('请填写所有必填字段');
+                AIEC.MessageHandler.error('请填写所有必填字段');
             }
         });
     }
@@ -358,6 +360,5 @@ function debugUsers() {
 function clearUsers() {
     localStorage.removeItem('aiec_users');
     window.authManager.users = [];
-    showMessage('用户数据已清空', 'success');
     console.log('用户数据已清空');
-} 
+}

@@ -1,0 +1,86 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="handGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8f9ff"/>
+  
+  <!-- Title -->
+  <text x="200" y="25" text-anchor="middle" fill="#2d3748" font-family="system-ui, -apple-system" font-size="16" font-weight="600">两次创造理念</text>
+  
+  <!-- Left side - Mental Creation -->
+  <g transform="translate(50, 60)">
+    <!-- Brain icon -->
+    <circle cx="70" cy="50" r="35" fill="url(#brainGradient)" opacity="0.2"/>
+    <path d="M45 50 Q55 30 70 35 Q85 30 95 50 Q85 70 70 65 Q55 70 45 50" fill="url(#brainGradient)"/>
+    <circle cx="60" cy="45" r="3" fill="white" opacity="0.8"/>
+    <circle cx="80" cy="55" r="3" fill="white" opacity="0.8"/>
+    
+    <!-- Light bulb above -->
+    <circle cx="70" cy="20" r="8" fill="#ffd700" opacity="0.8"/>
+    <rect x="66" y="28" width="8" height="4" fill="#ffd700" opacity="0.6"/>
+    
+    <!-- Label -->
+    <text x="70" y="90" text-anchor="middle" fill="#667eea" font-family="system-ui" font-size="14" font-weight="600">第一次创造</text>
+    <text x="70" y="105" text-anchor="middle" fill="#667eea" font-family="system-ui" font-size="12">思想蓝图</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M180 110 L220 110" stroke="#718096" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#718096"/>
+    </marker>
+  </defs>
+  
+  <!-- Right side - Physical Creation -->
+  <g transform="translate(250, 60)">
+    <!-- Hand/tool icon -->
+    <circle cx="70" cy="50" r="35" fill="url(#handGradient)" opacity="0.2"/>
+    <path d="M55 55 L60 45 L65 50 L70 40 L75 50 L80 45 L85 55 L80 65 L70 70 L60 65 Z" fill="url(#handGradient)"/>
+    <rect x="62" y="60" width="16" height="8" rx="2" fill="url(#handGradient)" opacity="0.7"/>
+    
+    <!-- Gears -->
+    <circle cx="85" cy="25" r="6" fill="#38a169" opacity="0.6"/>
+    <circle cx="85" cy="25" r="3" fill="white"/>
+    <circle cx="95" cy="35" r="4" fill="#38a169" opacity="0.6"/>
+    
+    <!-- Label -->
+    <text x="70" y="90" text-anchor="middle" fill="#f5576c" font-family="system-ui" font-size="14" font-weight="600">第二次创造</text>
+    <text x="70" y="105" text-anchor="middle" fill="#f5576c" font-family="system-ui" font-size="12">实践执行</text>
+  </g>
+  
+  <!-- Bottom philosophy text -->
+  <text x="200" y="180" text-anchor="middle" fill="#4a5568" font-family="system-ui" font-size="14" font-weight="500">"任何事物都经过两次创造"</text>
+  <text x="200" y="200" text-anchor="middle" fill="#718096" font-family="system-ui" font-size="12">先在头脑中构思设计，再在现实中执行实现</text>
+  
+  <!-- Process flow -->
+  <g transform="translate(0, 220)">
+    <rect x="50" y="10" width="80" height="30" rx="15" fill="#e2e8f0" stroke="#cbd5e0"/>
+    <text x="90" y="30" text-anchor="middle" fill="#4a5568" font-size="11">明确目标</text>
+    
+    <path d="M130 25 L150 25" stroke="#a0aec0" stroke-width="2" marker-end="url(#smallArrow)"/>
+    
+    <rect x="150" y="10" width="80" height="30" rx="15" fill="#e2e8f0" stroke="#cbd5e0"/>
+    <text x="190" y="30" text-anchor="middle" fill="#4a5568" font-size="11">规划路径</text>
+    
+    <path d="M230 25 L250 25" stroke="#a0aec0" stroke-width="2" marker-end="url(#smallArrow)"/>
+    
+    <rect x="250" y="10" width="80" height="30" rx="15" fill="#e2e8f0" stroke="#cbd5e0"/>
+    <text x="290" y="30" text-anchor="middle" fill="#4a5568" font-size="11">价值交付</text>
+  </g>
+  
+  <defs>
+    <marker id="smallArrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#a0aec0"/>
+    </marker>
+  </defs>
+</svg>

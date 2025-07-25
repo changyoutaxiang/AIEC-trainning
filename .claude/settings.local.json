@@ -5,7 +5,16 @@
       "Bash(git commit:*)",
       "Bash(git init:*)",
       "Bash(cp:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(for:*)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(echo)",
+      "Bash(done)",
+      "Bash(python3:*)",
+      "Bash(git checkout:*)"
     ],
     "deny": []
   }

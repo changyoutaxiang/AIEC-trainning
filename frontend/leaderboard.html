@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 学习排行榜 - AIEC七个习惯</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/leaderboard.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">AIEC 职场软技能</div>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="seven-habits.html">七个习惯</a>
+                <a href="my-journey.html">我的旅程</a>
+                <a href="skills.html">技能训练</a>
+                <a href="#" onclick="logout()">退出</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container leaderboard-container">
+        <!-- 用户排名卡片 -->
+        <div class="user-rank-card" id="userRankCard">
+            <div class="rank-header">
+                <h3>📊 我的排名</h3>
+                <div class="rank-loading" id="userRankLoading">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+            <div class="rank-content">
+                <div class="rank-position">
+                    <span class="position" id="userPosition">--</span>
+                    <span class="total" id="userTotal">/ --</span>
+                </div>
+                <div class="rank-progress">
+                    <div class="progress-label">
+                        <span>学习进度</span>
+                        <span id="userProgress">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="userProgressFill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rank-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="userCompleted">0</span>
+                        <span class="stat-label">完成习惯</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="userStreak">0</span>
+                        <span class="stat-label">连续天数</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="userScore">0</span>
+                        <span class="stat-label">总得分</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 筛选控件 -->
+        <div class="filter-section">
+            <div class="filter-controls">
+                <select id="periodFilter" class="filter-select">
+                    <option value="total">总榜</option>
+                    <option value="today">今日</option>
+                    <option value="week">本周</option>
+                    <option value="month">本月</option>
+                </select>
+                <select id="typeFilter" class="filter-select">
+                    <option value="global">全局</option>
+                    <option value="department">部门</option>
+                    <option value="friends">好友</option>
+                </select>
+                <select id="departmentFilter" class="filter-select" style="display: none;">
+                    <option value="">选择部门</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 排行榜列表 -->
+        <div class="leaderboard-section">
+            <div class="section-header">
+                <h3>🏆 排行榜</h3>
+                <div class="last-updated">
+                    最后更新: <span id="lastUpdated">--</span>
+                </div>
+            </div>
+            
+            <div class="leaderboard-loading" id="leaderboardLoading">
+                <div class="spinner"></div>
+                <p>加载排行榜中...</p>
+            </div>
+
+            <div class="leaderboard-list" id="leaderboardList" style="display: none;">
+                <!-- 排行榜内容将通过JavaScript动态加载 -->
+            </div>
+
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-icon">📊</div>
+                <h4>暂无排行榜数据</h4>
+                <p>还没有用户开始学习，快来成为第一个吧！</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025 AIEC. 让每个人都能在职场中发光发热</p>
+        </div>
+    </footer>
+
+    <script src="js/leaderboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="targetGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#ff8e53;stop-opacity:0.8" />
+      <stop offset="60%" style="stop-color:#ff9f43;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#ffa726;stop-opacity:0.4" />
+    </radialGradient>
+    <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2196f3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1976d2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f5f7fa"/>
+  
+  <!-- Title -->
+  <text x="200" y="30" text-anchor="middle" fill="#2d3748" font-family="system-ui, -apple-system" font-size="16" font-weight="600">澄清目标</text>
+  <text x="200" y="48" text-anchor="middle" fill="#718096" font-family="system-ui" font-size="12">精准定义你要射中的靶子</text>
+  
+  <!-- Target circles -->
+  <g transform="translate(200, 150)">
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#ff9f43" stroke-width="8" opacity="0.3"/>
+    <circle cx="0" cy="0" r="80" fill="url(#targetGradient)" opacity="0.1"/>
+    
+    <!-- Middle ring -->
+    <circle cx="0" cy="0" r="55" fill="none" stroke="#ff8e53" stroke-width="6" opacity="0.5"/>
+    <circle cx="0" cy="0" r="55" fill="url(#targetGradient)" opacity="0.15"/>
+    
+    <!-- Inner ring -->
+    <circle cx="0" cy="0" r="30" fill="none" stroke="#ff6b6b" stroke-width="4" opacity="0.7"/>
+    <circle cx="0" cy="0" r="30" fill="url(#targetGradient)" opacity="0.2"/>
+    
+    <!-- Bullseye -->
+    <circle cx="0" cy="0" r="12" fill="#ff6b6b"/>
+    <circle cx="0" cy="0" r="8" fill="white"/>
+    <circle cx="0" cy="0" r="4" fill="#ff6b6b"/>
+    
+    <!-- Target lines -->
+    <line x1="0" y1="-90" x2="0" y2="90" stroke="#e2e8f0" stroke-width="1" opacity="0.6"/>
+    <line x1="-90" y1="0" x2="90" y2="0" stroke="#e2e8f0" stroke-width="1" opacity="0.6"/>
+  </g>
+  
+  <!-- Arrow hitting target -->
+  <g transform="translate(50, 120) rotate(-30)">
+    <!-- Arrow shaft -->
+    <rect x="0" y="-2" width="60" height="4" fill="url(#arrowGradient)"/>
+    
+    <!-- Arrow head -->
+    <polygon points="60,-6 75,0 60,6" fill="#1976d2"/>
+    
+    <!-- Arrow fletching -->
+    <polygon points="0,-4 -8,-2 -8,2 0,4" fill="#e53e3e" opacity="0.8"/>
+    <polygon points="0,-4 -8,-6 -8,-2" fill="#e53e3e" opacity="0.6"/>
+    <polygon points="0,4 -8,2 -8,6" fill="#e53e3e" opacity="0.6"/>
+  </g>
+  
+  <!-- Target achievement indicators -->
+  <g transform="translate(200, 150)">
+    <!-- Precision indicator -->
+    <text x="-100" y="-60" text-anchor="middle" fill="#4a5568" font-size="10" font-weight="500">精准</text>
+    <circle cx="-100" cy="-45" r="15" fill="#48bb78" opacity="0.2"/>
+    <path d="M-107 -48 L-100 -41 L-93 -52" stroke="#48bb78" stroke-width="2" fill="none"/>
+    
+    <!-- Clarity indicator -->
+    <text x="100" y="-60" text-anchor="middle" fill="#4a5568" font-size="10" font-weight="500">清晰</text>
+    <circle cx="100" cy="-45" r="15" fill="#3182ce" opacity="0.2"/>
+    <circle cx="100" cy="-45" r="8" fill="none" stroke="#3182ce" stroke-width="2"/>
+    <circle cx="100" cy="-45" r="3" fill="#3182ce"/>
+    
+    <!-- Focus indicator -->
+    <text x="0" y="105" text-anchor="middle" fill="#4a5568" font-size="10" font-weight="500">专注</text>
+    <circle cx="0" cy="120" r="15" fill="#805ad5" opacity="0.2"/>
+    <path d="M-8 120 L0 112 L8 120 L0 128 Z" fill="#805ad5"/>
+  </g>
+  
+  <!-- Process steps -->
+  <g transform="translate(20, 240)">
+    <text x="0" y="0" fill="#4a5568" font-size="11" font-weight="500">澄清目标三步法：</text>
+    <text x="0" y="15" fill="#718096" font-size="10">1. 问"为什么" - 理解背后的真正目的</text>
+    <text x="0" y="28" fill="#718096" font-size="10">2. 问"什么" - 明确具体的成功标准</text>
+    <text x="0" y="41" fill="#718096" font-size="10">3. 问"如何验证" - 设定可衡量的指标</text>
+  </g>
+</svg>

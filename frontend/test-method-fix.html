@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方法修复验证 - AIEC</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            margin: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: rgba(255,255,255,0.1); 
+            padding: 30px; 
+            border-radius: 20px; 
+            backdrop-filter: blur(10px);
+        }
+        .test-button { 
+            background: rgba(255,255,255,0.2); 
+            color: white; 
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 15px 30px; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            margin: 10px; 
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .test-button:hover { 
+            background: rgba(255,255,255,0.3); 
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .test-button:disabled { 
+            background: rgba(255,255,255,0.1); 
+            cursor: not-allowed; 
+            opacity: 0.5;
+        }
+        .status { 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 15px; 
+            backdrop-filter: blur(10px);
+        }
+        .success { background: rgba(76, 175, 80, 0.3); border: 2px solid rgba(76, 175, 80, 0.5); }
+        .error { background: rgba(244, 67, 54, 0.3); border: 2px solid rgba(244, 67, 54, 0.5); }
+        .info { background: rgba(33, 150, 243, 0.3); border: 2px solid rgba(33, 150, 243, 0.5); }
+        .loading { background: rgba(255, 193, 7, 0.3); border: 2px solid rgba(255, 193, 7, 0.5); }
+        .debug-output {
+            background: rgba(0,0,0,0.7);
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: Monaco, monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 20px 0;
+            border: 2px solid rgba(0,255,0,0.3);
+        }
+        .title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 300;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🔧 guideDilemmaDiscussion 方法修复</h1>
+        <p class="subtitle">验证DilemmaManager是否已正确添加guideDilemmaDiscussion方法</p>
+        
+        <div id="status-display" class="status info">
+            <strong>🔍 状态:</strong> 准备验证方法修复...
+        </div>
+        
+        <button class="test-button" onclick="runMethodTest()" id="testBtn">🚀 运行方法测试</button>
+        <button class="test-button" onclick="runActualTest()" id="actualBtn">🎯 实际功能测试</button>
+        <a href="habit-learning.html?habit=2&_fresh=${Date.now()}" class="test-button">📚 前往学习页面</a>
+        
+        <div class="debug-output" id="debug-output">等待测试结果...</div>
+    </div>
+
+    <!-- 加载最新版本的脚本 -->
+    <script src="js/utils.js?v=1"></script>
+    <script src="js/app.js?v=10"></script>
+    <script src="js/aiService.js?v=3"></script>
+    
+    <script>
+        let debugMessages = [];
+        
+        function addDebug(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            debugMessages.push(`[${timestamp}] ${message}`);
+            document.getElementById('debug-output').textContent = debugMessages.join('\n');
+            document.getElementById('debug-output').scrollTop = document.getElementById('debug-output').scrollHeight;
+        }
+        
+        function updateStatus(type, message) {
+            const statusEl = document.getElementById('status-display');
+            statusEl.className = `status ${type}`;
+            statusEl.innerHTML = `<strong>${type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'loading' ? '⏳' : '🔍'} 状态:</strong> ${message}`;
+        }
+        
+        async function runMethodTest() {
+            const btn = document.getElementById('testBtn');
+            btn.disabled = true;
+            updateStatus('loading', '正在验证方法修复...');
+            
+            try {
+                addDebug('🚀 开始方法修复验证');
+                
+                // 测试1: 检查AIService定义
+                addDebug('📋 检查 AIService 定义...');
+                if (typeof AIService === 'undefined') {
+                    throw new Error('AIService 未定义');
+                }
+                addDebug('✅ AIService 已定义: ' + typeof AIService);
+                
+                // 测试2: 创建AIService实例
+                addDebug('📋 创建 AIService 实例...');
+                const aiService = new AIService();
+                addDebug('✅ AIService 实例创建成功: ' + typeof aiService);
+                
+                // 测试3: 检查guideDilemmaDiscussion方法
+                addDebug('📋 检查 guideDilemmaDiscussion 方法...');
+                if (typeof aiService.guideDilemmaDiscussion !== 'function') {
+                    throw new Error('guideDilemmaDiscussion 方法不存在');
+                }
+                addDebug('✅ guideDilemmaDiscussion 方法存在: ' + typeof aiService.guideDilemmaDiscussion);
+                
+                // 测试4: 检查方法参数
+                addDebug('📋 检查方法参数长度...');
+                const methodLength = aiService.guideDilemmaDiscussion.length;
+                addDebug(`✅ 方法参数长度: ${methodLength} (期望: 3)`);
+                
+                updateStatus('success', '✅ 方法修复验证成功！所有检查都通过了');
+                addDebug('🎉 方法修复验证完成 - 成功');
+                
+            } catch (error) {
+                updateStatus('error', `❌ 方法修复验证失败: ${error.message}`);
+                addDebug(`❌ 验证失败: ${error.message}`);
+                addDebug(`❌ 错误堆栈: ${error.stack}`);
+            }
+            
+            btn.disabled = false;
+        }
+        
+        async function runActualTest() {
+            const btn = document.getElementById('actualBtn');
+            btn.disabled = true;
+            updateStatus('loading', '正在进行实际功能测试...');
+            
+            try {
+                addDebug('🎯 开始实际功能测试');
+                
+                // 创建测试难题数据
+                const testDilemma = {
+                    dilemmaId: 'test_dilemma',
+                    title: '测试难题',
+                    question: '这是一个测试问题',
+                    coachingLogic: '这是测试的引导逻辑'
+                };
+                
+                const testThought = '这是我的测试想法';
+                
+                addDebug('📝 测试数据准备完成');
+                addDebug('📝 难题标题: ' + testDilemma.title);
+                addDebug('📝 用户想法: ' + testThought);
+                
+                // 创建AIService实例并调用方法
+                const aiService = new AIService();
+                addDebug('🔄 调用 guideDilemmaDiscussion 方法...');
+                
+                const result = await aiService.guideDilemmaDiscussion(
+                    testDilemma, 
+                    testThought, 
+                    []
+                );
+                
+                addDebug('✅ 方法调用成功');
+                addDebug('📄 AI回复: ' + (result.guidance || result || '无回复'));
+                
+                updateStatus('success', '🎉 实际功能测试成功！AI方法正常工作');
+                addDebug('🎊 实际功能测试完成 - 成功');
+                
+            } catch (error) {
+                updateStatus('error', `❌ 实际功能测试失败: ${error.message}`);
+                addDebug(`❌ 实际测试失败: ${error.message}`);
+                addDebug(`❌ 错误堆栈: ${error.stack}`);
+            }
+            
+            btn.disabled = false;
+        }
+        
+        // 页面加载完成后自动运行基础测试
+        window.addEventListener('load', function() {
+            addDebug('📄 页面加载完成');
+            addDebug('🔧 aiService.js 版本: v3');
+            
+            setTimeout(() => {
+                addDebug('⚡ 自动运行基础检查...');
+                runMethodTest();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

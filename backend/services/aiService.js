@@ -145,19 +145,38 @@ ${dilemma.coachingLogic}
 请基于学员的想法，提出引导性问题。
         `;
 
+        // 过滤conversationHistory，只保留role和content字段，并将'ai'转换为'assistant'
+        const filteredHistory = conversationHistory.map(msg => ({
+            role: msg.role === 'ai' ? 'assistant' : msg.role,
+            content: msg.content
+        }));
+
         const messages = [
             { role: 'system', content: systemPrompt },
-            ...conversationHistory,
+            ...filteredHistory,
             { role: 'user', content: userThought }
         ];
 
         try {
-            const response = await this.chat(userThought, messages, {
-                temperature: 0.8, // 稍高温度增加创造性
-                maxTokens: 600
-            });
-            
-            return response;
+            // 直接调用API，避免chat方法重复添加用户消息
+            const requestData = {
+                model: this.model,
+                messages: messages,
+                temperature: 0.8,
+                max_tokens: 600,
+                top_p: 0.9,
+                frequency_penalty: 0,
+                presence_penalty: 0
+            };
+
+            // 添加调试日志
+            console.log('🔍 OpenRouter请求数据:');
+            console.log('模型:', requestData.model);
+            console.log('消息数量:', requestData.messages.length);
+            console.log('消息内容:', JSON.stringify(requestData.messages, null, 2));
+
+            const response = await this.makeRequest('/chat/completions', requestData);
+            return response.choices[0].message.content;
         } catch (error) {
             console.error('难题思辨引导失败:', error.message);
             throw new Error(`引导失败: ${error.message}`);
@@ -264,8 +283,17 @@ ${learningData.habitName} - ${learningData.description}
             // API 返回的错误
             const status = error.response.status;
             const message = error.response.data?.error?.message || error.message;
+            const responseData = error.response.data;
+            
+            console.error('🔍 详细错误信息:', {
+                status,
+                message,
+                responseData: JSON.stringify(responseData, null, 2)
+            });
             
             switch (status) {
+                case 400:
+                    return new Error(`请求格式错误: ${message}`);
                 case 401:
                     return new Error('API 密钥无效或已过期');
                 case 429:

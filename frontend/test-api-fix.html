@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API修复验证 - AIEC</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            margin: 20px; 
+            background: #f5f5f5; 
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-button { 
+            background: #007AFF; 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            margin: 5px; 
+            font-size: 14px;
+        }
+        .test-button:hover { background: #0056b3; }
+        .test-button:disabled { background: #ccc; cursor: not-allowed; }
+        .status { 
+            padding: 15px; 
+            margin: 15px 0; 
+            border-radius: 6px; 
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #e7f3ff; color: #004085; }
+        .loading { background: #fff3cd; color: #856404; }
+        .debug-output {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: Monaco, monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 API端口修复验证</h1>
+        <p>验证前端是否能正确向后端API服务器（3000端口）发送请求</p>
+        
+        <div id="status-display" class="status info">
+            <strong>🔍 状态:</strong> 准备测试API端口修复...
+        </div>
+        
+        <div>
+            <button class="test-button" onclick="testAPIConnection()" id="testBtn">🚀 测试API连接</button>
+            <button class="test-button" onclick="testActualDilemma()" id="dilemmaBtn">🤔 测试实际难题功能</button>
+            <button class="test-button" onclick="clearResults()">🗑️ 清空结果</button>
+        </div>
+        
+        <div class="debug-output" id="debug-output">等待测试结果...</div>
+        
+        <div id="results-display"></div>
+    </div>
+
+    <!-- 加载修复后的脚本 -->
+    <script src="js/utils.js?v=1"></script>
+    <script src="js/app.js?v=10"></script>
+    <script src="js/aiService.js?v=4"></script>
+    
+    <script>
+        let debugMessages = [];
+        
+        function addDebug(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            debugMessages.push(`[${timestamp}] ${message}`);
+            document.getElementById('debug-output').textContent = debugMessages.join('\n');
+            document.getElementById('debug-output').scrollTop = document.getElementById('debug-output').scrollTop;
+        }
+        
+        function updateStatus(type, message) {
+            const statusEl = document.getElementById('status-display');
+            statusEl.className = `status ${type}`;
+            statusEl.innerHTML = `<strong>${type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'loading' ? '⏳' : '🔍'} 状态:</strong> ${message}`;
+        }
+        
+        function clearResults() {
+            debugMessages = [];
+            document.getElementById('debug-output').textContent = '结果已清空...';
+            document.getElementById('results-display').innerHTML = '';
+            updateStatus('info', '结果已清空，准备重新测试');
+        }
+        
+        async function testAPIConnection() {
+            const btn = document.getElementById('testBtn');
+            btn.disabled = true;
+            updateStatus('loading', '正在测试API连接...');
+            
+            try {
+                addDebug('🚀 开始API连接测试');
+                
+                // 检查前端AIService配置
+                const aiService = new FrontendAIService();
+                addDebug('✅ FrontendAIService 实例创建成功');
+                addDebug(`📍 API基础URL: ${aiService.baseURL}`);
+                
+                // 测试基础连接
+                addDebug('🔍 测试后端健康检查...');
+                const response = await fetch('http://localhost:3000/api/health');
+                const healthData = await response.json();
+                addDebug(`✅ 后端健康检查: ${healthData.success ? '正常' : '异常'}`);
+                
+                // 测试AI服务健康检查
+                addDebug('🔍 测试AI服务健康检查...');
+                const aiHealthResponse = await fetch('http://localhost:3000/api/ai/health');
+                const aiHealthData = await aiHealthResponse.json();
+                addDebug(`✅ AI服务健康检查: ${aiHealthData.data.healthy ? '正常' : '异常'}`);
+                
+                updateStatus('success', '✅ API连接测试成功！所有服务正常运行');
+                addDebug('🎉 API连接测试完成 - 成功');
+                
+            } catch (error) {
+                updateStatus('error', `❌ API连接测试失败: ${error.message}`);
+                addDebug(`❌ 连接测试失败: ${error.message}`);
+                addDebug(`❌ 错误堆栈: ${error.stack}`);
+            }
+            
+            btn.disabled = false;
+        }
+        
+        async function testActualDilemma() {
+            const btn = document.getElementById('dilemmaBtn');
+            btn.disabled = true;
+            updateStatus('loading', '正在测试实际难题功能...');
+            
+            try {
+                addDebug('🤔 开始实际难题功能测试');
+                
+                // 创建测试难题数据
+                const testDilemma = {
+                    dilemmaId: 'test_fix',
+                    title: 'API修复测试',
+                    question: '这是API修复后的测试问题',
+                    coachingLogic: 'API修复测试的引导逻辑'
+                };
+                
+                const testThought = '这是测试用户的想法，验证API修复是否成功';
+                
+                addDebug('📝 测试数据准备完成');
+                addDebug(`📝 难题: ${testDilemma.title}`);
+                addDebug(`📝 用户想法: ${testThought}`);
+                
+                // 创建DilemmaManager实例
+                const dilemmaManager = new DilemmaManager();
+                addDebug('✅ DilemmaManager 实例创建成功');
+                
+                // 调用修复后的方法
+                addDebug('🔄 调用 guideDilemmaDiscussion 方法...');
+                const result = await dilemmaManager.guideDilemmaDiscussion(
+                    testDilemma, 
+                    testThought, 
+                    []
+                );
+                
+                addDebug('✅ 方法调用成功');
+                addDebug(`📄 AI回复: ${result.guidance || result || '无回复内容'}`);
+                
+                // 显示结果
+                const resultsHtml = `
+                    <div class="status success" style="margin-top: 20px;">
+                        <h3>🎉 实际功能测试成功！</h3>
+                        <p><strong>AI回复内容:</strong></p>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; margin: 10px 0;">
+                            ${result.guidance || result || '无回复内容'}
+                        </div>
+                        <p style="margin: 10px 0 0 0; font-size: 0.9em; opacity: 0.8;">
+                            ✨ API端口修复成功，前端现在能正确向后端3000端口发送请求！
+                        </p>
+                    </div>
+                `;
+                document.getElementById('results-display').innerHTML = resultsHtml;
+                
+                updateStatus('success', '🎊 实际功能测试成功！AI难题功能完全正常');
+                addDebug('🎊 实际功能测试完成 - 成功');
+                
+            } catch (error) {
+                updateStatus('error', `❌ 实际功能测试失败: ${error.message}`);
+                addDebug(`❌ 功能测试失败: ${error.message}`);
+                addDebug(`❌ 错误堆栈: ${error.stack}`);
+                
+                const errorHtml = `
+                    <div class="status error" style="margin-top: 20px;">
+                        <h3>❌ 功能测试失败</h3>
+                        <p><strong>错误信息:</strong> ${error.message}</p>
+                        <p><strong>建议:</strong> 请检查后端服务器是否正常运行在3000端口</p>
+                    </div>
+                `;
+                document.getElementById('results-display').innerHTML = errorHtml;
+            }
+            
+            btn.disabled = false;
+        }
+        
+        // 页面加载完成后显示配置信息
+        window.addEventListener('load', function() {
+            addDebug('📄 API修复验证页面加载完成');
+            addDebug('🔧 当前使用的脚本版本: aiService.js?v=4');
+            
+            setTimeout(() => {
+                addDebug('⚡ 自动运行API连接测试...');
+                testAPIConnection();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

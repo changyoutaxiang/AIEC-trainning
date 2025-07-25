@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>注册 - AIEC 职场软技能</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=2">
 </head>
-<body>
+<body class="login-page">
     <div class="login-container">
         <!-- 左侧：品牌信息区域 -->
         <div class="login-brand">
@@ -21,35 +21,50 @@
         <!-- 右侧：注册表单区域 -->
         <div class="login-form-container">
             <div class="login-form">
-                <h2>创建账户</h2>
+                <h2>企业邮箱注册</h2>
+                <p class="auth-subtitle">使用您的企业邮箱创建 AIEC 学习账户</p>
                 <form id="registerForm">
                     <div class="form-group">
-                        <label for="fullName">姓名</label>
-                        <input type="text" id="fullName" name="fullName" required>
+                        <label for="email">企业邮箱 *</label>
+                        <input type="email" id="email" name="email" placeholder="your.name@company.com" required>
+                        <small class="form-hint">请使用公司授权的企业邮箱地址</small>
                     </div>
                     <div class="form-group">
-                        <label for="email">邮箱</label>
-                        <input type="email" id="email" name="email" required>
+                        <label for="name">姓名 *</label>
+                        <input type="text" id="name" name="name" placeholder="请输入您的姓名" required>
                     </div>
                     <div class="form-group">
-                        <label for="username">用户名</label>
-                        <input type="text" id="username" name="username" required>
+                        <label for="department">部门</label>
+                        <input type="text" id="department" name="department" placeholder="如：技术部、产品部等">
+                        <small class="form-hint">可选填写</small>
                     </div>
                     <div class="form-group">
-                        <label for="password">密码</label>
-                        <input type="password" id="password" name="password" required>
+                        <label for="position">职位</label>
+                        <input type="text" id="position" name="position" placeholder="如：工程师、产品经理等">
+                        <small class="form-hint">可选填写</small>
                     </div>
                     <div class="form-group">
-                        <label for="confirmPassword">确认密码</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <label for="password">6位数字密码 *</label>
+                        <input type="password" id="password" name="password" placeholder="请设置6位数字密码" maxlength="6" pattern="[0-9]{6}" required>
+                        <small class="form-hint">仅限数字，用于保护账户安全</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">确认密码 *</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="请再次输入密码" maxlength="6" pattern="[0-9]{6}" required>
+                        <small class="form-hint">请再次输入相同的6位数字</small>
                     </div>
                     <button type="submit" class="btn btn-primary btn-full">创建账户</button>
                 </form>
                 <p class="register-link">已有账户？<a href="login.html" id="showLogin">立即登录</a></p>
+                <div class="auth-whitelist-info">
+                    <p class="auth-note">📧 只有白名单中的企业邮箱才能注册</p>
+                    <p class="auth-note">👥 如需添加新邮箱，请联系管理员</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="js/auth.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/enterprise-auth.js"></script>
 </body>
 </html> 

@@ -1,0 +1,120 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a8e6cf;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#dcedc8;stop-opacity:0.5" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8f9ff"/>
+  
+  <!-- Title -->
+  <text x="200" y="30" text-anchor="middle" fill="#2d3748" font-family="system-ui, -apple-system" font-size="16" font-weight="600">规划路径</text>
+  <text x="200" y="48" text-anchor="middle" fill="#718096" font-family="system-ui" font-size="12">绘制从A到B的地图</text>
+  
+  <!-- Map background -->
+  <rect x="100" y="70" width="200" height="150" rx="10" fill="url(#mapGradient)" stroke="#a8e6cf" stroke-width="2"/>
+  
+  <!-- Starting point A -->
+  <g transform="translate(130, 110)">
+    <circle cx="0" cy="0" r="15" fill="#48bb78"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-size="14" font-weight="bold">A</text>
+    <text x="0" y="-25" text-anchor="middle" fill="#2d3748" font-size="12" font-weight="500">起点</text>
+  </g>
+  
+  <!-- Destination point B -->
+  <g transform="translate(270, 180)">
+    <circle cx="0" cy="0" r="15" fill="#e53e3e"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-size="14" font-weight="bold">B</text>
+    <text x="0" y="25" text-anchor="middle" fill="#2d3748" font-size="12" font-weight="500">目标</text>
+  </g>
+  
+  <!-- Planned path -->
+  <path d="M130 110 Q170 120 200 140 Q230 160 270 180" 
+        stroke="url(#pathGradient)" 
+        stroke-width="4" 
+        fill="none" 
+        stroke-dasharray="5,3"/>
+  
+  <!-- Waypoints/milestones -->
+  <g transform="translate(170, 125)">
+    <circle cx="0" cy="0" r="8" fill="#ffa726"/>
+    <text x="15" y="-10" fill="#2d3748" font-size="10">里程碑1</text>
+  </g>
+  
+  <g transform="translate(200, 145)">
+    <circle cx="0" cy="0" r="8" fill="#ffa726"/>
+    <text x="15" y="-10" fill="#2d3748" font-size="10">里程碑2</text>
+  </g>
+  
+  <g transform="translate(235, 165)">
+    <circle cx="0" cy="0" r="8" fill="#ffa726"/>
+    <text x="15" y="-10" fill="#2d3748" font-size="10">里程碑3</text>
+  </g>
+  
+  <!-- Direction arrows -->
+  <g transform="translate(150, 117) rotate(10)">
+    <polygon points="0,0 8,3 0,6 2,3" fill="#667eea"/>
+  </g>
+  <g transform="translate(185, 135) rotate(25)">
+    <polygon points="0,0 8,3 0,6 2,3" fill="#667eea"/>
+  </g>
+  <g transform="translate(220, 155) rotate(15)">
+    <polygon points="0,0 8,3 0,6 2,3" fill="#667eea"/>
+  </g>
+  <g transform="translate(250, 172) rotate(20)">
+    <polygon points="0,0 8,3 0,6 2,3" fill="#667eea"/>
+  </g>
+  
+  <!-- Compass -->
+  <g transform="translate(280, 100)">
+    <circle cx="0" cy="0" r="12" fill="white" stroke="#cbd5e0" stroke-width="2"/>
+    <polygon points="0,-8 3,0 0,8 -3,0" fill="#e53e3e"/>
+    <text x="0" y="-20" text-anchor="middle" fill="#718096" font-size="8">N</text>
+  </g>
+  
+  <!-- Map legend -->
+  <g transform="translate(110, 90)">
+    <rect x="0" y="0" width="50" height="40" fill="white" stroke="#e2e8f0" rx="3" opacity="0.9"/>
+    <line x1="5" y1="8" x2="15" y2="8" stroke="#667eea" stroke-width="2" stroke-dasharray="2,1"/>
+    <text x="18" y="12" fill="#4a5568" font-size="8">路径</text>
+    <circle cx="10" cy="20" r="3" fill="#ffa726"/>
+    <text x="18" y="24" fill="#4a5568" font-size="8">里程碑</text>
+    <circle cx="10" cy="32" r="3" fill="#48bb78"/>
+    <text x="18" y="36" fill="#4a5568" font-size="8">起点/终点</text>
+  </g>
+  
+  <!-- Planning tools -->
+  <g transform="translate(50, 250)">
+    <text x="0" y="0" fill="#4a5568" font-size="11" font-weight="500">规划工具箱：</text>
+    
+    <g transform="translate(0, 20)">
+      <circle cx="8" cy="0" r="6" fill="#3182ce" opacity="0.2"/>
+      <text x="8" y="2" text-anchor="middle" fill="#3182ce" font-size="8" font-weight="bold">1</text>
+      <text x="20" y="3" fill="#4a5568" font-size="10">任务分解 - WBS工作分解结构</text>
+    </g>
+    
+    <g transform="translate(0, 35)">
+      <circle cx="8" cy="0" r="6" fill="#805ad5" opacity="0.2"/>
+      <text x="8" y="2" text-anchor="middle" fill="#805ad5" font-size="8" font-weight="bold">2</text>
+      <text x="20" y="3" fill="#4a5568" font-size="10">资源识别 - 人员、工具、时间</text>
+    </g>
+    
+    <g transform="translate(120, 20)">
+      <circle cx="8" cy="0" r="6" fill="#38a169" opacity="0.2"/>
+      <text x="8" y="2" text-anchor="middle" fill="#38a169" font-size="8" font-weight="bold">3</text>
+      <text x="20" y="3" fill="#4a5568" font-size="10">风险识别 - 预案与应对</text>
+    </g>
+    
+    <g transform="translate(120, 35)">
+      <circle cx="8" cy="0" r="6" fill="#e53e3e" opacity="0.2"/>
+      <text x="8" y="2" text-anchor="middle" fill="#e53e3e" font-size="8" font-weight="bold">4</text>
+      <text x="20" y="3" fill="#4a5568" font-size="10">时间估算 - 合理排期</text>
+    </g>
+  </g>
+</svg>

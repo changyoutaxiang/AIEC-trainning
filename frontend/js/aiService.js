@@ -6,8 +6,21 @@
 
 class FrontendAIService {
     constructor() {
-        this.baseURL = '/api/ai';
+        this.baseURL = this.getAPIBaseURL() + '/api/ai';
         this.defaultTimeout = 30000; // 30秒超时
+    }
+
+    /**
+     * 获取API基础URL - 支持云端部署
+     */
+    getAPIBaseURL() {
+        // 云端部署时使用相对路径
+        if (window.location.hostname !== 'localhost' && 
+            window.location.hostname !== '127.0.0.1') {
+            return window.location.origin;
+        }
+        // 本地开发使用固定端口
+        return 'http://localhost:3000';
     }
 
     /**
@@ -19,30 +32,19 @@ class FrontendAIService {
     async makeRequest(endpoint, options = {}) {
         const url = `${this.baseURL}${endpoint}`;
         
-        const config = {
-            method: options.method || 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                ...options.headers
-            },
-            ...options
-        };
-
-        if (config.method !== 'GET' && options.body) {
-            config.body = JSON.stringify(options.body);
-        }
-
         try {
-            const response = await fetch(url, config);
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.error || `HTTP ${response.status}: ${response.statusText}`);
-            }
+            const data = await AIEC.HttpManager.request(url, {
+                ...options,
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...options.headers
+                },
+                body: options.body ? JSON.stringify(options.body) : undefined
+            });
 
             return data;
         } catch (error) {
-            console.error('API请求失败:', error);
+            AIEC.ErrorHandler.handle(error, 'AI服务');
             throw error;
         }
     }
@@ -273,10 +275,44 @@ class DilemmaManager {
     getConversationHistory() {
         return this.session.messages;
     }
+
+    // 为了兼容habit-learning.js中的调用，添加guideDilemmaDiscussion方法
+    async guideDilemmaDiscussion(dilemma, userThought, conversationHistory = []) {
+        try {
+            console.log('🔄 DilemmaManager.guideDilemmaDiscussion 被调用');
+            console.log('📝 难题:', dilemma.title);
+            console.log('💭 用户想法:', userThought);
+            
+            const guidance = await frontendAIService.guideDilemmaDiscussion(
+                dilemma,
+                userThought,
+                conversationHistory
+            );
+            
+            console.log('✅ AI引导获取成功:', guidance);
+            return guidance;
+        } catch (error) {
+            console.error('❌ DilemmaManager.guideDilemmaDiscussion 错误:', error);
+            throw error;
+        }
+    }
 }
 
 // 导出全局实例
 window.frontendAIService = frontendAIService;
 window.ChatSession = ChatSession;
 window.PracticeManager = PracticeManager;
-window.DilemmaManager = DilemmaManager; 
+window.DilemmaManager = DilemmaManager;
+
+// 为了兼容性，创建AIService别名
+window.AIService = DilemmaManager;
+
+// 调试信息
+console.log('🔧 aiService.js 已加载');
+console.log('✅ AIService 已定义:', typeof window.AIService);
+console.log('✅ DilemmaManager 已定义:', typeof window.DilemmaManager);
+
+// 确保在DOM加载完成后AIService仍然可用
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('📋 DOM加载完成后 AIService 状态:', typeof window.AIService);
+}); 

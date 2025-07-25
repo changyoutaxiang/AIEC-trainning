@@ -1,0 +1,155 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8faff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8f2ff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="questionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="rootGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#27ae60;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#229954;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradient)"/>
+  
+  <!-- Title -->
+  <text x="200" y="25" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#2c3e50">诊断式提问</text>
+  <text x="200" y="45" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="12" fill="#7f8c8d">像医生一样探寻根本原因</text>
+  
+  <!-- Central metaphor: Medical diagnosis process -->
+  <g transform="translate(200, 120)">
+    <!-- Patient (surface problem) -->
+    <g transform="translate(-120, -30)">
+      <circle cx="0" cy="0" r="20" fill="#f39c12" filter="url(#shadow)"/>
+      <circle cx="-6" cy="-3" r="2" fill="#2c3e50"/>
+      <circle cx="6" cy="-3" r="2" fill="#2c3e50"/>
+      <path d="M-8 8 Q0 15, 8 8" stroke="#e74c3c" stroke-width="2" fill="none"/>
+      
+      <!-- Pain indicator -->
+      <g transform="translate(25, -15)" opacity="0.8">
+        <path d="M0 0 L4 -8 L8 0 L4 -4 Z" fill="#e74c3c" filter="url(#glow)"/>
+        <text x="15" y="-2" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#e74c3c">症状</text>
+      </g>
+      
+      <text x="0" y="40" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#f39c12">表面问题</text>
+    </g>
+    
+    <!-- Doctor (questioner) with stethoscope -->
+    <g transform="translate(0, -30)">
+      <circle cx="0" cy="0" r="18" fill="#3498db" filter="url(#shadow)"/>
+      <circle cx="-5" cy="-3" r="1.5" fill="#2c3e50"/>
+      <circle cx="5" cy="-3" r="1.5" fill="#2c3e50"/>
+      <path d="M-3 5 Q0 8, 3 5" stroke="#2c3e50" stroke-width="1.5" fill="none"/>
+      
+      <!-- Stethoscope -->
+      <g opacity="0.9">
+        <path d="M-15 -5 Q-10 -8, -5 -5" stroke="#34495e" stroke-width="2" fill="none"/>
+        <path d="M5 -5 Q10 -8, 15 -5" stroke="#34495e" stroke-width="2" fill="none"/>
+        <circle cx="0" cy="15" r="4" fill="#34495e" opacity="0.8"/>
+      </g>
+      
+      <text x="0" y="40" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#3498db">诊断者</text>
+    </g>
+    
+    <!-- Diagnostic questions -->
+    <g transform="translate(120, -30)">
+      <circle cx="0" cy="0" r="3" fill="url(#questionGradient)" filter="url(#glow)"/>
+      <text x="0" y="2" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">?</text>
+      
+      <!-- Question bubbles -->
+      <g transform="translate(15, -15)" opacity="0.8">
+        <ellipse cx="0" cy="0" rx="12" ry="8" fill="#3498db" opacity="0.2" stroke="#3498db" stroke-width="1"/>
+        <text x="0" y="2" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="7" fill="#3498db">何时?</text>
+      </g>
+      
+      <g transform="translate(15, 5)" opacity="0.8">
+        <ellipse cx="0" cy="0" rx="12" ry="8" fill="#3498db" opacity="0.2" stroke="#3498db" stroke-width="1"/>
+        <text x="0" y="2" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="7" fill="#3498db">何地?</text>
+      </g>
+      
+      <g transform="translate(15, 25)" opacity="0.8">
+        <ellipse cx="0" cy="0" rx="12" ry="8" fill="#3498db" opacity="0.2" stroke="#3498db" stroke-width="1"/>
+        <text x="0" y="2" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="7" fill="#3498db">如何?</text>
+      </g>
+      
+      <text x="0" y="50" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" fill="#3498db">结构化提问</text>
+    </g>
+  </g>
+  
+  <!-- Arrow pointing down to root cause -->
+  <g transform="translate(200, 170)">
+    <path d="M0 0 L0 20 M-5 15 L0 20 L5 15" stroke="#27ae60" stroke-width="2" fill="none"/>
+    <text x="10" y="12" font-family="SF Pro Text, -apple-system, sans-serif" font-size="9" fill="#27ae60">深入探寻</text>
+  </g>
+  
+  <!-- Root cause discovery -->
+  <g transform="translate(200, 220)">
+    <rect x="-80" y="-15" width="160" height="30" rx="8" fill="#ffffff" filter="url(#shadow)" opacity="0.95"/>
+    
+    <!-- Root symbol -->
+    <g transform="translate(-50, 0)">
+      <circle cx="0" cy="0" r="8" fill="url(#rootGradient)" filter="url(#shadow)"/>
+      <path d="M-3 -2 L3 2 M-3 2 L3 -2" stroke="#ffffff" stroke-width="2"/>
+      
+      <!-- Root lines -->
+      <path d="M0 8 Q-5 15, -10 20" stroke="#27ae60" stroke-width="2" fill="none" opacity="0.6"/>
+      <path d="M0 8 Q0 15, 0 20" stroke="#27ae60" stroke-width="2" fill="none" opacity="0.6"/>
+      <path d="M0 8 Q5 15, 10 20" stroke="#27ae60" stroke-width="2" fill="none" opacity="0.6"/>
+    </g>
+    
+    <text x="10" y="3" font-family="SF Pro Text, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#27ae60">根本原因</text>
+  </g>
+  
+  <!-- The 5W1H framework -->
+  <g transform="translate(60, 60)" opacity="0.7">
+    <rect x="0" y="0" width="120" height="80" rx="8" fill="#ecf0f1" filter="url(#shadow)"/>
+    <text x="60" y="15" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#2c3e50">5W1H框架</text>
+    
+    <g transform="translate(10, 25)">
+      <text x="0" y="0" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#7f8c8d">• What 什么问题</text>
+      <text x="0" y="12" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#7f8c8d">• Why 为什么发生</text>
+      <text x="0" y="24" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#7f8c8d">• When 何时发生</text>
+      <text x="0" y="36" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#7f8c8d">• Where 何地发生</text>
+      <text x="0" y="48" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#7f8c8d">• Who 谁参与</text>
+    </g>
+  </g>
+  
+  <!-- Diagnostic levels visualization -->
+  <g transform="translate(250, 60)" opacity="0.7">
+    <rect x="0" y="0" width="120" height="80" rx="8" fill="#fff5f5" filter="url(#shadow)"/>
+    <text x="60" y="15" text-anchor="middle" font-family="SF Pro Text, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#2c3e50">诊断层次</text>
+    
+    <!-- Surface layer -->
+    <g transform="translate(10, 25)">
+      <rect x="0" y="0" width="40" height="6" fill="#e74c3c" opacity="0.7"/>
+      <text x="45" y="5" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#e74c3c">表面症状</text>
+    </g>
+    
+    <!-- Middle layer -->
+    <g transform="translate(10, 38)">
+      <rect x="0" y="0" width="60" height="6" fill="#f39c12" opacity="0.8"/>
+      <text x="65" y="5" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#f39c12">直接原因</text>
+    </g>
+    
+    <!-- Deep layer -->
+    <g transform="translate(10, 51)">
+      <rect x="0" y="0" width="80" height="6" fill="#27ae60" opacity="0.9"/>
+      <text x="85" y="5" font-family="SF Pro Text, -apple-system, sans-serif" font-size="8" fill="#27ae60">根本原因</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIEC 设计系统演示 - 组件库展示</title>
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .demo-section {
+            margin-bottom: var(--spacing-16);
+            padding: var(--spacing-8);
+            border: 1px solid var(--color-border-primary);
+            border-radius: var(--radius-xl);
+            background-color: var(--color-bg-primary);
+        }
+        
+        .demo-title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-6);
+            padding-bottom: var(--spacing-4);
+            border-bottom: 2px solid var(--color-primary-500);
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-6);
+        }
+        
+        .demo-item {
+            padding: var(--spacing-4);
+            background-color: var(--color-bg-secondary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border-secondary);
+        }
+        
+        .demo-label {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-2);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 导航栏 -->
+        <header class="navbar">
+            <div class="navbar-brand">AIEC 设计系统</div>
+            <nav class="navbar-nav flex-row gap-6">
+                <a href="#buttons" class="nav-link">按钮</a>
+                <a href="#forms" class="nav-link">表单</a>
+                <a href="#cards" class="nav-link">卡片</a>
+                <a href="#layout" class="nav-link">布局</a>
+                <a href="index.html" class="nav-link">返回主页</a>
+            </nav>
+        </header>
+
+        <main class="container-xl py-8">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-primary mb-4">AIEC 设计系统演示</h1>
+                <p class="text-lg text-secondary">基于设计令牌的统一组件库，为 AIEC 七个习惯学习系统提供一致的用户体验</p>
+            </div>
+
+            <!-- 按钮组件演示 -->
+            <section id="buttons" class="demo-section">
+                <h2 class="demo-title">按钮组件系统</h2>
+                
+                <div class="demo-grid">
+                    <div class="demo-item">
+                        <div class="demo-label">主要按钮</div>
+                        <div class="flex flex-col gap-3">
+                            <button class="btn btn-primary">开始学习</button>
+                            <button class="btn btn-primary btn-lg">大型按钮</button>
+                            <button class="btn btn-primary btn-sm">小型按钮</button>
+                        </div>
+                    </div>
+
+                    <div class="demo-item">
+                        <div class="demo-label">次要按钮</div>
+                        <div class="flex flex-col gap-3">
+                            <button class="btn btn-secondary">取消</button>
+                            <button class="btn btn-outline">轮廓按钮</button>
+                            <button class="btn btn-text">文本按钮</button>
+                        </div>
+                    </div>
+
+                    <div class="demo-item">
+                        <div class="demo-label">状态按钮</div>
+                        <div class="flex flex-col gap-3">
+                            <button class="btn btn-success">成功</button>
+                            <button class="btn btn-warning">警告</button>
+                            <button class="btn btn-error">错误</button>
+                        </div>
+                    </div>
+
+                    <div class="demo-item">
+                        <div class="demo-label">特殊状态</div>
+                        <div class="flex flex-col gap-3">
+                            <button class="btn btn-primary loading">加载中...</button>
+                            <button class="btn btn-primary" disabled>禁用状态</button>
+                            <button class="btn btn-primary btn-round">圆形按钮</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-label">按钮组</div>
+                    <div class="btn-group">
+                        <button class="btn btn-secondary">左</button>
+                        <button class="btn btn-secondary">中</button>
+                        <button class="btn btn-secondary">右</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 表单组件演示 -->
+            <section id="forms" class="demo-section">
+                <h2 class="demo-title">表单组件系统</h2>
+                
+                <div class="demo-grid">
+                    <div class="demo-item">
+                        <div class="demo-label">基础输入框</div>
+                        <div class="form-group">
+                            <label class="form-label required">姓名</label>
+                            <input type="text" class="form-input" placeholder="请输入您的姓名">
+                            <div class="form-text">这是帮助文本</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">反馈</label>
+                            <textarea class="form-textarea" placeholder="请输入您的反馈..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="demo-item">
+                        <div class="demo-label">选择框</div>
+                        <div class="form-group">
+                            <label class="form-label">习惯选择</label>
+                            <select class="form-select">
+                                <option>积极主动</option>
+                                <option>以终为始</option>
+                                <option>要事第一</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">进度</label>
+                            <input type="range" class="form-range" min="0" max="100" value="60">
+                        </div>
+                    </div>
+
+                    <div class="demo-item">
+                        <div class="demo-label">复选框和单选框</div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="agree">
+                            <label class="form-check-label" for="agree">
+                                我同意学习条款
+                            </label>
+                        </div>
+                        
+                        <div class="form-check form-switch">
+                            <input type="checkbox" class="form-check-input" id="notifications">
+                            <label class="form-check-label" for="notifications">
+                                接收学习提醒
+                            </label>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" name="level" id="beginner">
+                            <label class="form-check-label" for="beginner">
+                                初学者
+                            </label>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" name="level" id="advanced">
+                            <label class="form-check-label" for="advanced">
+                                进阶者
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="demo-item">
+                        <div class="demo-label">输入框组合</div>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">@</span>
+                            </div>
+                            <input type="text" class="form-input" placeholder="用户名">
+                        </div>
+                        
+                        <br>
+                        
+                        <div class="input-group">
+                            <input type="text" class="form-input" placeholder="金额">
+                            <div class="input-group-append">
+                                <span class="input-group-text">元</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-label">表单验证状态</div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-label">成功状态</label>
+                                <input type="text" class="form-input is-valid" value="正确输入">
+                                <div class="form-success">输入正确！</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-label">错误状态</label>
+                                <input type="text" class="form-input is-invalid" value="错误输入">
+                                <div class="form-error">请输入有效的信息</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 卡片组件演示 -->
+            <section id="cards" class="demo-section">
+                <h2 class="demo-title">卡片组件系统</h2>
+                
+                <div class="demo-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">基础卡片</h3>
+                            <p class="card-subtitle">这是一个基础卡片的副标题</p>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">这是基础卡片的内容区域。卡片是一个灵活且可扩展的内容容器。</p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary btn-sm">了解更多</button>
+                        </div>
+                    </div>
+
+                    <div class="card card-elevated">
+                        <div class="card-body">
+                            <h3 class="card-title">提升卡片</h3>
+                            <p class="card-text">这是一个带有更大阴影的提升卡片，适合重要内容展示。</p>
+                            <a href="#" class="card-link">卡片链接</a>
+                        </div>
+                    </div>
+
+                    <div class="card card-outlined">
+                        <div class="card-body">
+                            <h3 class="card-title">轮廓卡片</h3>
+                            <p class="card-text">这是一个带有边框但无阴影的轮廓卡片。</p>
+                        </div>
+                    </div>
+
+                    <div class="card card-filled">
+                        <div class="card-body">
+                            <h3 class="card-title">填充卡片</h3>
+                            <p class="card-text">这是一个带有背景色的填充卡片。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-label">七个习惯卡片示例</div>
+                    <div class="card-deck">
+                        <div class="card habit-card">
+                            <div class="card-body">
+                                <div class="habit-number">1</div>
+                                <h3 class="card-title">积极主动</h3>
+                                <p class="card-text">掌握主动权，对自己的行为和选择负责，成为变化的推动者而非被动接受者。</p>
+                                <div class="habit-progress">
+                                    <div class="habit-progress-bar" style="width: 75%"></div>
+                                </div>
+                                <button class="btn btn-primary btn-sm">开始学习</button>
+                            </div>
+                        </div>
+
+                        <div class="card habit-card">
+                            <div class="card-body">
+                                <div class="habit-number">2</div>
+                                <h3 class="card-title">以终为始</h3>
+                                <p class="card-text">明确目标和价值观，以清晰的愿景指导日常行为，确保每一步都朝着正确方向前进。</p>
+                                <div class="habit-progress">
+                                    <div class="habit-progress-bar" style="width: 40%"></div>
+                                </div>
+                                <button class="btn btn-primary btn-sm">开始学习</button>
+                            </div>
+                        </div>
+
+                        <div class="card habit-card">
+                            <div class="card-body">
+                                <div class="habit-number">3</div>
+                                <h3 class="card-title">要事第一</h3>
+                                <p class="card-text">优先处理重要而非紧急的事务，通过有效的时间管理实现个人和职业目标。</p>
+                                <div class="habit-progress">
+                                    <div class="habit-progress-bar" style="width: 20%"></div>
+                                </div>
+                                <button class="btn btn-primary btn-sm">开始学习</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 布局组件演示 -->
+            <section id="layout" class="demo-section">
+                <h2 class="demo-title">布局组件系统</h2>
+                
+                <div class="demo-item">
+                    <div class="demo-label">栅格系统</div>
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="p-3 bg-blue-light rounded text-center">col-12</div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <div class="p-3 bg-green-light rounded text-center">col-6</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-3 bg-yellow-light rounded text-center">col-6</div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-4">
+                            <div class="p-3 bg-blue-light rounded text-center">col-4</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="p-3 bg-green-light rounded text-center">col-4</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="p-3 bg-yellow-light rounded text-center">col-4</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-label">进度条</div>
+                    <div class="progress mb-3">
+                        <div class="progress-bar" style="width: 25%">25%</div>
+                    </div>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-green" style="width: 50%">50%</div>
+                    </div>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-yellow" style="width: 75%">75%</div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%">100%</div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-label">徽章</div>
+                    <div class="flex gap-3 flex-wrap">
+                        <span class="badge badge-primary">主要</span>
+                        <span class="badge badge-secondary">次要</span>
+                        <span class="badge badge-success">成功</span>
+                        <span class="badge badge-warning">警告</span>
+                        <span class="badge badge-error">错误</span>
+                        <span class="badge badge-outline">轮廓</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-label">标签页</div>
+                    <ul class="nav-tabs">
+                        <li><a href="#tab1" class="nav-link active">学习概览</a></li>
+                        <li><a href="#tab2" class="nav-link">进度统计</a></li>
+                        <li><a href="#tab3" class="nav-link">成就记录</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <p>这是学习概览标签页的内容。在这里可以看到您的整体学习进展。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-label">分页</div>
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a href="#" class="page-link">上一页</a>
+                            </li>
+                            <li class="page-item active">
+                                <a href="#" class="page-link">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a href="#" class="page-link">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a href="#" class="page-link">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a href="#" class="page-link">下一页</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+
+            <!-- 工具类演示 -->
+            <section class="demo-section">
+                <h2 class="demo-title">工具类系统</h2>
+                
+                <div class="demo-grid">
+                    <div class="demo-item">
+                        <div class="demo-label">间距工具类</div>
+                        <div class="p-4 bg-blue-light rounded mb-3">padding: 1rem (p-4)</div>
+                        <div class="m-4 p-2 bg-green-light rounded">margin: 1rem (m-4)</div>
+                    </div>
+
+                    <div class="demo-item">
+                        <div class="demo-label">文本工具类</div>
+                        <div class="text-xs mb-2">超小字体 (text-xs)</div>
+                        <div class="text-sm mb-2">小字体 (text-sm)</div>
+                        <div class="text-base mb-2">基础字体 (text-base)</div>
+                        <div class="text-lg mb-2">大字体 (text-lg)</div>
+                        <div class="text-xl font-bold">特大字体 加粗 (text-xl font-bold)</div>
+                    </div>
+
+                    <div class="demo-item">
+                        <div class="demo-label">颜色工具类</div>
+                        <div class="text-blue mb-2">蓝色文本 (text-blue)</div>
+                        <div class="text-green mb-2">绿色文本 (text-green)</div>
+                        <div class="text-red mb-2">红色文本 (text-red)</div>
+                        <div class="bg-blue-light p-2 rounded mb-2">浅蓝背景 (bg-blue-light)</div>
+                    </div>
+
+                    <div class="demo-item">
+                        <div class="demo-label">布局工具类</div>
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-12 h-12 bg-blue rounded"></div>
+                            <div>Flex 居中对齐</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="bg-green-light p-2 rounded text-center">1</div>
+                            <div class="bg-green-light p-2 rounded text-center">2</div>
+                            <div class="bg-green-light p-2 rounded text-center">3</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // 简单的标签页切换功能
+        document.querySelectorAll('.nav-tabs .nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 移除所有活动状态
+                document.querySelectorAll('.nav-tabs .nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+                
+                // 添加当前活动状态
+                this.classList.add('active');
+                const targetId = this.getAttribute('href').substring(1);
+                const targetPane = document.getElementById(targetId);
+                if (targetPane) {
+                    targetPane.classList.add('active');
+                }
+            });
+        });
+
+        // 平滑滚动到锚点
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

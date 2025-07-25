@@ -1,0 +1,240 @@
+{
+  "habit_5": {
+    "habitId": "habit_5",
+    "habitName": "知彼解己",
+    "habitNameEn": "Seek First to Understand",
+    "description": "从一个'急于表达的陈述者'转变为一个'善于倾听的诊断者'",
+    "corePhilosophy": "沟通的关键，在于被理解。除非对方感觉到自己被充分理解了，否则他很难真正敞开心扉，去理解你",
+    "status": "available",
+    "prerequisite": "habit_4",
+    "estimatedTime": "4-6周",
+    "units": {
+      "unit_5_1": {
+        "unitId": "unit_5_1",
+        "unitName": "移情聆听",
+        "unitNameEn": "Empathetic Listening",
+        "subtitle": "戴上对方的眼镜看世界",
+        "description": "掌握高质量聆听的技巧，通过移情聆听建立深度信任",
+        "sections": {
+          "why_it_matters": {
+            "professional": "移情聆听是'知彼'的最高层次。它超越了简单的'听见'词语，而是要求我们去理解词语背后的情感、意图和思维框架。",
+            "simple": "想象你去看医生说'肚子疼'。优秀的医生会放下笔，看着你的眼睛，认真地问：'听起来很难受。除了疼，还有别的感觉吗？'当你感觉自己被完全理解时，你才会信任他。"
+          },
+          "leon_perspective": {
+            "videoTitle": "Leon聊倾听：为什么最高效的沟通，是从沉默开始的？",
+            "videoDescription": "我们天生就急于表达，急于给出建议，因为这能让我们感觉自己很'有用'。但最高效的沟通，往往是从有意识的'沉默'和专注的'聆听'开始的。"
+          },
+          "practice_arena": [
+            {
+              "practiceId": "practice_5_1_1",
+              "title": "倾听一位沮丧的同事",
+              "scenario": "你的同事Peter，一位负责后端开发的工程师，看起来非常沮丧地对你说：'这个新的AI模型太难用了！官方文档写得一塌糊涂，我已经卡了一整天了，感觉永远也无法按时完成任务了。'",
+              "task": "你的目标不是提供技术解决方案，而是练习移情聆听。请写下你对Peter的第一句回复。",
+              "evaluationDimensions": [
+                "情绪反映 (Reflecting Feelings)",
+                "内容复述 (Paraphrasing Content)", 
+                "避免过早建议 (Avoiding Premature Advice)"
+              ]
+            },
+            {
+              "practiceId": "practice_5_1_2", 
+              "title": "倾听客户的抱怨",
+              "scenario": "你正在与一位重要的付费客户通电话，客户的语气充满不满：'我们为这个AI工具投入了不小的预算，但我团队的人都觉得它太复杂了。你们的培训也太快，大家根本没学会，现在几乎没人用。我老板天天追问我这个项目的ROI，我压力很大。'",
+              "task": "请写下你在电话中对客户的第一段回复。",
+              "evaluationDimensions": [
+                "共情理解 (Showing Empathy)",
+                "确认核心问题 (Confirming the Core Issue)",
+                "创造安全空间 (Creating a Safe Space)"
+              ]
+            },
+            {
+              "practiceId": "practice_5_1_3",
+              "title": "倾听领导的担忧", 
+              "scenario": "在一次1对1沟通中，你的领导看起来有些疲惫，他对你说：'我最近有点担心团队的整体状态，感觉大家都很忙，但似乎缺少了一些激情和创造力。我也不确定问题到底出在哪。'",
+              "task": "你将如何回应，来打开话匣子，并深入理解他真正的担忧？",
+              "evaluationDimensions": [
+                "识别弦外之音 (Recognizing Unspoken Cues)",
+                "鼓励性提问 (Encouraging Elaboration)",
+                "建立伙伴关系 (Building Partnership)"
+              ]
+            }
+          ],
+          "dilemma_zone": [
+            {
+              "dilemmaId": "dilemma_5_1_1",
+              "title": "效率与倾听的矛盾",
+              "question": "在一个快节奏的会议上，我明知道同事正在描述的问题，我有一个完美的解决方案。花时间听他把话说完，似乎是在浪费所有人的时间。我难道不应该为了效率，直接打断并给出答案吗？",
+              "guidanceLogic": "引导学员思考两种不同的'效率'：'解决眼前这个问题的效率'和'建立长期信任关系的效率'，哪一个更重要？"
+            },
+            {
+              "dilemmaId": "dilemma_5_1_2", 
+              "title": "面对情绪化的沟通",
+              "question": "一位同事非常激动，甚至带着怒气向我抱怨一个问题。我感到很有压力，本能地想为自己或团队辩护。我该如何在这种情况下，做到'移情聆听'？",
+              "guidanceLogic": "引导学员思考分离技巧：'你是否能尝试将'人'和'问题'分开，将'情绪'和'信息'分开？'"
+            },
+            {
+              "dilemmaId": "dilemma_5_1_3",
+              "title": "当自己完全不同意对方时", 
+              "question": "我正在听一个人阐述一个我完全无法苟同的观点。我如何才能做到'移情聆听'，同时又不让对方误以为我同意他的看法？",
+              "guidanceLogic": "引导学员思考'理解'和'同意'的本质区别：'移情聆听'的目标是'我懂你的意思了'，而不是'我同意你的意思'。"
+            }
+          ]
+        }
+      },
+      "unit_5_2": {
+        "unitId": "unit_5_2",
+        "unitName": "诊断式提问",
+        "unitNameEn": "Diagnostic Questioning",
+        "subtitle": "像医生一样探寻根本原因",
+        "description": "通过结构化提问，挖掘并解决根本问题，而非表面症状",
+        "sections": {
+          "why_it_matters": {
+            "professional": "'诊断式提问'是在'移情聆听'基础上，进行深度探寻的结构化方法。它要求我们像一名资深顾问，通过一系列有逻辑、有层次的提问，帮助对方和自己共同厘清问题的本质。",
+            "simple": "医生听你说'肚子疼'后，不会马上开药。他会问：'是哪个位置疼？是持续疼还是阵痛？疼之前你吃了什么？'只有通过精准的提问，他才能找到真正的病根。"
+          },
+          "leon_perspective": {
+            "videoTitle": "Leon聊提问：为什么'好问题'比'好答案'更值钱？",
+            "videoDescription": "在职业生涯的早期，我们总是努力去寻找'好答案'。但慢慢地，我发现，真正拉开人与人差距的，是提出'好问题'的能力。"
+          },
+          "practice_arena": [
+            {
+              "practiceId": "practice_5_2_1",
+              "title": "诊断业务部门的技术需求",
+              "scenario": "销售部门负责人找到你，说：'我们团队需要一个'客户数据看板'，你们能帮忙开发一个吗？'",
+              "task": "你的目标是通过诊断式提问，探寻这个'数据看板'需求背后的真实业务问题。请列出你准备问的3个核心诊断性问题。",
+              "evaluationDimensions": [
+                "探寻决策场景 (Exploring Decision Context)",
+                "挖掘衡量指标 (Uncovering Metrics)",
+                "理解现有流程 (Understanding Current Workflow)"
+              ]
+            },
+            {
+              "practiceId": "practice_5_2_2",
+              "title": "诊断领导的模糊指令",
+              "scenario": "在一次团队会议上，你的领导说：'我感觉我们团队的知识库太混乱了，新人入职后很难找到需要的信息，大家需要想办法解决一下。'",
+              "task": "你准备会后找领导深入沟通。请设计你的诊断性提问策略，以厘清'混乱'这个模糊问题的根本原因。",
+              "evaluationDimensions": [
+                "问题具象化 (Problem Concretization)",
+                "探寻根本原因 (Root Cause Analysis)",
+                "聚焦用户体验 (Focusing on User Experience)"
+              ]
+            },
+            {
+              "practiceId": "practice_5_2_3",
+              "title": "通过提问赋能同事",
+              "scenario": "一位新同事向你求助：'我写的这个AI Prompt，返回的结果总是不稳定，时好时坏，你能帮我看看怎么改吗？'",
+              "task": "你的目标不是直接帮他修改Prompt，而是通过诊断式提问，引导他自己找到问题所在。请写下你会如何通过提问来引导他。",
+              "evaluationDimensions": [
+                "引导复现问题 (Guiding Reproduction)",
+                "启发式提问 (Heuristic Questioning)",
+                "赋能而非包办 (Empowering over Solving)"
+              ]
+            }
+          ],
+          "dilemma_zone": [
+            {
+              "dilemmaId": "dilemma_5_2_1",
+              "title": "担心挑战对方的专业性",
+              "question": "如果我向业务部门的资深同事问太多诊断性问题，他们会不会觉得我在质疑他们的业务判断，认为我不信任他们已经想清楚了？",
+              "guidanceLogic": "引导学员思考提问的'框架'：你如何通过构建一个'合作诊断'的框架，来化解这种担忧？"
+            },
+            {
+              "dilemmaId": "dilemma_5_2_2",
+              "title": "对方不耐烦，只要解决方案",
+              "question": "我正在尝试问一些诊断性问题，但对方显得很不耐烦，说：'你别问这么多了，你只要告诉我能不能做就行了。' 我该怎么办？",
+              "guidanceLogic": "引导学员思考'价值阐述'的重要性：对方的不耐烦，是否是因为他没有理解你提问的'价值'？"
+            },
+            {
+              "dilemmaId": "dilemma_5_2_3",
+              "title": "缺乏提问的知识背景",
+              "question": "我需要诊断一个我完全不熟悉的业务领域的问题。我根本不知道从何问起，感觉自己提不出有深度的问题。我该怎么办？",
+              "guidanceLogic": "引导学员回归'AI赋能'和'结构化'的思路：在你去见这位业务专家之前，你是否可以先进行'第一次创造'？"
+            }
+          ]
+        }
+      },
+      "unit_5_3": {
+        "unitId": "unit_5_3", 
+        "unitName": "在理解的基础上表达",
+        "unitNameEn": "Presenting Based on Understanding",
+        "subtitle": "先赢得人心，再赢得观点",
+        "description": "基于深度理解，用对方听得懂的语言来表达观点和方案",
+        "sections": {
+          "why_it_matters": {
+            "professional": "'在理解的基础上表达'是'知彼解己'的闭环。它强调，我们表达观点和方案的最终目的，不是为了'证明自己是对的'，而是为了'解决问题'和'达成共识'。",
+            "simple": "医生通过倾听和诊断，完全搞清楚了你的病因后，他不会直接扔给你一堆你看不懂的化学分子式。他会用你能听懂的语言说：'根据你的情况，我建议你采用C方案...'"
+          },
+          "leon_perspective": {
+            "videoTitle": "Leon聊表达：如何让你的方案，听起来像是对方自己想出来的？",
+            "videoDescription": "我们都希望自己的观点能被采纳。但强行说服往往会引发抵抗。我想聊一个更高阶的表达技巧：如何将你的方案，包装成对方问题的'完美答案'。"
+          },
+          "practice_arena": [
+            {
+              "practiceId": "practice_5_3_1",
+              "title": "向沮丧的同事提出解决方案",
+              "scenario": "接续练习5.1.1。在你通过移情聆听，让同事Peter充分表达了他的沮丧并让他感觉被理解后，现在轮到你提出解决方案了。",
+              "task": "请写下你将如何向Peter提出你的帮助建议。",
+              "evaluationDimensions": [
+                "连接痛点 (Connecting to Pain Points)",
+                "提供选择而非命令 (Offering Choices, Not Orders)",
+                "赋能导向 (Empowerment-Oriented)"
+              ]
+            },
+            {
+              "practiceId": "practice_5_3_2",
+              "title": "向业务方'推销'你的技术方案",
+              "scenario": "接续练习5.2.1。在你通过诊断式提问，深刻理解了销售部门负责人真正想要的是'识别有流失风险的大客户'后，你设计了一个技术方案。",
+              "task": "你现在需要向这位负责人阐述你的技术方案。你的阐述重点会是什么？请写下你的核心表达逻辑。",
+              "evaluationDimensions": [
+                "价值前置 (Value First)",
+                "使用对方的语言 (Using Their Language)",
+                "对齐目标 (Aligning with Goals)"
+              ]
+            },
+            {
+              "practiceId": "practice_5_3_3",
+              "title": "在争议中提出你的观点",
+              "scenario": "在一次关于产品方向的激烈讨论中，你完全不同意同事Peter的观点。但在发言前，你成功地运用了移情聆听，并完整、准确地复述了他的核心逻辑，让他感觉到了尊重和理解。",
+              "task": "现在，轮到你来阐述你自己的、与他相反的观点了。你的开场白和论述结构会是怎样的？",
+              "evaluationDimensions": [
+                "尊重与过渡 (Respectful Transition)",
+                "基于事实而非个人偏好 (Fact-Based, Not Opinion-Based)",
+                "聚焦共同目标 (Focusing on Common Goals)"
+              ]
+            }
+          ],
+          "dilemma_zone": [
+            {
+              "dilemmaId": "dilemma_5_3_1",
+              "title": "担心被对方'带偏'",
+              "question": "如果我花太多时间去理解对方，甚至用对方的逻辑来思考问题，我担心自己的立场会被对方同化或带偏，最终无法有力地表达我最初的观点。我该怎么办？",
+              "guidanceLogic": "引导学员思考'理解'和'认同'的区别：深入理解对方的观点，是否必然导致你认同它？"
+            },
+            {
+              "dilemmaId": "dilemma_5_3_2", 
+              "title": "当对方的逻辑是错误或混乱的",
+              "question": "我尝试去理解对方，但我发现他的逻辑本身就是混乱的，甚至是基于错误的信息。我很难在他那套混乱的逻辑上，构建我的表达。我该怎么办？",
+              "guidanceLogic": "引导学员思考'重塑框架'的能力：在这种情况下，你的任务是进入他的混乱框架，还是帮助他走出来，进入一个更清晰的框架？"
+            },
+            {
+              "dilemmaId": "dilemma_5_3_3",
+              "title": "表达的'度'如何把握",
+              "question": "为了让对方更好地接受我的观点，我应该在多大程度上'包装'我的表达？如果过度迎合对方的语言和思维，会不会显得不够真诚，甚至有点像在'操纵'对方？",
+              "guidanceLogic": "引导学员思考'同理心'和'操纵'的根本区别：这两者的根本区别，在于你的'意图'。"
+            }
+          ]
+        }
+      }
+    },
+    "capstoneProject": {
+      "title": "毕业项目：沟通与解决方案备忘录",
+      "description": "处理一个棘手的、综合性的沟通难题",
+      "scenario": "运营部门的负责人找到你，情绪激动地抱怨：'你们AIEC上周交付的那个自动化报告工具，不仅没有提升我们的效率，反而给我们添了更多乱！数据提取经常出错，我们的人每天都要花大量时间去手动核对，还不如回到原始的手工方式。这个项目完全是失败的！'",
+      "requirements": [
+        "第一步：聆听与诊断策略 - 如何运用移情聆听处理情绪，如何通过诊断式提问探寻根本原因",
+        "第二步：解决方案阐述 - 如何向对方阐述解决方案，确保对方能理解并接受"
+      ],
+      "evaluationMethod": "AI教练和导师Leon共同评估"
+    }
+  }
+}
