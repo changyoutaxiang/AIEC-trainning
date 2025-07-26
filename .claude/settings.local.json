@@ -22,7 +22,8 @@
       "Bash(npm start)",
       "Bash(npm install)",
       "Bash(timeout 15 npm start)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(./test-optimization.sh:*)"
     ],
     "deny": []
   }

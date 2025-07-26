@@ -13,6 +13,9 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
+// 引入数据库连接池
+const { dbPool } = require('./database/pool');
+
 // 创建Express应用
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -82,59 +85,53 @@ app.use('/api', leaderboardRoutes);
 app.use('/api/auth', authRoutes);
 
 // 添加"我的旅程"页面所需的API端点
-app.get('/api/auth/user/:id', (req, res) => {
+app.get('/api/auth/user/:id', async (req, res) => {
     const userId = req.params.id;
     
-    // 从数据库获取用户信息
-    const sqlite3 = require('sqlite3').verbose();
-    const dbPath = process.env.DATABASE_PATH || path.join(__dirname, 'database/aiec_users.db');
-    const db = new sqlite3.Database(dbPath);
-    
-    db.get(
-        "SELECT * FROM users WHERE id = ?",
-        [userId],
-        (err, row) => {
-            if (err) {
-                console.error('查询用户信息失败:', err.message);
-                return res.status(500).json({
-                    success: false,
-                    message: '查询用户信息失败'
-                });
-            }
-            
-            if (!row) {
-                // 如果数据库中没有找到用户，返回模拟数据
-                return res.json({
-                    success: true,
-                    user: {
-                        id: userId,
-                        name: "王东",
-                        email: "wangdong@51talk.com",
-                        department: "技术部",
-                        position: "架构师",
-                        created_at: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-                        last_login: new Date().toISOString()
-                    }
-                });
-            }
-            
-            // 返回数据库中的用户信息
-            res.json({
+    try {
+        // 使用连接池查询用户信息
+        const row = await dbPool.get(
+            "SELECT * FROM users WHERE id = ?",
+            [userId]
+        );
+        
+        if (!row) {
+            // 如果数据库中没有找到用户，返回模拟数据
+            return res.json({
                 success: true,
                 user: {
-                    id: row.id,
-                    name: row.name,
-                    email: row.email,
-                    department: row.department,
-                    position: row.position,
-                    created_at: row.created_at,
-                    last_login: row.last_login
+                    id: userId,
+                    name: "王东",
+                    email: "wangdong@51talk.com",
+                    department: "技术部",
+                    position: "架构师",
+                    created_at: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+                    last_login: new Date().toISOString()
                 }
             });
-            
-            db.close();
         }
-    );
+        
+        // 返回数据库中的用户信息
+        res.json({
+            success: true,
+            user: {
+                id: row.id,
+                name: row.name,
+                email: row.email,
+                department: row.department,
+                position: row.position,
+                created_at: row.created_at,
+                last_login: row.last_login
+            }
+        });
+        
+    } catch (err) {
+        console.error('查询用户信息失败:', err.message);
+        res.status(500).json({
+            success: false,
+            message: '查询用户信息失败'
+        });
+    }
 });
 
 
@@ -198,13 +195,15 @@ app.listen(PORT, () => {
 });
 
 // 优雅关闭处理
-process.on('SIGTERM', () => {
+process.on('SIGTERM', async () => {
     console.log('收到 SIGTERM 信号，正在优雅关闭服务器...');
+    await dbPool.close();
     process.exit(0);
 });
 
-process.on('SIGINT', () => {
+process.on('SIGINT', async () => {
     console.log('收到 SIGINT 信号，正在优雅关闭服务器...');
+    await dbPool.close();
     process.exit(0);
 });
 
