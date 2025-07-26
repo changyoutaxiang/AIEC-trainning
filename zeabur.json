@@ -4,7 +4,7 @@
     {
       "name": "web",
       "type": "nodejs",
-      "buildCommand": "npm install",
+      "buildCommand": "npm install && cd backend && npm install",
       "startCommand": "npm start",
       "port": 3000,
       "env": {

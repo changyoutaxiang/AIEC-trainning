@@ -137,13 +137,6 @@ app.get('/api/auth/user/:id', (req, res) => {
     );
 });
 
-app.get('/api/journey/stats/:id', (req, res) => {
-    // 返回空数据，让前端基于学习记录计算
-    res.json({
-        success: false,
-        message: "请使用前端计算统计数据"
-    });
-});
 
 
 // 错误处理中间件

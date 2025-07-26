@@ -21,7 +21,8 @@
       "Bash(chmod:*)",
       "Bash(npm start)",
       "Bash(npm install)",
-      "Bash(timeout 15 npm start)"
+      "Bash(timeout 15 npm start)",
+      "Bash(curl:*)"
     ],
     "deny": []
   }
