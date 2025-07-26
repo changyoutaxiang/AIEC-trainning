@@ -24,8 +24,32 @@ const PORT = process.env.PORT || 3000;
 
 // 数据库初始化
 async function initializeDatabase() {
-    // 使用环境变量或默认路径
-    const dbPath = process.env.DATABASE_PATH || path.join(__dirname, 'backend/database/aiec_users.db');
+    // 首先检查持久化存储是否可用
+    const persistentDataPath = '/data';
+    let usePersistentStorage = false;
+    
+    try {
+        if (fs.existsSync(persistentDataPath)) {
+            fs.accessSync(persistentDataPath, fs.constants.W_OK);
+            usePersistentStorage = true;
+            console.log('✅ 持久化存储可用: /data');
+        } else {
+            console.log('⚠️  持久化存储路径不存在: /data');
+        }
+    } catch (err) {
+        console.log('⚠️  持久化存储不可写:', err.message);
+    }
+    
+    // 根据持久化存储可用性选择数据库路径
+    let dbPath;
+    if (usePersistentStorage && process.env.DATABASE_PATH) {
+        dbPath = process.env.DATABASE_PATH;
+        console.log('🎯 使用持久化数据库路径');
+    } else {
+        dbPath = path.join(__dirname, 'backend/database/aiec_users.db');
+        console.log('⚠️  回退到本地数据库路径（数据将在重新部署时丢失）');
+    }
+    
     const dbDir = path.dirname(dbPath);
     
     console.log(`📍 数据库路径: ${dbPath}`);
