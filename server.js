@@ -34,6 +34,24 @@ async function initializeDatabase() {
     if (!fs.existsSync(dbDir)) {
         fs.mkdirSync(dbDir, { recursive: true });
         console.log(`📁 数据库目录已创建: ${dbDir}`);
+    } else {
+        console.log(`📁 数据库目录已存在: ${dbDir}`);
+    }
+    
+    // 检查数据库文件是否已存在
+    if (fs.existsSync(dbPath)) {
+        const stats = fs.statSync(dbPath);
+        console.log(`📊 发现现有数据库文件，大小: ${stats.size} bytes，修改时间: ${stats.mtime}`);
+    } else {
+        console.log(`📊 数据库文件不存在，将创建新数据库`);
+    }
+    
+    // 检查目录权限
+    try {
+        fs.accessSync(dbDir, fs.constants.W_OK);
+        console.log(`✅ 数据库目录可写: ${dbDir}`);
+    } catch (err) {
+        console.error(`❌ 数据库目录权限问题: ${err.message}`);
     }
     
     return new Promise((resolve, reject) => {
@@ -103,7 +121,17 @@ async function initializeDatabase() {
                         reject(err);
                         return;
                     }
-                    console.log('✅ 用户表创建成功');
+                    
+                    // 检查表是否已存在数据
+                    db.get("SELECT COUNT(*) as count FROM users", [], (countErr, row) => {
+                        if (countErr) {
+                            console.log('✅ 用户表创建成功（新表）');
+                        } else if (row.count > 0) {
+                            console.log(`✅ 用户表确认存在，包含 ${row.count} 个用户`);
+                        } else {
+                            console.log('✅ 用户表创建成功（空表）');
+                        }
+                    });
                 });
                 
                 db.run(createLearningRecordsTable, (err) => {
